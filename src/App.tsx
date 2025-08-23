@@ -15,7 +15,7 @@ import BookCall from "./pages/BookCall";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import NotFound from "./pages/NotFound";
-// Removed: import Cursor from "./components/Cursor";
+import ScrollToTop from "./components/ScrollToTop"; // Import the new component
 
 const queryClient = new QueryClient();
 
@@ -25,7 +25,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        {/* Removed: <Cursor /> */}
+        <ScrollToTop /> {/* Render ScrollToTop here */}
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<Index />} />
