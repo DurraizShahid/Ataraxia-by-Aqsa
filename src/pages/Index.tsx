@@ -22,9 +22,7 @@ import Autoplay from "embla-carousel-autoplay";
 import React from "react";
 import ServicesSection from "@/components/home/ServicesSection"; // Import the ServicesSection component
 
-const heroImages = [
-  { src: "https://images.pexels.com/photos/7929183/pexels-photo-7929183.jpeg", alt: "Woman meditating in a serene setting, representing emotional healing and transformation" },
-];
+const heroImage = { src: "https://images.pexels.com/photos/7929183/pexels-photo-7929183.jpeg", alt: "Woman meditating in a serene setting, representing emotional healing and transformation" };
 
 const blogPosts = [
     { title: "Anxiety symptoms", image: "https://images.pexels.com/photos/4101143/pexels-photo-4101143.jpeg?auto=compress&cs=tinysrgb&w=600", alt: "Person experiencing anxiety symptoms" },
@@ -47,7 +45,7 @@ const instagramImages = [
 const Index = () => {
   return (
     <div className="bg-[#F8F5F3]">
-      <HeroCarousel />
+      <HeroSection /> {/* Renamed to HeroSection */}
       <QuoteSection />
       <BlogPreview />
       <PartnersSection />
@@ -61,41 +59,32 @@ const Index = () => {
   );
 };
 
-const HeroCarousel = () => (
+// Renamed from HeroCarousel to HeroSection
+const HeroSection = () => (
   <section className="relative">
-    <Carousel>
-      <CarouselContent>
-        {heroImages.map((item, i) => (
-          <CarouselItem key={i}>
-            <div
-              className="w-full h-[80vh] bg-cover bg-center flex items-center"
-              style={{ backgroundImage: `url(${item.src})` }}
-              aria-label={item.alt} // Added aria-label for accessibility
-            >
-              <div className="container mx-auto px-4 text-left text-white">
-                <p className="text-sm uppercase tracking-[0.2em] mb-4">Psychotherapy</p>
-                <h1 className="text-5xl md:text-7xl font-serif max-w-2xl">
-                  Tranquillity in Transformation
-                </h1>
-                <p className="mt-4 text-lg md:text-xl max-w-2xl">
-                  Unlock emotional freedom, align your mind, body, and soul, and achieve the success you truly deserve.
-                </p>
-                <div className="mt-8 flex gap-4">
-                  <Button size="lg" asChild>
-                    <Link to="/book-call">Book a Free 1:1 NLP Coaching Session</Link>
-                  </Button>
-                  <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-primary" asChild>
-                    <Link to="/services">Explore Emotional Healing Services</Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious className="absolute left-8 h-12 w-12 bg-white/50 hover:bg-white border-none text-primary" />
-      <CarouselNext className="absolute right-8 h-12 w-12 bg-white/50 hover:bg-white border-none text-primary" />
-    </Carousel>
+    <div
+      className="w-full h-[80vh] bg-cover bg-center flex items-center"
+      style={{ backgroundImage: `url(${heroImage.src})` }}
+      aria-label={heroImage.alt}
+    >
+      <div className="container mx-auto px-4 text-left text-white">
+        <p className="text-sm uppercase tracking-[0.2em] mb-4">Psychotherapy</p>
+        <h1 className="text-5xl md:text-7xl font-serif max-w-2xl">
+          Tranquillity in Transformation
+        </h1>
+        <p className="mt-4 text-lg md:text-xl max-w-2xl">
+          Unlock emotional freedom, align your mind, body, and soul, and achieve the success you truly deserve.
+        </p>
+        <div className="mt-8 flex gap-4">
+          <Button size="lg" asChild>
+            <Link to="/book-call">Book a Free 1:1 NLP Coaching Session</Link>
+          </Button>
+          <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-primary" asChild>
+            <Link to="/services">Explore Emotional Healing Services</Link>
+          </Button>
+        </div>
+      </div>
+    </div>
   </section>
 );
 
