@@ -1,6 +1,6 @@
 import { QueryClient, useQuery } from "@tanstack/react-query";
 
-const WORDPRESS_API_BASE_URL = "https://www.ataraxiabyaqsa.com/wp-json/wp/v2";
+const WORDPRESS_API_BASE_URL = "https://wp.ataraxiabyaqsa.com/wp-json/wp/v2";
 
 export interface WordPressPost {
   id: number;
