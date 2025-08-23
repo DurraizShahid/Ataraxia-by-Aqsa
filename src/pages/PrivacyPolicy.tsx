@@ -4,7 +4,7 @@ const PrivacyPolicy = () => {
       <h1 className="text-4xl font-bold mb-6">Privacy Policy</h1>
       <div className="prose max-w-none text-muted-foreground">
         <p>
-          Ataraxia Foundation is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website [Your Website URL], including any other media form, media channel, mobile website, or mobile application related or connected thereto (collectively, the “Site”). Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
+          Ataraxia by Aqsa is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website [Your Website URL], including any other media form, media channel, mobile website, or mobile application related or connected thereto (collectively, the “Site”). Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
         </p>
         <h2 className="text-2xl font-semibold mt-8 mb-4">1. Collection of Your Information</h2>
         <p>

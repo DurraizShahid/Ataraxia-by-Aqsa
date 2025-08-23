@@ -11,9 +11,9 @@ const About = () => {
       <section className="py-20 md:py-32 text-center">
         <div className="container mx-auto px-4 max-w-3xl">
           <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Welcome</p>
-          <h1 className="text-5xl md:text-6xl font-serif text-primary mb-6">Welcome to Ataraxia</h1>
+          <h1 className="text-5xl md:text-6xl font-serif text-primary mb-6">Welcome to Ataraxia by Aqsa</h1>
           <p className="text-lg text-muted-foreground mb-6">
-            At Ataraxia, we guide you to transform your life by healing the root causes of emotional blockages and mental fog. Our internationally certified team uses proven techniques in NLP, Hypnosis, and emotional release strategies to help you release emotional baggage, clear mental fog, and realign with your true self.
+            At Ataraxia by Aqsa, we guide you to transform your life by healing the root causes of emotional blockages and mental fog. Our internationally certified team uses proven techniques in NLP, Hypnosis, and emotional release strategies to help you release emotional baggage, clear mental fog, and realign with your true self.
           </p>
           <p className="text-lg text-muted-foreground">
             Our approach is designed to achieve faster and long-lasting results by changing the foundation of your mindset and emotional well-being. When you let go of limiting beliefs, blocked emotions, and unresolved traumas, you unlock sharper clarity, inner peace, and experience up to 4x more productivity in your personal and professional life.
@@ -24,12 +24,12 @@ const About = () => {
       {/* Why Choose Ataraxia? Section */}
       <section className="py-20 md:py-32 bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-4xl md:text-5xl font-serif text-primary text-center mb-12">Why Choose Ataraxia?</h2>
+          <h2 className="text-4xl md:text-5xl font-serif text-primary text-center mb-12">Why Choose Ataraxia by Aqsa?</h2>
           <p className="text-lg text-muted-foreground text-center mb-12">
             Because true transformation begins within — and that’s exactly where we start.
-            Ataraxia is more than a coaching space. It's a sanctuary where healing meets science, and your personal evolution becomes inevitable. Unlike surface-level solutions, we work at the root cause of emotional struggles and mental blocks — using a powerful blend of Neuro-Linguistic Programming (NLP), Hypnotherapy, Time Line Therapy™, and Emotional Release techniques.
+            Ataraxia by Aqsa is more than a coaching space. It's a sanctuary where healing meets science, and your personal evolution becomes inevitable. Unlike surface-level solutions, we work at the root cause of emotional struggles and mental blocks — using a powerful blend of Neuro-Linguistic Programming (NLP), Hypnotherapy, Time Line Therapy™, and Emotional Release techniques.
           </p>
-          <h3 className="text-2xl font-serif text-primary mb-8 text-center">✨ Here’s What Makes Ataraxia Different:</h3>
+          <h3 className="text-2xl font-serif text-primary mb-8 text-center">✨ Here’s What Makes Ataraxia by Aqsa Different:</h3>
           <ul className="space-y-8 text-left">
             <li className="flex items-start gap-4">
               <span className="text-primary text-2xl font-bold">●</span>
@@ -63,7 +63,7 @@ const About = () => {
               <div>
                 <h4 className="text-xl font-semibold text-primary">Safe & Non-Judgmental Space</h4>
                 <p className="text-muted-foreground mt-1">
-                  Whether you're navigating anxiety, burnout, childhood trauma, or self-doubt — you’re safe here. Ataraxia is a trauma-informed space designed to support your healing with compassion and care.
+                  Whether you're navigating anxiety, burnout, childhood trauma, or self-doubt — you’re safe here. Ataraxia by Aqsa is a trauma-informed space designed to support your healing with compassion and care.
                 </p>
               </div>
             </li>
@@ -106,17 +106,17 @@ const About = () => {
             <div className="relative">
               <h3 className="text-2xl font-serif text-primary mb-2">...to Coach...</h3>
               <p className="text-muted-foreground">
-                But it wasn’t just one method that helped — it was the combination of tools that truly transformed me. That's why I now use an integrated approach. At Ataraxia, I combine the most effective techniques — from subconscious work and emotional release to inner child healing and mindset restructuring — to guide others through their own breakthroughs.
+                But it wasn’t just one method that helped — it was the combination of tools that truly transformed me. That's why I now use an integrated approach. At Ataraxia by Aqsa, I combine the most effective techniques — from subconscious work and emotional release to inner child healing and mindset restructuring — to guide others through their own breakthroughs.
               </p>
             </div>
             <div className="absolute left-0 w-4 h-4 bg-brand-pink rounded-full -translate-x-1/2"></div>
             <div className="relative">
-              <h3 className="text-2xl font-serif text-primary mb-2">...to Ataraxia</h3>
+              <h3 className="text-2xl font-serif text-primary mb-2">...to Ataraxia by Aqsa</h3>
               <p className="text-muted-foreground">
                 Because I’ve been where you are. And if you're here reading this, maybe you're carrying something heavy too — something that no longer fits who you’re becoming. It’s time to release it.
               </p>
               <p className="text-muted-foreground mt-4">
-                I created Ataraxia not just as a brand, but as a sacred space — where healing goes beyond the surface, where you get to feel light again, where you realign with your true self and unlock your highest potential.
+                I created Ataraxia by Aqsa not just as a brand, but as a sacred space — where healing goes beyond the surface, where you get to feel light again, where you realign with your true self and unlock your highest potential.
               </p>
               <p className="text-muted-foreground mt-4">
                 You don’t have to keep surviving. You were made to thrive — emotionally, mentally, spiritually.
@@ -167,7 +167,7 @@ const About = () => {
         <div className="container mx-auto px-4 max-w-3xl">
           <h2 className="text-4xl md:text-5xl font-serif text-primary mb-6">Our Mission</h2>
           <p className="text-lg text-muted-foreground">
-            We empower you to heal from within, realign your emotional and mental state, and step confidently into your highest potential. Ataraxia’s mission is to provide compassionate, science-backed coaching that helps you live a life full of purpose, balance, and clarity.
+            We empower you to heal from within, realign your emotional and mental state, and step confidently into your highest potential. Ataraxia by Aqsa’s mission is to provide compassionate, science-backed coaching that helps you live a life full of purpose, balance, and clarity.
           </p>
         </div>
       </section>
@@ -182,7 +182,7 @@ const About = () => {
           {/* Placeholder for testimonials - you can add a carousel or grid here later */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-secondary p-8 rounded-lg shadow-sm">
-              <p className="italic text-muted-foreground">"Working with Ataraxia has been truly transformative. I feel a profound sense of peace and clarity I haven't experienced in years."</p>
+              <p className="italic text-muted-foreground">"Working with Ataraxia by Aqsa has been truly transformative. I feel a profound sense of peace and clarity I haven't experienced in years."</p>
               <p className="font-semibold text-primary mt-4">- Client Name</p>
             </div>
             <div className="bg-secondary p-8 rounded-lg shadow-sm">

@@ -175,26 +175,6 @@ const CtaSection = () => (
   </section>
 );
 
-// ContactFormSection is replaced by ContactCtaSection
-// const ContactFormSection = () => (
-//   <section className="py-24">
-//     <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
-//       <div>
-//         <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Read & Learn</p>
-//         <h2 className="text-5xl font-serif text-primary">Feel free to contact us and ask us anything.</h2>
-//         <p className="mt-4 text-muted-foreground">
-//           Sign up for our newsletter to receive updates, resources, and insights on your emotional healing journey and NLP coaching tips.
-//         </p>
-//       </div>
-//       <form className="space-y-4">
-//         <Input placeholder="Your name" className="bg-white" />
-//         <Input type="email" placeholder="Your e-mail" className="bg-white" />
-//         <Button type="submit" className="w-full bg-[#E6DCD5] text-primary hover:bg-[#d9c9c0]">Subscribe</Button>
-//       </form>
-//     </div>
-//   </section>
-// );
-
 const InstagramCarousel = () => {
   const plugin = React.useRef(
     Autoplay({ delay: 5000, stopOnInteraction: false })
@@ -203,7 +183,7 @@ const InstagramCarousel = () => {
   return (
     <section className="py-24 text-center">
       <div className="container mx-auto px-4">
-        <h2 className="font-serif text-3xl text-primary">_ataraxia</h2>
+        <h2 className="font-serif text-3xl text-primary">_ataraxiabyaqsa</h2>
         <Carousel
           plugins={[plugin.current]}
           className="mt-8"

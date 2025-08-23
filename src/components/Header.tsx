@@ -76,7 +76,7 @@ const Header = () => {
           {/* Mobile: Left Side - Logo */}
           <div className="lg:hidden">
             <Link to="/" className={cn("flex items-center gap-2", isScrolled ? "text-primary" : "text-primary-foreground")}>
-              <img src="/logo-black.svg" alt="Ataraxia Logo" className={cn("h-10 w-10", !isScrolled && "brightness-0 invert")} />
+              <img src="/logo-black.svg" alt="Ataraxia by Aqsa Logo" className={cn("h-10 w-10", !isScrolled && "brightness-0 invert")} />
             </Link>
           </div>
 
@@ -95,7 +95,7 @@ const Header = () => {
               ))}
             </nav>
             <Link to="/" className={cn("flex items-center gap-2 shrink-0", isScrolled ? "text-primary" : "text-primary-foreground")}>
-              <img src="/logo-black.svg" alt="Ataraxia Logo" className={cn("h-12 w-12", !isScrolled && "brightness-0 invert")} />
+              <img src="/logo-black.svg" alt="Ataraxia by Aqsa Logo" className={cn("h-12 w-12", !isScrolled && "brightness-0 invert")} />
             </Link>
             <nav className="flex items-center space-x-8">
               {rightNavLinks.map(({ to, label }) => (
@@ -133,8 +133,8 @@ const Header = () => {
               <SheetContent side="right" className="w-full max-w-sm">
                 <div className="flex justify-between items-center p-4 border-b -m-6 mb-6">
                   <Link to="/" onClick={closeMenu} className="flex items-center gap-2 text-primary">
-                    <img src="/logo-black.svg" alt="Ataraxia Logo" className="h-8 w-8" />
-                    <span className="font-bold text-xl">Ataraxia</span>
+                    <img src="/logo-black.svg" alt="Ataraxia by Aqsa Logo" className="h-8 w-8" />
+                    <span className="font-bold text-xl">Ataraxia by Aqsa</span>
                   </Link>
                   <Button variant="ghost" size="icon" onClick={closeMenu}>
                     <X className="h-6 w-6" />

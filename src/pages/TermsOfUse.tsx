@@ -4,7 +4,7 @@ const TermsOfUse = () => {
       <h1 className="text-4xl font-bold mb-6">Terms of Use</h1>
       <div className="prose max-w-none text-muted-foreground">
         <p>
-          Welcome to Ataraxia Foundation. These Terms of Use govern your access to and use of our website, including any content, functionality, and services offered on or through [Your Website URL] (the "Website").
+          Welcome to Ataraxia by Aqsa. These Terms of Use govern your access to and use of our website, including any content, functionality, and services offered on or through [Your Website URL] (the "Website").
         </p>
         <p>
           Please read the Terms of Use carefully before you start to use the Website. By using the Website, you accept and agree to be bound and abide by these Terms of Use and our Privacy Policy, incorporated herein by reference. If you do not want to agree to these Terms of Use or the Privacy Policy, you must not access or use the Website.
@@ -20,7 +20,7 @@ const TermsOfUse = () => {
         </ul>
         <h2 className="text-2xl font-semibold mt-8 mb-4">2. Intellectual Property Rights</h2>
         <p>
-          The Website and its entire contents, features, and functionality (including but not limited to all information, software, text, displays, images, video, and audio, and the design, selection, and arrangement thereof) are owned by Ataraxia Foundation, its licensors, or other providers of such material and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.
+          The Website and its entire contents, features, and functionality (including but not limited to all information, software, text, displays, images, video, and audio, and the design, selection, and arrangement thereof) are owned by Ataraxia by Aqsa, its licensors, or other providers of such material and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.
         </p>
         <p>
           These Terms of Use permit you to use the Website for your personal, non-commercial use only. You must not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any of the material on our Website, except as generally and ordinarily permitted through the Website's functionality.
@@ -30,8 +30,8 @@ const TermsOfUse = () => {
         <ul className="list-disc list-inside ml-4">
           <li>In any way that violates any applicable federal, state, local, or international law or regulation.</li>
           <li>To transmit, or procure the sending of, any advertising or promotional material without our prior written consent, including any "junk mail," "chain letter," "spam," or any other similar solicitation.</li>
-          <li>To impersonate or attempt to impersonate Ataraxia Foundation, an Ataraxia Foundation employee, another user, or any other person or entity.</li>
-          <li>To engage in any other conduct that restricts or inhibits anyone's use or enjoyment of the Website, or which, as determined by us, may harm Ataraxia Foundation or users of the Website, or expose them to liability.</li>
+          <li>To impersonate or attempt to impersonate Ataraxia by Aqsa, an Ataraxia by Aqsa employee, another user, or any other person or entity.</li>
+          <li>To engage in any other conduct that restricts or inhibits anyone's use or enjoyment of the Website, or which, as determined by us, may harm Ataraxia by Aqsa or users of the Website, or expose them to liability.</li>
         </ul>
         <h2 className="text-2xl font-semibold mt-8 mb-4">4. Disclaimer of Warranties</h2>
         <p>

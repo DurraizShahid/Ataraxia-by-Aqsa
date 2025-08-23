@@ -8,14 +8,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <img src="/logo-black.svg" alt="Ataraxia Logo" className="h-10 w-10" style={{ filter: 'brightness(0) invert(1)' }} />
+              <img src="/logo-black.svg" alt="Ataraxia by Aqsa Logo" className="h-10 w-10" style={{ filter: 'brightness(0) invert(1)' }} />
             </Link>
             <p className="text-sm text-primary-foreground/70 mb-6">
               Empowering you with tools for transformation and healing.
             </p>
             <div className="flex space-x-4">
-              <a href="https://www.instagram.com/ataraxiafoundation" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/70 hover:text-primary-foreground"><Instagram size={16} /></a>
-              <a href="https://www.linkedin.com/company/ataraxiafoundation" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/70 hover:text-primary-foreground"><Linkedin size={16} /></a>
+              <a href="https://www.instagram.com/ataraxiabyaqsa" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/70 hover:text-primary-foreground"><Instagram size={16} /></a>
+              <a href="https://www.linkedin.com/company/ataraxiabyaqsa" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/70 hover:text-primary-foreground"><Linkedin size={16} /></a>
               {/* Add WhatsApp if needed */}
             </div>
           </div>
@@ -49,7 +49,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-16 pt-8 border-t border-primary-foreground/20 text-center">
-          <p className="text-sm text-primary-foreground/70">&copy; {new Date().getFullYear()} Ataraxia Foundation, All Rights Reserved</p>
+          <p className="text-sm text-primary-foreground/70">&copy; {new Date().getFullYear()} Ataraxia by Aqsa, All Rights Reserved</p>
         </div>
       </div>
     </footer>
