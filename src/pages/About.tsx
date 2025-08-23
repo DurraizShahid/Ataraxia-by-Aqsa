@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Linkedin, ArrowRight, ExternalLink } from "lucide-react";
+import ContactCtaSection from "@/components/ContactCtaSection"; // Import the new component
 
 const About = () => {
   return (
@@ -192,28 +193,8 @@ const About = () => {
         </div>
       </section>
 
-      {/* Begin Your Journey with Ataraxia Section */}
-      <section className="py-20 md:py-32 text-center">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-4xl md:text-5xl font-serif text-primary mb-6">Begin Your Journey with Ataraxia</h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Whether you are seeking personal transformation or want to empower your team through corporate training, Ataraxia is your trusted partner for deep, transformational change.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild size="lg" className="bg-brand-pink hover:bg-brand-pink-darker text-primary-foreground">
-              <Link to="/book-call">Book a Free Discovery Call</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-              <Link to="/services">Explore Our Services</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-              <a href="https://www.instagram.com/ataraxiafoundation" target="_blank" rel="noopener noreferrer">
-                Join Our Community <ExternalLink className="ml-2 h-4 w-4" />
-              </a>
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* Begin Your Journey with Ataraxia Section (now using ContactCtaSection) */}
+      <ContactCtaSection />
     </div>
   );
 };
