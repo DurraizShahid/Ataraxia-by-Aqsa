@@ -11,12 +11,12 @@ import {
 import { Link } from "react-router-dom";
 
 const services = [
-  { icon: <Lightbulb />, title: "NLP | Time Line Therapy | Hypnotherapy", link: "/services" },
-  { icon: <Brain />, title: "Brain Rewiring", link: "/services" },
-  { icon: <Heart />, title: "Emotional Healing", link: "/services" },
-  { icon: <Zap />, title: "Behavior Modification", link: "/services" },
-  { icon: <BookOpen />, title: "Personal Mastery Programs", link: "/courses" },
-  { icon: <Users />, title: "Healing Workshops", link: "/courses" },
+  { icon: <Lightbulb />, title: "1:1 NLP Coaching", description: "Personalized sessions using Neuro-Linguistic Programming to remove limiting beliefs and achieve emotional freedom.", link: "/services" },
+  { icon: <Brain />, title: "Time Line Therapy™", description: "Advanced techniques to clear mental fog and release past traumas for lasting emotional healing.", link: "/services" },
+  { icon: <Heart />, title: "Hypnosis Therapy Online", description: "Guided hypnosis sessions to address emotional blockages and foster deep relaxation and transformation.", link: "/services" },
+  { icon: <Zap />, title: "Emotional Release Techniques", description: "Learn powerful methods to process and release suppressed emotions, leading to greater inner peace.", link: "/services" },
+  { icon: <BookOpen />, title: "Personal Mastery Programs", description: "Comprehensive programs designed for life transformation coaching and increasing productivity with mindset coaching.", link: "/courses" },
+  { icon: <Users />, title: "Group Sessions for Emotional Healing", description: "Connect with a supportive community in group sessions focused on collective emotional healing and growth.", link: "/courses" },
 ];
 
 const ServicesSection = () => (
@@ -29,7 +29,7 @@ const ServicesSection = () => (
           <div key={service.title} className="text-center">
             <div className="inline-block p-4 rounded-full bg-secondary text-primary mb-4">{service.icon}</div>
             <h3 className="text-2xl font-serif text-primary">{service.title}</h3>
-            <p className="text-muted-foreground mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p className="text-muted-foreground mt-2">{service.description}</p>
             <Button variant="link" className="p-0 mt-2 text-primary text-xs" asChild>
               <Link to={service.link}>READ MORE <ArrowRight className="ml-1 h-3 w-3" /></Link>
             </Button>
