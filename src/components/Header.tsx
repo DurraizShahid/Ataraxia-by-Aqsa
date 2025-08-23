@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, X, Search, ArrowUpRight } from "lucide-react";
+import { Menu, X, Search, ArrowUpRight, ShoppingCart } from "lucide-react"; // Added ShoppingCart icon
 import { cn } from "@/lib/utils";
+import { useCart } from "@/context/CartContext"; // Import useCart hook
 
 const leftNavLinks = [
   { to: "/", label: "Home" },
@@ -22,6 +23,7 @@ const allNavLinks = [...leftNavLinks, ...rightNavLinks];
 const Header = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { cartItemCount } = useCart(); // Get cart item count
 
   useEffect(() => {
     const handleScroll = () => {
@@ -113,11 +115,33 @@ const Header = () => {
                 <Search className="h-5 w-5" />
                 <span className="sr-only">Search</span>
               </Button>
+              <Button variant="ghost" size="icon" asChild>
+                <Link to="/cart" className="relative">
+                  <ShoppingCart className="h-5 w-5" />
+                  {cartItemCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-brand-pink text-primary-foreground rounded-full h-4 w-4 flex items-center justify-center text-xs">
+                      {cartItemCount}
+                    </span>
+                  )}
+                  <span className="sr-only">Cart</span>
+                </Link>
+              </Button>
             </div>
           </div>
 
           {/* Mobile: Right Side - Menu */}
-          <div className="lg:hidden">
+          <div className="lg:hidden flex items-center gap-2">
+            <Button variant="ghost" size="icon" asChild className={cn(isScrolled ? "text-primary" : "text-primary", "hover:bg-transparent focus:bg-transparent")}>
+              <Link to="/cart" className="relative">
+                <ShoppingCart className="h-6 w-6" />
+                {cartItemCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-brand-pink text-primary-foreground rounded-full h-4 w-4 flex items-center justify-center text-xs">
+                    {cartItemCount}
+                  </span>
+                )}
+                <span className="sr-only">Cart</span>
+              </Link>
+            </Button>
             <Sheet open={isMenuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className={cn(isScrolled ? "text-primary" : "text-primary", "hover:bg-transparent focus:bg-transparent")}>

@@ -3,10 +3,12 @@ import { useProduct } from "@/lib/woocommerce";
 import DOMPurify from 'dompurify';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ShoppingCart } from "lucide-react";
+import { useCart } from "@/context/CartContext"; // Import useCart hook
 
 const ProductDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { data: product, isLoading, isError, error } = useProduct(slug || "");
+  const { addToCart } = useCart(); // Use the addToCart function
 
   if (isLoading) {
     return (
@@ -37,6 +39,10 @@ const ProductDetail = () => {
       </div>
     );
   }
+
+  const handleAddToCart = () => {
+    addToCart(product);
+  };
 
   return (
     <div className="container mx-auto py-16 px-4">
@@ -70,12 +76,17 @@ const ProductDetail = () => {
             className="prose prose-lg max-w-none text-foreground mb-8"
             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(product.description) }}
           />
-          <Button asChild size="lg" className="w-full md:w-auto">
-            <a href={product.permalink} target="_blank" rel="noopener noreferrer">
-              <ShoppingCart className="mr-2 h-4 w-4" /> Buy Now
-            </a>
-          </Button>
-          <Button asChild variant="outline" className="mt-4 md:mt-0 md:ml-4 w-full md:w-auto">
+          <div className="flex flex-col md:flex-row gap-4">
+            <Button size="lg" className="w-full md:w-auto" onClick={handleAddToCart}>
+              <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
+            </Button>
+            <Button asChild size="lg" variant="outline" className="w-full md:w-auto">
+              <a href={product.permalink} target="_blank" rel="noopener noreferrer">
+                View on Store
+              </a>
+            </Button>
+          </div>
+          <Button asChild variant="link" className="mt-4 w-full md:w-auto p-0 justify-start">
             <Link to="/journals">
               <ArrowLeft className="mr-2 h-4 w-4" /> Back to Journals
             </Link>
