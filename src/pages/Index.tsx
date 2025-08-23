@@ -18,6 +18,8 @@ import {
   Repeat,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import Autoplay from "embla-carousel-autoplay";
+import React from "react";
 
 const heroImages = [
   "https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
@@ -228,23 +230,35 @@ const ContactFormSection = () => (
   </section>
 );
 
-const InstagramCarousel = () => (
-  <section className="py-24 text-center">
-    <div className="container mx-auto px-4">
-      <h2 className="font-serif text-3xl text-primary">_ataraxia</h2>
-      <Carousel className="mt-8" opts={{ align: "start", loop: true }}>
-        <CarouselContent>
-          {instagramImages.map((src, i) => (
-            <CarouselItem key={i} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6">
-              <img src={src} alt={`Instagram post ${i+1}`} className="w-full aspect-square object-cover" />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
-      <p className="mt-4 text-sm text-muted-foreground">***Follow @ataraxiafoundation for everyday notes about mental health.</p>
-    </div>
-  </section>
-);
+const InstagramCarousel = () => {
+  const plugin = React.useRef(
+    Autoplay({ delay: 2000, stopOnInteraction: false })
+  );
+
+  return (
+    <section className="py-24 text-center">
+      <div className="container mx-auto px-4">
+        <h2 className="font-serif text-3xl text-primary">_ataraxia</h2>
+        <Carousel
+          plugins={[plugin.current]}
+          className="mt-8"
+          opts={{ align: "start", loop: true }}
+          onMouseEnter={plugin.current.stop}
+          onMouseLeave={plugin.current.reset}
+        >
+          <CarouselContent>
+            {instagramImages.map((src, i) => (
+              <CarouselItem key={i} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6">
+                <img src={src} alt={`Instagram post ${i + 1}`} className="w-full aspect-square object-cover" />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+        <p className="mt-4 text-sm text-muted-foreground">***Follow @ataraxiafoundation for everyday notes about mental health.</p>
+      </div>
+    </section>
+  );
+};
 
 const TestimonialSection = () => (
   <section className="py-24">
