@@ -14,13 +14,12 @@ import {
 import { Link } from "react-router-dom";
 
 const services = [
-  { icon: <Lightbulb />, title: "1:1 Breakthrough Coaching", description: "Personalized NLP coaching for emotional overwhelm, inner conflicts, confidence, and trauma release.", link: "/services" },
-  { icon: <Brain />, title: "Time Line Therapy™ Sessions", description: "Go to the root cause of past traumas, phobias, and unresolved emotions without reliving them.", link: "/services" },
-  { icon: <Heart />, title: "Hypnotherapy", description: "Deep relaxation and subconscious communication for anxiety, sleep issues, confidence, and self-worth.", link: "/services" },
-  { icon: <PenTool />, title: "Journaling & Creative Therapy", description: "Guided methods to identify emotional patterns, reprogram thoughts, and express stuck feelings.", link: "/services" },
-  { icon: <Users />, title: "Group Healing Circles", description: "Intimate online or in-person sessions for shared support, breathwork, and emotional reconnection.", link: "/services" },
-  { icon: <Briefcase />, title: "Corporate Trainings & Workshops", description: "Customized programs for employee well-being, resilience building, and mental clarity.", link: "/services" },
-  { icon: <Award />, title: "4X Boost to Personal Mastery", description: "A guided 21-day course for complete emotional reset and mind-body reprogramming.", link: "/services" },
+  { icon: <Lightbulb />, title: "1 - 1 Live Coaching with our professionals", description: "1:1 Coaching including NLP, Time Line Therapy, Hypnosis and Somatic Healing to remove mental blocks and improve emotional wellness", link: "/services" },
+  { icon: <Brain />, title: "Time Line Therapy", description: "Time Line Therapy™ to release negative emotions and unlock your future", link: "/services" },
+  { icon: <Heart />, title: "Hypnosis", description: "Hypnotherapy for deep subconscious transformation", link: "/services" },
+  { icon: <PenTool />, title: "Journals", description: "Guided Journaling & Creative Therapy for self-reflection and growth", link: "/journals" },
+  { icon: <Users />, title: "Group Sessions", description: "Group Sessions that foster collective healing and support", link: "/services" },
+  { icon: <Briefcase />, title: "Training Sessions", description: "Corporate Training Sessions to empower teams and boost their performance", link: "/services" },
 ];
 
 const ServicesSection = () => (

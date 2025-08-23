@@ -20,8 +20,10 @@ import {
 import { Link } from "react-router-dom";
 import Autoplay from "embla-carousel-autoplay";
 import React from "react";
-import ServicesSection from "@/components/home/ServicesSection"; // Import the ServicesSection component
-import ContactCtaSection from "@/components/ContactCtaSection"; // Import the new component
+import ServicesSection from "@/components/home/ServicesSection";
+import ContactCtaSection from "@/components/ContactCtaSection";
+import TransformationFlow from "@/components/home/TransformationFlow";
+import IntroTextSection from "@/components/home/IntroTextSection";
 
 const heroImage = { src: "https://images.pexels.com/photos/7929183/pexels-photo-7929183.jpeg", alt: "Woman meditating in a serene setting, representing emotional healing and transformation" };
 
@@ -47,12 +49,14 @@ const Index = () => {
   return (
     <div className="bg-[#F8F5F3]">
       <HeroSection />
+      <TransformationFlow />
+      <IntroTextSection />
       <QuoteSection />
       <BlogPreview />
       <PartnersSection />
       <ServicesSection />
       <CtaSection />
-      <ContactCtaSection /> {/* Replaced ContactFormSection with new component */}
+      <ContactCtaSection />
       <InstagramCarousel />
       <TestimonialSection />
       <ContactInfoBar />
@@ -73,14 +77,14 @@ const HeroSection = () => (
           Tranquillity in Transformation
         </h1>
         <p className="mt-4 text-lg md:text-xl max-w-2xl">
-          Unlock emotional freedom, align your mind, body, and soul, and achieve the success you truly deserve.
+          Unlock emotional freedom, align your mind, body, and soul, and boost your success by 4x.
         </p>
         <div className="mt-8 flex gap-4">
           <Button size="lg" asChild>
-            <Link to="/book-call">Book a Free 1:1 NLP Coaching Session</Link>
+            <Link to="/book-call">Book a Free 1:1 Discovery Call</Link>
           </Button>
           <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-primary" asChild>
-            <Link to="/services">Explore Emotional Healing Services</Link>
+            <Link to="/services">Explore Our Healing Services</Link>
           </Button>
         </div>
       </div>
