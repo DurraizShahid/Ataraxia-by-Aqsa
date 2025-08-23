@@ -15,7 +15,7 @@ import BookCall from "./pages/BookCall";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import NotFound from "./pages/NotFound";
-import Cursor from "./components/Cursor"; // Import the new Cursor component
+// Removed: import Cursor from "./components/Cursor";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +25,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Cursor /> {/* Render the custom cursor here */}
+        {/* Removed: <Cursor /> */}
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<Index />} />
