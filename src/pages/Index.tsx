@@ -22,8 +22,7 @@ import Autoplay from "embla-carousel-autoplay";
 import React from "react";
 import ServicesSection from "@/components/home/ServicesSection";
 import ContactCtaSection from "@/components/ContactCtaSection";
-import TransformationFlow from "@/components/home/TransformationFlow";
-import IntroTextSection from "@/components/home/IntroTextSection";
+import TransformationIntroSection from "@/components/home/TransformationIntroSection"; // Updated import
 
 const heroImage = { src: "https://images.pexels.com/photos/7929183/pexels-photo-7929183.jpeg", alt: "Woman meditating in a serene setting, representing emotional healing and transformation" };
 
@@ -49,8 +48,7 @@ const Index = () => {
   return (
     <div className="bg-[#F8F5F3]">
       <HeroSection />
-      <TransformationFlow />
-      <IntroTextSection />
+      <TransformationIntroSection /> {/* Using the new combined component */}
       <QuoteSection />
       <BlogPreview />
       <PartnersSection />
