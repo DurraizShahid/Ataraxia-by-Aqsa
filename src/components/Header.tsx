@@ -38,16 +38,10 @@ const Header = () => {
   const navLinkClasses = (isActive: boolean) =>
     cn(
       "uppercase text-xs font-semibold tracking-widest transition-colors flex items-center gap-2",
-      isScrolled
-        ? "hover:text-primary"
-        : "text-primary-foreground hover:text-primary-foreground/80",
-      isActive
-        ? isScrolled
-          ? "text-primary"
-          : "text-primary-foreground"
-        : isScrolled
-        ? "text-muted-foreground"
-        : "text-primary-foreground/80"
+      // Base color when not scrolled (transparent header)
+      !isScrolled && (isActive ? "text-primary" : "text-primary/80 hover:text-primary"),
+      // Base color when scrolled (white header)
+      isScrolled && (isActive ? "text-primary" : "text-muted-foreground hover:text-primary")
     );
 
   return (
@@ -65,7 +59,8 @@ const Header = () => {
               to="/book-call"
               className={cn(
                 "text-xs uppercase font-semibold tracking-widest flex items-center gap-2 group",
-                isScrolled ? "text-primary" : "text-primary-foreground"
+                // Always use text-primary for visibility against light background
+                "text-primary hover:text-primary/80"
               )}
             >
               <span>Book a Call</span>
@@ -75,8 +70,8 @@ const Header = () => {
 
           {/* Mobile: Left Side - Logo */}
           <div className="lg:hidden">
-            <Link to="/" className={cn("flex items-center gap-2", isScrolled ? "text-primary" : "text-primary-foreground")}>
-              <img src="/logo-black.svg" alt="Ataraxia by Aqsa Logo" className={cn("h-10 w-10", !isScrolled && "brightness-0 invert")} />
+            <Link to="/" className="flex items-center gap-2 text-primary">
+              <img src="/logo-black.svg" alt="Ataraxia by Aqsa Logo" className="h-10 w-10" />
             </Link>
           </div>
 
@@ -94,8 +89,8 @@ const Header = () => {
                 </NavLink>
               ))}
             </nav>
-            <Link to="/" className={cn("flex items-center gap-2 shrink-0", isScrolled ? "text-primary" : "text-primary-foreground")}>
-              <img src="/logo-black.svg" alt="Ataraxia by Aqsa Logo" className={cn("h-12 w-12", !isScrolled && "brightness-0 invert")} />
+            <Link to="/" className="flex items-center gap-2 shrink-0 text-primary">
+              <img src="/logo-black.svg" alt="Ataraxia by Aqsa Logo" className="h-12 w-12" />
             </Link>
             <nav className="flex items-center space-x-8">
               {rightNavLinks.map(({ to, label }) => (
@@ -113,7 +108,7 @@ const Header = () => {
 
           {/* Right Side - Icons (Desktop) & Menu (Mobile) */}
           <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:flex items-center">
-            <div className={cn("flex items-center space-x-2", isScrolled ? "text-primary" : "text-primary-foreground")}>
+            <div className={cn("flex items-center space-x-2", isScrolled ? "text-primary" : "text-primary")}>
               <Button variant="ghost" size="icon">
                 <Search className="h-5 w-5" />
                 <span className="sr-only">Search</span>
@@ -125,7 +120,7 @@ const Header = () => {
           <div className="lg:hidden">
             <Sheet open={isMenuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className={cn(isScrolled ? "text-primary" : "text-primary-foreground", "hover:bg-transparent focus:bg-transparent")}>
+                <Button variant="ghost" size="icon" className={cn(isScrolled ? "text-primary" : "text-primary", "hover:bg-transparent focus:bg-transparent")}>
                   <Menu className="h-6 w-6" />
                   <span className="sr-only">Open menu</span>
                 </Button>
