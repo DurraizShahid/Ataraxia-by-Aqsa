@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
-import { Facebook, Twitter, Linkedin, Pinterest, ArrowRight, ExternalLink } from "lucide-react";
+import { Facebook, Twitter, Linkedin, ArrowRight, ExternalLink } from "lucide-react"; // Removed Pinterest
 
 const About = () => {
   return (
@@ -28,9 +28,7 @@ const About = () => {
               <a href="#" className="w-8 h-8 rounded-full bg-brand-pink flex items-center justify-center text-primary-foreground hover:bg-brand-pink-darker transition-colors">
                 <Linkedin size={16} />
               </a>
-              <a href="#" className="w-8 h-8 rounded-full bg-brand-pink flex items-center justify-center text-primary-foreground hover:bg-brand-pink-darker transition-colors">
-                <Pinterest size={16} />
-              </a>
+              {/* Removed Pinterest link */}
             </div>
           </div>
           <div className="flex justify-center md:justify-end">
