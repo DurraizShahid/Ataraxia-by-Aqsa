@@ -27,7 +27,7 @@ const About = () => {
           <div>
             <h2 className="text-3xl md:text-4xl font-bold">Meet Our Founder, Aqsa Khan</h2>
             <p className="mt-4 text-muted-foreground">
-              [Placeholder for a short bio of Aqsa Khan. This section will detail her journey, her passion for healing, and what led her to create the Ataraxia Foundation. It will highlight her dedication to empowering individuals to overcome their limitations and achieve personal mastery.]
+              Aqsa Khan is the visionary founder of Ataraxia Foundation, dedicated to empowering individuals to achieve profound mental and emotional tranquility. With a deep understanding of human psychology and a passion for transformative healing, Aqsa guides her clients through personalized journeys to overcome limitations, rewire their minds, and master their lives. Her approach is rooted in compassion, evidence-based techniques, and a steadfast belief in each person's innate capacity for change.
             </p>
             <div className="mt-6">
               <h3 className="text-xl font-semibold mb-3">Certifications</h3>

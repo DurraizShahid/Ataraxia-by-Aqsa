@@ -11,6 +11,8 @@ import Courses from "./pages/Courses";
 import Journals from "./pages/Journals";
 import Blog from "./pages/Blog";
 import BookCall from "./pages/BookCall";
+import PrivacyPolicy from "./pages/PrivacyPolicy"; // New import
+import TermsOfUse from "./pages/TermsOfUse";       // New import
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +32,8 @@ const App = () => (
             <Route path="/journals" element={<Journals />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/book-call" element={<BookCall />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} /> {/* New route */}
+            <Route path="/terms-of-use" element={<TermsOfUse />} />       {/* New route */}
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

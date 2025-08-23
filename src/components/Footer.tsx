@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Instagram, Linkedin } from "lucide-react"; // Removed Facebook, Twitter, Youtube
 
 const Footer = () => {
   return (
@@ -14,19 +14,21 @@ const Footer = () => {
               Empowering you with tools for transformation and healing.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-primary-foreground/70 hover:text-primary-foreground"><Facebook size={16} /></a>
-              <a href="#" className="text-primary-foreground/70 hover:text-primary-foreground"><Instagram size={16} /></a>
-              <a href="#" className="text-primary-foreground/70 hover:text-primary-foreground"><Twitter size={16} /></a>
-              <a href="#" className="text-primary-foreground/70 hover:text-primary-foreground"><Youtube size={16} /></a>
+              <a href="https://www.instagram.com/ataraxiafoundation" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/70 hover:text-primary-foreground"><Instagram size={16} /></a>
+              <a href="https://www.linkedin.com/company/ataraxiafoundation" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/70 hover:text-primary-foreground"><Linkedin size={16} /></a>
+              {/* Add WhatsApp if needed */}
             </div>
           </div>
           <div>
             <h3 className="font-serif text-xl mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/about" className="text-primary-foreground/70 hover:text-primary-foreground">About Us</Link></li>
-              <li><Link to="/services" className="text-primary-foreground/70 hover:text-primary-foreground">Services</Link></li>
+              <li><Link to="/" className="text-primary-foreground/70 hover:text-primary-foreground">Home</Link></li>
               <li><Link to="/courses" className="text-primary-foreground/70 hover:text-primary-foreground">Courses</Link></li>
+              <li><Link to="/journals" className="text-primary-foreground/70 hover:text-primary-foreground">Journals</Link></li>
+              <li><Link to="/book-call" className="text-primary-foreground/70 hover:text-primary-foreground">Book a Call</Link></li>
               <li><Link to="/blog" className="text-primary-foreground/70 hover:text-primary-foreground">Blog</Link></li>
+              <li><Link to="/privacy-policy" className="text-primary-foreground/70 hover:text-primary-foreground">Privacy Policy</Link></li>
+              <li><Link to="/terms-of-use" className="text-primary-foreground/70 hover:text-primary-foreground">Terms of Use</Link></li>
             </ul>
           </div>
           <div>
