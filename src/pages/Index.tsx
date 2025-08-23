@@ -77,7 +77,7 @@ const HeroSection = () => (
         <p className="mt-4 text-lg md:text-xl max-w-2xl">
           Unlock emotional freedom, align your mind, body, and soul, and boost your success by 4x.
         </p>
-        <div className="mt-8 flex gap-4">
+        <div className="mt-8 flex gap-4 flex-col sm:flex-row"> {/* Added flex-col for mobile buttons */}
           <Button size="lg" asChild>
             <Link to="/book-call">Book a Free 1:1 Discovery Call</Link>
           </Button>
@@ -103,7 +103,7 @@ const QuoteSection = () => (
 
 const BlogPreview = () => (
   <section className="py-24">
-    <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
+    <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"> {/* Adjusted for mobile */}
       <div>
         <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Read and Learn</p>
         <h2 className="text-5xl font-serif text-primary">New texts about everyday issues of a modern man.</h2>
@@ -118,7 +118,7 @@ const BlogPreview = () => (
         <Carousel opts={{ align: "start", loop: true }}>
           <CarouselContent>
             {blogPosts.map(({ title, image, alt }, i) => (
-              <CarouselItem key={i} className="md:basis-1/2">
+              <CarouselItem key={i} className="basis-full md:basis-1/2"> {/* Adjusted for mobile */}
                 <Card className="border-none shadow-none bg-transparent">
                   <CardContent className="p-0">
                     <div className="relative">
@@ -161,7 +161,7 @@ const PartnersSection = () => (
 
 const CtaSection = () => (
   <section className="py-24">
-    <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
+    <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center"> {/* Adjusted for mobile */}
       <img src="https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Therapy session for emotional healing and life transformation" className="w-full h-auto object-cover" />
       <div className="text-left">
         <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Therapy</p>
@@ -209,7 +209,7 @@ const InstagramCarousel = () => {
 
 const TestimonialSection = () => (
   <section className="py-24">
-    <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
+    <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center"> {/* Adjusted for mobile */}
       <div className="text-left">
         <p className="text-6xl font-serif text-primary">”</p>
         <h2 className="text-4xl font-serif text-primary mt-4">Healing is a priority</h2>
