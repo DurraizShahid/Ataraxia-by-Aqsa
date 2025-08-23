@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <img src="/logo.svg" alt="Ataraxia Logo" className="h-10 w-10" style={{ filter: 'brightness(0) invert(1)' }} />
+              <img src="/logo-black.svg" alt="Ataraxia Logo" className="h-10 w-10" style={{ filter: 'brightness(0) invert(1)' }} />
             </Link>
             <p className="text-sm text-primary-foreground/70 mb-6">
               Empowering you with tools for transformation and healing.
