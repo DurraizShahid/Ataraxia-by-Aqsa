@@ -76,7 +76,7 @@ const Header = () => {
           {/* Mobile: Left Side - Logo */}
           <div className="lg:hidden">
             <Link to="/" className={cn("flex items-center gap-2", isScrolled ? "text-primary" : "text-primary-foreground")}>
-              <img src="/logo-black.svg" alt="Ataraxia Logo" className={cn("h-8 w-8", !isScrolled && "brightness-0 invert")} />
+              <img src="/logo-black.svg" alt="Ataraxia Logo" className={cn("h-10 w-10", !isScrolled && "brightness-0 invert")} />
             </Link>
           </div>
 
@@ -95,7 +95,7 @@ const Header = () => {
               ))}
             </nav>
             <Link to="/" className={cn("flex items-center gap-2 shrink-0", isScrolled ? "text-primary" : "text-primary-foreground")}>
-              <img src="/logo-black.svg" alt="Ataraxia Logo" className={cn("h-10 w-10", !isScrolled && "brightness-0 invert")} />
+              <img src="/logo-black.svg" alt="Ataraxia Logo" className={cn("h-12 w-12", !isScrolled && "brightness-0 invert")} />
             </Link>
             <nav className="flex items-center space-x-8">
               {rightNavLinks.map(({ to, label }) => (

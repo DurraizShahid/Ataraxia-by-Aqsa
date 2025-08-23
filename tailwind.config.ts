@@ -12,9 +12,18 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: {
+        DEFAULT: "1rem", // Default padding for smaller screens
+        md: "2rem",      // Original padding for medium screens
+        "2xl": "3rem",   // Slightly more padding for very large screens
+      },
       screens: {
-        "2xl": "1400px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px", // Increased from 1400px
+        "3xl": "1920px", // New breakpoint for even wider screens
       },
     },
     extend: {
