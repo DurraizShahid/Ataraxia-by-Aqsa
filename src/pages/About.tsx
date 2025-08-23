@@ -1,149 +1,217 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
-import { Facebook, Twitter, Linkedin, ArrowRight, ExternalLink } from "lucide-react"; // Removed Pinterest
+import { Facebook, Twitter, Linkedin, ArrowRight, ExternalLink } from "lucide-react";
 
 const About = () => {
   return (
     <div className="bg-[#F8F5F3]">
-      {/* About Me Hero Section */}
-      <section className="py-20 md:py-32">
-        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="text-left">
-            <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">About Me</p>
-            <h1 className="text-5xl md:text-6xl font-serif text-primary mb-4">Olivia Forman, Ph.D.</h1>
-            <p className="text-lg text-muted-foreground mb-6">Clinical psychiatrist and therapist</p>
-            <p className="text-muted-foreground mb-6 max-w-lg">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-            <p className="text-muted-foreground mb-2">A: Seestrasse 21, Zurich, Swisse</p>
-            <p className="text-muted-foreground mb-6">E: wellmont@qodeinteractive.com</p>
-            <div className="flex space-x-3">
-              <a href="#" className="w-8 h-8 rounded-full bg-brand-pink flex items-center justify-center text-primary-foreground hover:bg-brand-pink-darker transition-colors">
-                <Facebook size={16} />
-              </a>
-              <a href="#" className="w-8 h-8 rounded-full bg-brand-pink flex items-center justify-center text-primary-foreground hover:bg-brand-pink-darker transition-colors">
-                <Twitter size={16} />
-              </a>
-              <a href="#" className="w-8 h-8 rounded-full bg-brand-pink flex items-center justify-center text-primary-foreground hover:bg-brand-pink-darker transition-colors">
-                <Linkedin size={16} />
-              </a>
-              {/* Removed Pinterest link */}
-            </div>
-          </div>
-          <div className="flex justify-center md:justify-end">
-            <img
-              src="/images/about-hero.png"
-              alt="Olivia Forman, Ph.D."
-              className="w-full max-w-md md:max-w-none h-auto object-cover rounded-lg shadow-lg"
-            />
-          </div>
+      {/* Welcome to Ataraxia Section */}
+      <section className="py-20 md:py-32 text-center">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Welcome</p>
+          <h1 className="text-5xl md:text-6xl font-serif text-primary mb-6">Welcome to Ataraxia</h1>
+          <p className="text-lg text-muted-foreground mb-6">
+            At Ataraxia, we guide you to transform your life by healing the root causes of emotional blockages and mental fog. Our internationally certified team uses proven techniques in NLP, Hypnosis, and emotional release strategies to help you release emotional baggage, clear mental fog, and realign with your true self.
+          </p>
+          <p className="text-lg text-muted-foreground">
+            Our approach is designed to achieve faster and long-lasting results by changing the foundation of your mindset and emotional well-being. When you let go of limiting beliefs, blocked emotions, and unresolved traumas, you unlock sharper clarity, inner peace, and experience up to 4x more productivity in your personal and professional life.
+          </p>
         </div>
       </section>
 
-      {/* Memberships & Certificates Section */}
+      {/* Why Choose Ataraxia? Section */}
+      <section className="py-20 md:py-32 bg-white">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <h2 className="text-4xl md:text-5xl font-serif text-primary text-center mb-12">Why Choose Ataraxia?</h2>
+          <p className="text-lg text-muted-foreground text-center mb-12">
+            Because true transformation begins within — and that’s exactly where we start.
+            Ataraxia is more than a coaching space. It's a sanctuary where healing meets science, and your personal evolution becomes inevitable. Unlike surface-level solutions, we work at the root cause of emotional struggles and mental blocks — using a powerful blend of Neuro-Linguistic Programming (NLP), Hypnotherapy, Time Line Therapy™, and Emotional Release techniques.
+          </p>
+          <h3 className="text-2xl font-serif text-primary mb-8 text-center">✨ Here’s What Makes Ataraxia Different:</h3>
+          <ul className="space-y-8 text-left">
+            <li className="flex items-start gap-4">
+              <span className="text-primary text-2xl font-bold">●</span>
+              <div>
+                <h4 className="text-xl font-semibold text-primary">Integrated Healing Approach</h4>
+                <p className="text-muted-foreground mt-1">
+                  We don’t believe in one-size-fits-all. Every journey is unique, so we blend modern psychology, subconscious work, and emotional release to help you achieve deep, lasting change.
+                </p>
+              </div>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-primary text-2xl font-bold">●</span>
+              <div>
+                <h4 className="text-xl font-semibold text-primary">Certified & Experienced Coaching</h4>
+                <p className="text-muted-foreground mt-1">
+                  Led by internationally certified NLP Coach and Hypnotherapist Aqsa Khan, who has helped hundreds of individuals achieve emotional clarity, career breakthroughs, and personal empowerment.
+                </p>
+              </div>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-primary text-2xl font-bold">●</span>
+              <div>
+                <h4 className="text-xl font-semibold text-primary">Results That Last</h4>
+                <p className="text-muted-foreground mt-1">
+                  Clients report up to 4x increase in productivity, greater self-awareness, and long-term emotional freedom after just a few sessions. Why? Because we work with your unconscious patterns, not just surface behaviors.
+                </p>
+              </div>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-primary text-2xl font-bold">●</span>
+              <div>
+                <h4 className="text-xl font-semibold text-primary">Safe & Non-Judgmental Space</h4>
+                <p className="text-muted-foreground mt-1">
+                  Whether you're navigating anxiety, burnout, childhood trauma, or self-doubt — you’re safe here. Ataraxia is a trauma-informed space designed to support your healing with compassion and care.
+                </p>
+              </div>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-primary text-2xl font-bold">●</span>
+              <div>
+                <h4 className="text-xl font-semibold text-primary">Proven Techniques, Real-Life Results</h4>
+                <p className="text-muted-foreground mt-1">
+                  Our methods are backed by neuroscience and lived experience. From emotional unblocking to mindset rewiring — we guide you step by step toward clarity, peace, and confidence.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Aqsa's Story Section */}
+      <section className="py-20 md:py-32">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-4xl md:text-5xl font-serif text-primary text-center mb-12">Aqsa's Story</h2>
+          <div className="relative pl-8 md:pl-16 border-l-2 border-brand-pink space-y-12">
+            <div className="absolute left-0 top-0 w-4 h-4 bg-brand-pink rounded-full -translate-x-1/2"></div>
+            <div className="relative">
+              <h3 className="text-2xl font-serif text-primary mb-2">From Stuck...</h3>
+              <p className="text-muted-foreground">
+                I know how it feels to smile on the outside while silently breaking on the inside. I’ve felt the ache of carrying emotions I couldn’t name — the weight of a childhood wound, the pressure to be strong, the fear of being misunderstood. I was functioning, yes… but not truly living.
+              </p>
+              <p className="text-muted-foreground mt-4">
+                I used to believe that success meant pushing through. I tried journaling, therapy, meditation — all of it helped a little, but the deeper pain kept resurfacing. Something within me whispered, “This isn’t healing. This is coping.”
+              </p>
+            </div>
+            <div className="absolute left-0 w-4 h-4 bg-brand-pink rounded-full -translate-x-1/2"></div>
+            <div className="relative">
+              <h3 className="text-2xl font-serif text-primary mb-2">...to Healing...</h3>
+              <p className="text-muted-foreground">
+                What I found was a path that went deeper than mindset. A path that transformed my subconscious. When I discovered Neuro-Linguistic Programming (NLP), Time Line Therapy™, and Hypnotherapy, everything changed. I didn’t just heal — I was rewired. The fog began to lift. Emotions I had buried started to release. And for the first time in years, I felt free.
+              </p>
+            </div>
+            <div className="absolute left-0 w-4 h-4 bg-brand-pink rounded-full -translate-x-1/2"></div>
+            <div className="relative">
+              <h3 className="text-2xl font-serif text-primary mb-2">...to Coach...</h3>
+              <p className="text-muted-foreground">
+                But it wasn’t just one method that helped — it was the combination of tools that truly transformed me. That's why I now use an integrated approach. At Ataraxia, I combine the most effective techniques — from subconscious work and emotional release to inner child healing and mindset restructuring — to guide others through their own breakthroughs.
+              </p>
+            </div>
+            <div className="absolute left-0 w-4 h-4 bg-brand-pink rounded-full -translate-x-1/2"></div>
+            <div className="relative">
+              <h3 className="text-2xl font-serif text-primary mb-2">...to Ataraxia</h3>
+              <p className="text-muted-foreground">
+                Because I’ve been where you are. And if you're here reading this, maybe you're carrying something heavy too — something that no longer fits who you’re becoming. It’s time to release it.
+              </p>
+              <p className="text-muted-foreground mt-4">
+                I created Ataraxia not just as a brand, but as a sacred space — where healing goes beyond the surface, where you get to feel light again, where you realign with your true self and unlock your highest potential.
+              </p>
+              <p className="text-muted-foreground mt-4">
+                You don’t have to keep surviving. You were made to thrive — emotionally, mentally, spiritually.
+              </p>
+              <Button asChild className="mt-8 bg-brand-pink hover:bg-brand-pink-darker text-primary-foreground">
+                <Link to="/book-call">Book Your Free Discovery Call Now</Link>
+              </Button>
+            </div>
+          </div>
+          <p className="text-center text-3xl font-serif text-primary mt-16">
+            "I didn’t just survive the storm — I learned to speak its language and taught the waves to carry me home."
+          </p>
+          <p className="text-center text-sm uppercase tracking-widest text-muted-foreground mt-4">— Aqsa Khan</p>
+        </div>
+      </section>
+
+      {/* Licenses & Certifications Section */}
       <section className="py-20 md:py-32 bg-white">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Read & Learn</p>
-          <h2 className="text-4xl md:text-5xl font-serif text-primary mb-12">Memberships & certificates</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-8 items-center justify-center">
-            {/* Placeholder Logos - Replace with actual images if available */}
-            <div className-="flex flex-col items-center text-muted-foreground text-lg font-semibold">
-              <img src="https://via.placeholder.com/80x40/E6DCD5/5C4B4B?text=Logo1" alt="Logo 1" className="h-10 object-contain mb-2" />
-              Mental Health
+          <h2 className="text-4xl md:text-5xl font-serif text-primary mb-12">Licenses & Certifications</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center justify-center">
+            <div className="flex flex-col items-center text-muted-foreground text-lg font-semibold">
+              <img src="https://via.placeholder.com/100x50/E6DCD5/5C4B4B?text=ABNLP" alt="ABNLP Coaching Division Graphic" className="h-12 object-contain mb-2" />
+              Certified NLP Coach via the American Board of Neuro-Linguistic Programming (ABNLP) Coaching Division
             </div>
             <div className="flex flex-col items-center text-muted-foreground text-lg font-semibold">
-              <img src="https://via.placeholder.com/80x40/E6DCD5/5C4B4B?text=Logo2" alt="Logo 2" className="h-10 object-contain mb-2" />
-              ABCD
+              <img src="https://via.placeholder.com/100x50/E6DCD5/5C4B4B?text=TLTA" alt="TLTA Graphic" className="h-12 object-contain mb-2" />
+              Certified Practitioner of Time Line Therapy™ via the Time Line Therapy Association (TLTA)
             </div>
             <div className="flex flex-col items-center text-muted-foreground text-lg font-semibold">
-              <img src="https://via.placeholder.com/80x40/E6DCD5/5C4B4B?text=Logo3" alt="Logo 3" className="h-10 object-contain mb-2" />
-              Mind Consulting
+              <img src="https://via.placeholder.com/100x50/E6DCD5/5C4B4B?text=ABH" alt="ABH Graphic" className="h-12 object-contain mb-2" />
+              Certified Hypnotist via the American Board of Hypnotherapy (ABH)
             </div>
             <div className="flex flex-col items-center text-muted-foreground text-lg font-semibold">
-              <img src="https://via.placeholder.com/80x40/E6DCD5/5C4B4B?text=Logo4" alt="Logo 4" className="h-10 object-contain mb-2" />
-              GEST
+              <img src="https://via.placeholder.com/100x50/E6DCD5/5C4B4B?text=ABNLP" alt="ABNLP Graphic" className="h-12 object-contain mb-2" />
+              Certified NLP Practitioner via the American Board of Neuro-Linguistic Programming (ABNLP)
             </div>
             <div className="flex flex-col items-center text-muted-foreground text-lg font-semibold">
-              <img src="https://via.placeholder.com/80x40/E6DCD5/5C4B4B?text=Logo5" alt="Logo 5" className="h-10 object-contain mb-2" />
-              P.S.Y.
-            </div>
-            <div className="flex flex-col items-center text-muted-foreground text-lg font-semibold">
-              <img src="https://via.placeholder.com/80x40/E6DCD5/5C4B4B?text=Logo6" alt="Logo 6" className="h-10 object-contain mb-2" />
-              UniPh
-            </div>
-            <div className="flex flex-col items-center text-muted-foreground text-lg font-semibold">
-              <img src="https://via.placeholder.com/80x40/E6DCD5/5C4B4B?text=Logo7" alt="Logo 7" className="h-10 object-contain mb-2" />
-              Heal
-            </div>
-            <div className="flex flex-col items-center text-muted-foreground text-lg font-semibold">
-              <img src="https://via.placeholder.com/80x40/E6DCD5/5C4B4B?text=Logo8" alt="Logo 8" className="h-10 object-contain mb-2" />
-              IFP
-            </div>
-            <div className="flex flex-col items-center text-muted-foreground text-lg font-semibold">
-              <img src="https://via.placeholder.com/80x40/E6DCD5/5C4B4B?text=Logo9" alt="Logo 9" className="h-10 object-contain mb-2" />
-              Therapy Society
+              <img src="https://via.placeholder.com/100x50/E6DCD5/5C4B4B?text=UoY" alt="University of York Graphic" className="h-12 object-contain mb-2" />
+              Introduction to Behavioural Activation for Depression, University of York
             </div>
           </div>
         </div>
       </section>
 
-      {/* Modern Psychology Section */}
-      <section className="py-20 md:py-32 relative overflow-hidden">
-        <div className="absolute top-0 right-0 -mt-16 -mr-16 opacity-30">
-          {/* Placeholder for the leaf graphic */}
-          <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M100 0C44.7715 0 0 44.7715 0 100C0 155.228 44.7715 200 100 200C155.228 200 200 155.228 200 100C200 44.7715 155.228 0 100 0ZM100 180C55.8172 180 20 144.183 20 100C20 55.8172 55.8172 20 100 20C144.183 20 180 55.8172 180 100C180 144.183 144.183 180 100 180Z" fill="#E6DCD5"/>
-            <path d="M100 20C127.614 20 150 42.3858 150 70C150 97.6142 127.614 120 100 120C72.3858 120 50 97.6142 50 70C50 42.3858 72.3858 20 100 20Z" fill="#E6DCD5"/>
-            <path d="M100 120C116.569 120 130 106.569 130 90C130 73.4315 116.569 60 100 60C83.4315 60 70 73.4315 70 90C70 106.569 83.4315 120 100 120Z" fill="#E6DCD5"/>
-          </svg>
+      {/* Our Mission Section */}
+      <section className="py-20 md:py-32 text-center">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-4xl md:text-5xl font-serif text-primary mb-6">Our Mission</h2>
+          <p className="text-lg text-muted-foreground">
+            We empower you to heal from within, realign your emotional and mental state, and step confidently into your highest potential. Ataraxia’s mission is to provide compassionate, science-backed coaching that helps you live a life full of purpose, balance, and clarity.
+          </p>
         </div>
-        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="flex justify-center md:justify-start">
-            <img
-              src="https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=600" // Placeholder for book image
-              alt="Modern Psychology Book"
-              className="w-full max-w-sm h-auto object-cover rounded-lg shadow-lg"
-            />
-          </div>
-          <div className="text-left">
-            <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Read & Learn</p>
-            <h2 className="text-4xl md:text-5xl font-serif text-primary mb-6">Modern psychology</h2>
-            <p className="text-muted-foreground mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-            <p className="text-muted-foreground mb-8">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            </p>
-            <div className="flex gap-4">
-              <Button className="bg-brand-pink hover:bg-brand-pink-darker text-primary-foreground" asChild>
-                <Link to="/courses">Buy Now</Link>
-              </Button>
-              <Button variant="link" className="p-0 text-primary flex items-center group" asChild>
-                <a href="#" target="_blank" rel="noopener noreferrer">
-                  Download First Part <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:rotate-45" />
-                </a>
-              </Button>
+      </section>
+
+      {/* What Our Clients Say Section */}
+      <section className="py-20 md:py-32 bg-white text-center">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-4xl md:text-5xl font-serif text-primary mb-6">What Our Clients Say</h2>
+          <p className="text-lg text-muted-foreground">
+            (Add client testimonial screenshots here for authentic social proof.)
+          </p>
+          {/* Placeholder for testimonials - you can add a carousel or grid here later */}
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-secondary p-8 rounded-lg shadow-sm">
+              <p className="italic text-muted-foreground">"Working with Ataraxia has been truly transformative. I feel a profound sense of peace and clarity I haven't experienced in years."</p>
+              <p className="font-semibold text-primary mt-4">- Client Name</p>
+            </div>
+            <div className="bg-secondary p-8 rounded-lg shadow-sm">
+              <p className="italic text-muted-foreground">"The integrated approach helped me address deep-rooted issues quickly and effectively. Highly recommend!"</p>
+              <p className="font-semibold text-primary mt-4">- Another Client</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section className="py-20 md:py-32 bg-white">
-        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="text-left">
-            <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Read & Learn</p>
-            <h2 className="text-4xl md:text-5xl font-serif text-primary mb-6">Sign up for newsletter & be part of the community.</h2>
-            <p className="text-muted-foreground max-w-lg">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.
-            </p>
+      {/* Begin Your Journey with Ataraxia Section */}
+      <section className="py-20 md:py-32 text-center">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-4xl md:text-5xl font-serif text-primary mb-6">Begin Your Journey with Ataraxia</h2>
+          <p className="text-lg text-muted-foreground mb-8">
+            Whether you are seeking personal transformation or want to empower your team through corporate training, Ataraxia is your trusted partner for deep, transformational change.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Button asChild size="lg" className="bg-brand-pink hover:bg-brand-pink-darker text-primary-foreground">
+              <Link to="/book-call">Book a Free Discovery Call</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+              <Link to="/services">Explore Our Services</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+              <a href="https://www.instagram.com/ataraxiafoundation" target="_blank" rel="noopener noreferrer">
+                Join Our Community <ExternalLink className="ml-2 h-4 w-4" />
+              </a>
+            </Button>
           </div>
-          <form className="space-y-4">
-            <Input placeholder="Your name" className="bg-background" />
-            <Input type="email" placeholder="Your e-mail" className="bg-background" />
-            <Button type="submit" className="w-full bg-brand-pink hover:bg-brand-pink-darker text-primary-foreground">Subscribe</Button>
-          </form>
         </div>
       </section>
     </div>
