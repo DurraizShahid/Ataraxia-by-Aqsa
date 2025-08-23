@@ -7,16 +7,20 @@ import {
   Zap, // Using Zap for Behavior Modification
   BookOpen, // Using BookOpen for NLP/TLT/Hypnotherapy
   Lightbulb, // Using Lightbulb for NLP/TLT/Hypnotherapy
+  PenTool, // New icon for Journaling
+  Briefcase, // New icon for Corporate Trainings
+  Award, // New icon for Upcoming Course
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const services = [
-  { icon: <Lightbulb />, title: "1:1 NLP Coaching", description: "Personalized sessions using Neuro-Linguistic Programming to remove limiting beliefs and achieve emotional freedom.", link: "/services" },
-  { icon: <Brain />, title: "Time Line Therapy™", description: "Advanced techniques to clear mental fog and release past traumas for lasting emotional healing.", link: "/services" },
-  { icon: <Heart />, title: "Hypnosis Therapy Online", description: "Guided hypnosis sessions to address emotional blockages and foster deep relaxation and transformation.", link: "/services" },
-  { icon: <Zap />, title: "Emotional Release Techniques", description: "Learn powerful methods to process and release suppressed emotions, leading to greater inner peace.", link: "/services" },
-  { icon: <BookOpen />, title: "Personal Mastery Programs", description: "Comprehensive programs designed for life transformation coaching and increasing productivity with mindset coaching.", link: "/courses" },
-  { icon: <Users />, title: "Group Sessions for Emotional Healing", description: "Connect with a supportive community in group sessions focused on collective emotional healing and growth.", link: "/courses" },
+  { icon: <Lightbulb />, title: "1:1 Breakthrough Coaching", description: "Personalized NLP coaching for emotional overwhelm, inner conflicts, confidence, and trauma release.", link: "/services" },
+  { icon: <Brain />, title: "Time Line Therapy™ Sessions", description: "Go to the root cause of past traumas, phobias, and unresolved emotions without reliving them.", link: "/services" },
+  { icon: <Heart />, title: "Hypnotherapy", description: "Deep relaxation and subconscious communication for anxiety, sleep issues, confidence, and self-worth.", link: "/services" },
+  { icon: <PenTool />, title: "Journaling & Creative Therapy", description: "Guided methods to identify emotional patterns, reprogram thoughts, and express stuck feelings.", link: "/services" },
+  { icon: <Users />, title: "Group Healing Circles", description: "Intimate online or in-person sessions for shared support, breathwork, and emotional reconnection.", link: "/services" },
+  { icon: <Briefcase />, title: "Corporate Trainings & Workshops", description: "Customized programs for employee well-being, resilience building, and mental clarity.", link: "/services" },
+  { icon: <Award />, title: "4X Boost to Personal Mastery", description: "A guided 21-day course for complete emotional reset and mind-body reprogramming.", link: "/services" },
 ];
 
 const ServicesSection = () => (
