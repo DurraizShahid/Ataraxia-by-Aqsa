@@ -14,7 +14,7 @@ import {
 import { Link } from "react-router-dom";
 
 const services = [
-  { icon: <Lightbulb />, title: "1 - 1 Live Coaching with our professionals", description: "1:1 Coaching including NLP, Time Line Therapy, Hypnosis and Somatic Healing to remove mental blocks and improve emotional wellness", link: "/services" },
+  { icon: <Lightbulb />, title: "1 - 1 Live Coaching", description: "1:1 Coaching including NLP, Time Line Therapy, Hypnosis and Somatic Healing to remove mental blocks and improve emotional wellness", link: "/services" },
   { icon: <Brain />, title: "Time Line Therapy", description: "Time Line Therapy™ to release negative emotions and unlock your future", link: "/services" },
   { icon: <Heart />, title: "Hypnosis", description: "Hypnotherapy for deep subconscious transformation", link: "/services" },
   { icon: <PenTool />, title: "Journals", description: "Guided Journaling & Creative Therapy for self-reflection and growth", link: "/journals" },
