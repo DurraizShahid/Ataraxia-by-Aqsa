@@ -23,9 +23,7 @@ import React from "react";
 import ServicesSection from "@/components/home/ServicesSection"; // Import the ServicesSection component
 
 const heroImages = [
-  { src: "https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", alt: "Woman meditating for emotional healing" },
-  { src: "https://images.pexels.com/photos/3828944/pexels-photo-3828944.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", alt: "Therapist and client in a hypnosis therapy session" },
-  { src: "https://images.pexels.com/photos/1535162/pexels-photo-1535162.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", alt: "Person writing in a journal for emotional release" },
+  { src: "https://images.pexels.com/photos/7929183/pexels-photo-7929183.jpeg", alt: "Woman meditating in a serene setting, representing emotional healing and transformation" },
 ];
 
 const blogPosts = [
