@@ -9,13 +9,14 @@ import About from "./pages/About";
 import Services from "./pages/Services";
 import Courses from "./pages/Courses";
 import Journals from "./pages/Journals";
+import ProductDetail from "./pages/ProductDetail"; // Import the new ProductDetail component
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import BookCall from "./pages/BookCall";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import NotFound from "./pages/NotFound";
-import ScrollToTop from "./components/ScrollToTop"; // Import the new component
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +26,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <ScrollToTop /> {/* Render ScrollToTop here */}
+        <ScrollToTop />
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<Index />} />
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/services" element={<Services />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/journals" element={<Journals />} />
+            <Route path="/journals/:slug" element={<ProductDetail />} /> {/* New route for product details */}
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/book-call" element={<BookCall />} />
