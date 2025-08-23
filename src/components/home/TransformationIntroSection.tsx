@@ -10,13 +10,13 @@ const TransformationIntroSection = () => {
       <div className="container mx-auto px-4 max-w-5xl">
         {/* Stuck -> Empowered Flow */}
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 mb-16">
-          <Card className="p-6 md:p-8 shadow-lg border-none bg-white/70 backdrop-blur-sm">
+          <Card className="p-8 md:p-10 shadow-lg border border-border bg-white/80 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
             <CardContent className="p-0">
               <div className="text-4xl md:text-5xl font-serif text-primary font-bold">Stuck</div>
             </CardContent>
           </Card>
           <ArrowRight className="h-16 w-16 text-brand-pink animate-pulse shrink-0" />
-          <Card className="p-6 md:p-8 shadow-lg border-none bg-white/70 backdrop-blur-sm">
+          <Card className="p-8 md:p-10 shadow-lg border border-border bg-white/80 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
             <CardContent className="p-0">
               <div className="text-4xl md:text-5xl font-serif text-primary font-bold">Empowered</div>
             </CardContent>
@@ -26,14 +26,13 @@ const TransformationIntroSection = () => {
         {/* Body Text */}
         <div className="max-w-3xl mx-auto">
           <p className="text-lg text-muted-foreground mb-6">
-            Experience up to 4x more productivity through mind, body, soul alignment.
-            Our signature approach heals the mind, soothes the body, and frees the soul — creating a ripple of success in every area of your life. Our transformational coaching services are designed to rewire your subconscious mind, bringing clarity, confidence, and inner peace.
+            Unlock up to 4x more productivity through mind, body, and soul alignment. Our signature approach heals, soothes, and frees, creating a ripple of success in every area of your life. Our transformational coaching rewires your subconscious for clarity, confidence, and inner peace.
           </p>
           <p className="text-lg text-muted-foreground mb-6">
-            Experience the power of emotional healing coaching that boosts your productivity up to 4x by freeing your mind and body from emotional baggage. Whether through personalized 1:1 coaching, Time Line Therapy™, somatic healing, hypnotherapy sessions, or supportive group sessions, Ataraxia provides the tools you need for lasting change.
+            Experience powerful emotional healing that boosts productivity by freeing your mind and body from emotional baggage. Through personalized 1:1 coaching, Time Line Therapy™, somatic healing, hypnotherapy, or supportive group sessions, Ataraxia provides the tools for lasting change.
           </p>
           <p className="text-lg text-muted-foreground mb-8">
-            Our unique approach combines proven methods in life transformation coaching with compassionate support, empowering you to live with purpose, balance, and mental clarity. Start your journey to emotional freedom and discover how to remove limiting beliefs that hold you back.
+            Our unique, compassionate approach combines proven methods in life transformation coaching, empowering you to live with purpose, balance, and mental clarity. Start your journey to emotional freedom and remove limiting beliefs today.
           </p>
         </div>
 
