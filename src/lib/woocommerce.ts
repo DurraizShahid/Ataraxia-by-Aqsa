@@ -94,19 +94,16 @@ export interface WooCommerceProduct {
   // Add any other fields you expect from your WooCommerce products
 }
 
-const getAuthHeader = () => {
-  const credentials = btoa(`${WOOCOMMERCE_CONSUMER_KEY}:${WOOCOMMERCE_CONSUMER_SECRET}`);
-  return `Basic ${credentials}`;
-};
+// Define a type for cart items that includes quantity
+export interface CartItem extends WooCommerceProduct {
+  quantity: number;
+}
+
+// Helper to construct the authentication string
+const getAuthParams = () => `consumer_key=${WOOCOMMERCE_CONSUMER_KEY}&consumer_secret=${WOOCOMMERCE_CONSUMER_SECRET}`;
 
 export async function getProducts(): Promise<WooCommerceProduct[]> {
-  const response = await fetch(`${WOOCOMMERCE_API_BASE_URL}/products?consumer_key=${WOOCOMMERCE_CONSUMER_KEY}&consumer_secret=${WOOCOMMERCE_CONSUMER_SECRET}`);
-  // Using query parameters for simplicity as per user request, though Basic Auth header is also an option.
-  // const response = await fetch(`${WOOCOMMERCE_API_BASE_URL}/products`, {
-  //   headers: {
-  //     Authorization: getAuthHeader(),
-  //   },
-  // });
+  const response = await fetch(`${WOOCOMMERCE_API_BASE_URL}/products?${getAuthParams()}`);
   if (!response.ok) {
     throw new Error("Failed to fetch products");
   }
@@ -114,17 +111,74 @@ export async function getProducts(): Promise<WooCommerceProduct[]> {
 }
 
 export async function getProductBySlug(slug: string): Promise<WooCommerceProduct | null> {
-  // WooCommerce API doesn't directly support fetching by slug for single product.
-  // We'll fetch all products and filter by slug, or fetch by ID if we had it.
-  // For now, fetching by slug will involve fetching all and filtering.
-  // In a real app, you might want to fetch by ID if you have it, or use a custom endpoint.
-  const response = await fetch(`${WOOCOMMERCE_API_BASE_URL}/products?slug=${slug}&consumer_key=${WOOCOMMERCE_CONSUMER_KEY}&consumer_secret=${WOOCOMMERCE_CONSUMER_SECRET}`);
+  const response = await fetch(`${WOOCOMMERCE_API_BASE_URL}/products?slug=${slug}&${getAuthParams()}`);
   if (!response.ok) {
     throw new Error(`Failed to fetch product with slug: ${slug}`);
   }
   const products: WooCommerceProduct[] = await response.json();
   return products.length > 0 ? products[0] : null;
 }
+
+export async function createWooCommerceOrder(cartItems: CartItem[]): Promise<{ payment_url: string }> {
+  if (cartItems.length === 0) {
+    throw new Error("Cart is empty, cannot create an order.");
+  }
+
+  const line_items = cartItems.map(item => ({
+    product_id: item.id,
+    quantity: item.quantity,
+  }));
+
+  // Placeholder billing and shipping information.
+  // In a real application, you would collect this from the user via a form.
+  const orderPayload = {
+    payment_method: "bacs", // Example: Direct Bank Transfer. You might need to adjust this based on your WooCommerce setup.
+    payment_method_title: "Direct Bank Transfer",
+    set_paid: false,
+    billing: {
+      first_name: "Guest",
+      last_name: "User",
+      address_1: "123 Placeholder St",
+      address_2: "",
+      city: "Anytown",
+      state: "CA",
+      postcode: "90210",
+      country: "US",
+      email: "guest@example.com", // Consider making this dynamic if you have user auth
+      phone: "555-123-4567"
+    },
+    shipping: {
+      first_name: "Guest",
+      last_name: "User",
+      address_1: "123 Placeholder St",
+      address_2: "",
+      city: "Anytown",
+      state: "CA",
+      postcode: "90210",
+      country: "US"
+    },
+    line_items: line_items,
+    // You can add shipping_lines, coupon_lines, etc. if needed
+  };
+
+  const response = await fetch(`${WOOCOMMERCE_API_BASE_URL}/orders?${getAuthParams()}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(orderPayload),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    console.error("WooCommerce Order Creation Error:", errorData);
+    throw new Error(errorData.message || "Failed to create order on WooCommerce.");
+  }
+
+  const order = await response.json();
+  return { payment_url: order.payment_url };
+}
+
 
 export const useProducts = () => {
   return useQuery<WooCommerceProduct[], Error>({
