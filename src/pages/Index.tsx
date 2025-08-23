@@ -19,6 +19,30 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
+const heroImages = [
+  "https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  "https://images.pexels.com/photos/3828944/pexels-photo-3828944.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  "https://images.pexels.com/photos/1535162/pexels-photo-1535162.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+];
+
+const blogPosts = [
+    { title: "Anxiety symptoms", image: "https://images.pexels.com/photos/4101143/pexels-photo-4101143.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { title: "Communication issues", image: "https://images.pexels.com/photos/6954162/pexels-photo-6954162.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { title: "Online sessions", image: "https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { title: "Teenage challenges", image: "https://images.pexels.com/photos/5379710/pexels-photo-5379710.jpeg?auto=compress&cs=tinysrgb&w=600" },
+];
+
+const instagramImages = [
+    "https://images.pexels.com/photos/3992933/pexels-photo-3992933.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/7176026/pexels-photo-7176026.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/4100670/pexels-photo-4100670.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/3771089/pexels-photo-3771089.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/4098228/pexels-photo-4098228.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/3755440/pexels-photo-3755440.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/2253821/pexels-photo-2253821.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/5428833/pexels-photo-5428833.jpeg?auto=compress&cs=tinysrgb&w=400",
+];
+
 const Index = () => {
   return (
     <div className="bg-[#F8F5F3]">
@@ -40,13 +64,13 @@ const HeroCarousel = () => (
   <section className="relative">
     <Carousel>
       <CarouselContent>
-        {[1, 2, 3].map((i) => (
+        {heroImages.map((src, i) => (
           <CarouselItem key={i}>
             <div
               className="w-full h-[80vh] bg-cover bg-center flex items-center"
-              style={{ backgroundImage: `url(/placeholder.svg)` }}
+              style={{ backgroundImage: `url(${src})` }}
             >
-              <div className="container mx-auto px-4 text-left text-primary">
+              <div className="container mx-auto px-4 text-left text-white">
                 <p className="text-sm uppercase tracking-[0.2em] mb-4">Psychotherapy</p>
                 <h1 className="text-5xl md:text-7xl font-serif max-w-2xl">
                   Connect with all parts of yourself & start new life
@@ -55,7 +79,7 @@ const HeroCarousel = () => (
                   <Button size="lg" asChild>
                     <Link to="/book-call">Book a Session</Link>
                   </Button>
-                  <Button size="lg" variant="outline" className="bg-transparent border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                  <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-primary">
                     Learn More
                   </Button>
                 </div>
@@ -97,12 +121,12 @@ const BlogPreview = () => (
       <div>
         <Carousel opts={{ align: "start", loop: true }}>
           <CarouselContent>
-            {["Anxiety symptoms", "Communication issues", "Online sessions", "Teenage challenges"].map((title, i) => (
+            {blogPosts.map(({ title, image }, i) => (
               <CarouselItem key={i} className="md:basis-1/2">
                 <Card className="border-none shadow-none bg-transparent">
                   <CardContent className="p-0">
                     <div className="relative">
-                      <img src="/placeholder.svg" alt={title} className="w-full aspect-[3/4] object-cover" />
+                      <img src={image} alt={title} className="w-full aspect-[3/4] object-cover" />
                       <div className="absolute top-4 left-4 bg-white/80 px-2 py-1 text-xs font-semibold">NOV 17</div>
                     </div>
                     <p className="text-xs text-muted-foreground mt-4">Aqsa Khan | ONLINE</p>
@@ -170,7 +194,7 @@ const ServicesSection = () => (
 const CtaSection = () => (
   <section className="py-24">
     <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
-      <img src="/placeholder.svg" alt="Therapy session" className="w-full h-auto object-cover" />
+      <img src="https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Therapy session" className="w-full h-auto object-cover" />
       <div className="text-left">
         <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Therapy</p>
         <h2 className="text-5xl font-serif text-primary">Emotional Healing</h2>
@@ -210,9 +234,9 @@ const InstagramCarousel = () => (
       <h2 className="font-serif text-3xl text-primary">_ataraxia</h2>
       <Carousel className="mt-8" opts={{ align: "start", loop: true }}>
         <CarouselContent>
-          {[...Array(8)].map((_, i) => (
+          {instagramImages.map((src, i) => (
             <CarouselItem key={i} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6">
-              <img src="/placeholder.svg" alt={`Instagram post ${i+1}`} className="w-full aspect-square object-cover" />
+              <img src={src} alt={`Instagram post ${i+1}`} className="w-full aspect-square object-cover" />
             </CarouselItem>
           ))}
         </CarouselContent>
@@ -233,7 +257,7 @@ const TestimonialSection = () => (
         </p>
         <p className="mt-4 font-semibold text-primary">Jessica M.</p>
       </div>
-      <img src="/placeholder.svg" alt="Client testimonial" className="w-full h-auto object-cover" />
+      <img src="https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Client testimonial" className="w-full h-auto object-cover" />
     </div>
   </section>
 );

@@ -19,7 +19,7 @@ const About = () => {
         <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
           <div>
             <img 
-              src="/placeholder.svg"
+              src="https://images.pexels.com/photos/5214413/pexels-photo-5214413.jpeg?auto=compress&cs=tinysrgb&w=800"
               alt="Aqsa Khan" 
               className="rounded-lg shadow-lg w-full h-auto object-cover aspect-square"
             />
@@ -55,7 +55,7 @@ const About = () => {
           </div>
           <div>
              <img 
-              src="/placeholder.svg"
+              src="https://images.pexels.com/photos/1528640/pexels-photo-1528640.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
               alt="Vision and Mission" 
               className="rounded-lg shadow-lg w-full h-auto object-cover aspect-video"
             />
