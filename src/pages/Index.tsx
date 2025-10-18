@@ -213,7 +213,14 @@ const InstagramCarousel = () => {
   return (
     <section className="py-24 text-center">
       <div className="container mx-auto px-4">
-        <h2 className="font-serif text-3xl text-primary">_ataraxiabyaqsa</h2>
+        <a 
+          href="https://www.instagram.com/ataraxiabyaqsa?igsh=MWtydjNldTFremszZQ==" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="font-serif text-3xl text-primary hover:text-primary/80 transition-colors inline-block"
+        >
+          @ataraxiabyaqsa
+        </a>
         <Carousel
           plugins={[plugin.current]}
           className="mt-8"
@@ -229,7 +236,26 @@ const InstagramCarousel = () => {
             ))}
           </CarouselContent>
         </Carousel>
-        <p className="mt-4 text-sm text-muted-foreground">***Follow @ataraxiafoundation for everyday notes about mental health and emotional freedom.</p>
+        <p className="mt-4 text-sm text-muted-foreground">
+          Follow <a 
+            href="https://www.instagram.com/ataraxiabyaqsa?igsh=MWtydjNldTFremszZQ==" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-primary hover:underline font-semibold"
+          >
+            @ataraxiabyaqsa
+          </a> for everyday notes about mental health and emotional freedom.
+        </p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Journals: <a 
+            href="https://www.instagram.com/ataraxiabyaqsajournals" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-primary hover:underline font-semibold"
+          >
+            @ataraxiabyaqsajournals
+          </a>
+        </p>
       </div>
     </section>
   );
@@ -254,8 +280,12 @@ const TestimonialSection = () => (
 const ContactInfoBar = () => (
   <section className="py-12 border-t border-b">
     <div className="container mx-auto px-4 flex flex-col md:flex-row justify-center items-center text-center md:space-x-12 space-y-4 md:space-y-0">
-      <p className="text-sm text-muted-foreground">info@ataraxiafoundation.com</p>
-      <p className="text-sm text-muted-foreground">+1 (555) 123-4567</p>
+      <p className="text-sm text-muted-foreground">
+        <a href="mailto:ataraxiaaqsa@gmail.com" className="hover:text-primary transition-colors">ataraxiaaqsa@gmail.com</a>
+      </p>
+      <p className="text-sm text-muted-foreground">
+        <a href="tel:+923338566992" className="hover:text-primary transition-colors">+92 333 8566992</a>
+      </p>
       <p className="text-sm text-muted-foreground">Online & In-Person Sessions for NLP coaching and emotional healing</p>
     </div>
   </section>

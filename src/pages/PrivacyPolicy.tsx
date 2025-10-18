@@ -52,7 +52,7 @@ const PrivacyPolicy = () => {
         </p>
         <h2 className="text-2xl font-semibold mt-8 mb-4">5. Contact Us</h2>
         <p>
-          If you have questions or comments about this Privacy Policy, please contact us at: info@ataraxiafoundation.com
+          If you have questions or comments about this Privacy Policy, please contact us at: <a href="mailto:ataraxiaaqsa@gmail.com" className="text-primary hover:underline">ataraxiaaqsa@gmail.com</a>
         </p>
       </div>
     </div>

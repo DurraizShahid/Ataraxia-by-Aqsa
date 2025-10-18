@@ -39,7 +39,7 @@ const TermsOfUse = () => {
         </p>
         <h2 className="text-2xl font-semibold mt-8 mb-4">5. Contact Information</h2>
         <p>
-          To ask questions or comment about these Terms of Use, contact us at: info@ataraxiafoundation.com
+          To ask questions or comment about these Terms of Use, contact us at: <a href="mailto:ataraxiaaqsa@gmail.com" className="text-primary hover:underline">ataraxiaaqsa@gmail.com</a>
         </p>
       </div>
     </div>
