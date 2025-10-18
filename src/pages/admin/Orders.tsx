@@ -1,21 +1,41 @@
-import { useState } from 'react';
-import { getOrders, updateOrderStatus, Order } from '@/lib/localData';
+import { useState, useEffect } from 'react';
+import { getOrders, updateOrderStatus, Order } from '@/lib/supabaseData';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 
 const AdminOrders = () => {
-  const [orders, setOrders] = useState<Order[]>(getOrders());
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
 
-  const handleStatusChange = (orderId: string, newStatus: Order['status']) => {
-    updateOrderStatus(orderId, newStatus);
-    setOrders(getOrders());
-    toast({
-      title: 'Success',
-      description: 'Order status updated',
-    });
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  const fetchOrders = async () => {
+    setIsLoading(true);
+    const data = await getOrders();
+    setOrders(data);
+    setIsLoading(false);
+  };
+
+  const handleStatusChange = async (orderId: string, newStatus: Order['status']) => {
+    const success = await updateOrderStatus(orderId, newStatus);
+    if (success) {
+      await fetchOrders();
+      toast({
+        title: 'Success',
+        description: 'Order status updated',
+      });
+    } else {
+      toast({
+        title: 'Error',
+        description: 'Failed to update order status',
+        variant: 'destructive',
+      });
+    }
   };
 
   const sortedOrders = [...orders].sort((a, b) => 
@@ -42,8 +62,13 @@ const AdminOrders = () => {
         <p className="text-muted-foreground mt-1">Manage customer orders</p>
       </div>
 
-      <div className="grid gap-4">
-        {sortedOrders.length === 0 ? (
+      {isLoading ? (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">Loading orders...</p>
+        </div>
+      ) : (
+        <div className="grid gap-4">
+          {sortedOrders.length === 0 ? (
           <Card>
             <CardContent className="text-center py-12">
               <p className="text-muted-foreground">No orders yet</p>
@@ -114,7 +139,8 @@ const AdminOrders = () => {
             </Card>
           ))
         )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,18 +1,39 @@
 import { useState, useEffect } from "react";
-import { getCourses } from "@/lib/localData";
-import { getSiteContent } from "@/lib/siteContent";
+import { getCourses } from "@/lib/supabaseData";
+import { getSiteContent } from "@/lib/supabaseSiteContent";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { ArrowRight, Clock, BookOpen, BarChart } from "lucide-react";
+import type { Course } from "@/lib/supabaseData";
+import type { SiteContent } from "@/lib/siteContent";
 
 const Courses = () => {
-  const [courses, setCourses] = useState(getCourses());
-  const content = getSiteContent();
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [content, setContent] = useState<SiteContent | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setCourses(getCourses());
+    const fetchData = async () => {
+      setIsLoading(true);
+      const [coursesData, contentData] = await Promise.all([
+        getCourses(),
+        getSiteContent()
+      ]);
+      setCourses(coursesData);
+      setContent(contentData);
+      setIsLoading(false);
+    };
+    fetchData();
   }, []);
+
+  if (isLoading || !content) {
+    return (
+      <div className="container mx-auto py-16 px-4 text-center">
+        <p className="text-muted-foreground">Loading courses...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto py-16 px-4">

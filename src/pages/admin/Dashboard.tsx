@@ -1,12 +1,32 @@
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { getBlogs, getCourses, getJournals, getOrders } from '@/lib/localData';
+import { getBlogs, getCourses, getJournals, getOrders } from '@/lib/supabaseData';
 import { BookOpen, GraduationCap, Book, ShoppingBag, TrendingUp } from 'lucide-react';
 
 const AdminDashboard = () => {
-  const blogs = getBlogs();
-  const courses = getCourses();
-  const journals = getJournals();
-  const orders = getOrders();
+  const [blogs, setBlogs] = useState<any[]>([]);
+  const [courses, setCourses] = useState<any[]>([]);
+  const [journals, setJournals] = useState<any[]>([]);
+  const [orders, setOrders] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      const [blogsData, coursesData, journalsData, ordersData] = await Promise.all([
+        getBlogs(),
+        getCourses(),
+        getJournals(),
+        getOrders()
+      ]);
+      setBlogs(blogsData);
+      setCourses(coursesData);
+      setJournals(journalsData);
+      setOrders(ordersData);
+      setIsLoading(false);
+    };
+    fetchData();
+  }, []);
 
   const stats = [
     {
@@ -43,6 +63,16 @@ const AdminDashboard = () => {
   const totalRevenue = orders
     .filter(order => order.status === 'completed')
     .reduce((sum, order) => sum + order.total, 0);
+
+  if (isLoading) {
+    return (
+      <div className="space-y-8">
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">Loading dashboard...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8">

@@ -1,12 +1,33 @@
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getBlogBySlug } from "@/lib/localData";
+import { getBlogBySlug } from "@/lib/supabaseData";
 import DOMPurify from 'dompurify';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import type { BlogPost as BlogPostType } from "@/lib/supabaseData";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const post = getBlogBySlug(slug || "");
+  const [post, setPost] = useState<BlogPostType | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      setIsLoading(true);
+      const data = await getBlogBySlug(slug || "");
+      setPost(data);
+      setIsLoading(false);
+    };
+    fetchPost();
+  }, [slug]);
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto py-16 px-4 text-center">
+        <p className="text-muted-foreground">Loading post...</p>
+      </div>
+    );
+  }
 
   if (!post) {
     return (

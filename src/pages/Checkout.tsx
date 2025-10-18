@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '@/context/CartContext';
-import { createOrder } from '@/lib/localData';
+import { createOrder } from '@/lib/supabaseData';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -29,32 +29,42 @@ const Checkout = () => {
     e.preventDefault();
     setIsProcessing(true);
 
-    // Simulate payment processing
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      // Simulate payment processing
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
-    // Create order
-    const order = createOrder({
-      items: cartItems.map(item => ({
-        type: 'journal' as const,
-        id: item.id.toString(),
-        name: item.name,
-        price: parseFloat(item.price),
-        quantity: item.quantity,
-      })),
-      total,
-      customerEmail: formData.email,
-      customerName: formData.name,
-    });
+      // Create order in database
+      const order = await createOrder({
+        items: cartItems.map(item => ({
+          type: 'journal' as const,
+          id: item.id.toString(),
+          name: item.name,
+          price: parseFloat(item.price),
+          quantity: item.quantity,
+        })),
+        total,
+        customerEmail: formData.email,
+        customerName: formData.name,
+      });
 
-    // Mark order as completed (dummy payment always succeeds)
-    setIsProcessing(false);
-    setOrderComplete(true);
-    clearCart();
+      if (order) {
+        // Mark order as completed (dummy payment always succeeds)
+        setIsProcessing(false);
+        setOrderComplete(true);
+        clearCart();
 
-    // Redirect after 3 seconds
-    setTimeout(() => {
-      navigate('/');
-    }, 3000);
+        // Redirect after 3 seconds
+        setTimeout(() => {
+          navigate('/');
+        }, 3000);
+      } else {
+        throw new Error('Failed to create order');
+      }
+    } catch (error) {
+      console.error('Error creating order:', error);
+      setIsProcessing(false);
+      alert('Failed to process order. Please try again.');
+    }
   };
 
   if (cartItems.length === 0 && !orderComplete) {

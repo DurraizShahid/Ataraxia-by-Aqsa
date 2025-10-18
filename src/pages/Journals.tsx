@@ -3,16 +3,37 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Download, MessageCircle, Heart, BookOpen, Brain, Leaf, Lightbulb, Package, ArrowRight } from "lucide-react";
-import { getJournals } from "@/lib/localData";
-import { getSiteContent } from "@/lib/siteContent";
+import { getJournals } from "@/lib/supabaseData";
+import { getSiteContent } from "@/lib/supabaseSiteContent";
+import type { Journal } from "@/lib/supabaseData";
+import type { SiteContent } from "@/lib/siteContent";
 
 const Journals = () => {
-  const [products, setProducts] = useState(getJournals());
-  const content = getSiteContent();
+  const [products, setProducts] = useState<Journal[]>([]);
+  const [content, setContent] = useState<SiteContent | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setProducts(getJournals());
+    const fetchData = async () => {
+      setIsLoading(true);
+      const [journalsData, contentData] = await Promise.all([
+        getJournals(),
+        getSiteContent()
+      ]);
+      setProducts(journalsData);
+      setContent(contentData);
+      setIsLoading(false);
+    };
+    fetchData();
   }, []);
+
+  if (isLoading || !content) {
+    return (
+      <div className="container mx-auto py-16 px-4 text-center">
+        <p className="text-muted-foreground">Loading journals...</p>
+      </div>
+    );
+  }
 
   // Filter products into individual and bundles
   const individualProducts = products.filter(p => !p.isBundle);

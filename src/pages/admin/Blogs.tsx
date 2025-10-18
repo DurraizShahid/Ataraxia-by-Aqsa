@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { getBlogs, createBlog, updateBlog, deleteBlog, BlogPost } from '@/lib/localData';
+import { useState, useEffect } from 'react';
+import { getBlogs, createBlog, updateBlog, deleteBlog, BlogPost } from '@/lib/supabaseData';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -17,11 +17,23 @@ import { Plus, Edit, Trash2, Search } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const AdminBlogs = () => {
-  const [blogs, setBlogs] = useState<BlogPost[]>(getBlogs());
+  const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingBlog, setEditingBlog] = useState<BlogPost | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
+
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  const fetchBlogs = async () => {
+    setIsLoading(true);
+    const data = await getBlogs();
+    setBlogs(data);
+    setIsLoading(false);
+  };
 
   const [formData, setFormData] = useState({
     title: '',
@@ -69,7 +81,7 @@ const AdminBlogs = () => {
     resetForm();
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const blogData = {
@@ -82,32 +94,48 @@ const AdminBlogs = () => {
       author: formData.author,
     };
 
-    if (editingBlog) {
-      updateBlog(editingBlog.id, blogData);
+    try {
+      if (editingBlog) {
+        await updateBlog(editingBlog.id, blogData);
+        toast({
+          title: 'Success',
+          description: 'Blog updated successfully',
+        });
+      } else {
+        await createBlog(blogData);
+        toast({
+          title: 'Success',
+          description: 'Blog created successfully',
+        });
+      }
+
+      await fetchBlogs();
+      handleCloseDialog();
+    } catch (error) {
       toast({
-        title: 'Success',
-        description: 'Blog updated successfully',
-      });
-    } else {
-      createBlog(blogData);
-      toast({
-        title: 'Success',
-        description: 'Blog created successfully',
+        title: 'Error',
+        description: 'Failed to save blog',
+        variant: 'destructive',
       });
     }
-
-    setBlogs(getBlogs());
-    handleCloseDialog();
   };
 
-  const handleDelete = (id: string, title: string) => {
+  const handleDelete = async (id: string, title: string) => {
     if (window.confirm(`Are you sure you want to delete "${title}"?`)) {
-      deleteBlog(id);
-      setBlogs(getBlogs());
-      toast({
-        title: 'Success',
-        description: 'Blog deleted successfully',
-      });
+      const success = await deleteBlog(id);
+      if (success) {
+        await fetchBlogs();
+        toast({
+          title: 'Success',
+          description: 'Blog deleted successfully',
+        });
+      } else {
+        toast({
+          title: 'Error',
+          description: 'Failed to delete blog',
+          variant: 'destructive',
+        });
+      }
     }
   };
 
@@ -141,8 +169,13 @@ const AdminBlogs = () => {
       </div>
 
       {/* Blogs List */}
-      <div className="grid gap-4">
-        {filteredBlogs.length === 0 ? (
+      {isLoading ? (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">Loading blogs...</p>
+        </div>
+      ) : (
+        <div className="grid gap-4">
+          {filteredBlogs.length === 0 ? (
           <Card>
             <CardContent className="text-center py-12">
               <p className="text-muted-foreground">No blogs found</p>
@@ -191,7 +224,8 @@ const AdminBlogs = () => {
             </Card>
           ))
         )}
-      </div>
+        </div>
+      )}
 
       {/* Add/Edit Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={handleCloseDialog}>

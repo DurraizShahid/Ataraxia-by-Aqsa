@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { getCourses, createCourse, updateCourse, deleteCourse, Course } from '@/lib/localData';
+import { useState, useEffect } from 'react';
+import { getCourses, createCourse, updateCourse, deleteCourse, Course } from '@/lib/supabaseData';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -18,11 +18,23 @@ import { Plus, Edit, Trash2, Search } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const AdminCourses = () => {
-  const [courses, setCourses] = useState<Course[]>(getCourses());
+  const [courses, setCourses] = useState<Course[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingCourse, setEditingCourse] = useState<Course | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
+
+  useEffect(() => {
+    fetchCourses();
+  }, []);
+
+  const fetchCourses = async () => {
+    setIsLoading(true);
+    const data = await getCourses();
+    setCourses(data);
+    setIsLoading(false);
+  };
 
   const [formData, setFormData] = useState({
     title: '',
@@ -94,7 +106,7 @@ const AdminCourses = () => {
     resetForm();
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const price = parseFloat(formData.price);
@@ -119,32 +131,48 @@ const AdminCourses = () => {
       requirements: formData.requirements.split('\n').map(item => item.trim()).filter(Boolean),
     };
 
-    if (editingCourse) {
-      updateCourse(editingCourse.id, courseData);
+    try {
+      if (editingCourse) {
+        await updateCourse(editingCourse.id, courseData);
+        toast({
+          title: 'Success',
+          description: 'Course updated successfully',
+        });
+      } else {
+        await createCourse(courseData);
+        toast({
+          title: 'Success',
+          description: 'Course created successfully',
+        });
+      }
+
+      await fetchCourses();
+      handleCloseDialog();
+    } catch (error) {
       toast({
-        title: 'Success',
-        description: 'Course updated successfully',
-      });
-    } else {
-      createCourse(courseData);
-      toast({
-        title: 'Success',
-        description: 'Course created successfully',
+        title: 'Error',
+        description: 'Failed to save course',
+        variant: 'destructive',
       });
     }
-
-    setCourses(getCourses());
-    handleCloseDialog();
   };
 
-  const handleDelete = (id: string, title: string) => {
+  const handleDelete = async (id: string, title: string) => {
     if (window.confirm(`Are you sure you want to delete "${title}"?`)) {
-      deleteCourse(id);
-      setCourses(getCourses());
-      toast({
-        title: 'Success',
-        description: 'Course deleted successfully',
-      });
+      const success = await deleteCourse(id);
+      if (success) {
+        await fetchCourses();
+        toast({
+          title: 'Success',
+          description: 'Course deleted successfully',
+        });
+      } else {
+        toast({
+          title: 'Error',
+          description: 'Failed to delete course',
+          variant: 'destructive',
+        });
+      }
     }
   };
 
@@ -178,8 +206,13 @@ const AdminCourses = () => {
       </div>
 
       {/* Courses List */}
-      <div className="grid gap-4">
-        {filteredCourses.length === 0 ? (
+      {isLoading ? (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">Loading courses...</p>
+        </div>
+      ) : (
+        <div className="grid gap-4">
+          {filteredCourses.length === 0 ? (
           <Card>
             <CardContent className="text-center py-12">
               <p className="text-muted-foreground">No courses found</p>
@@ -236,7 +269,8 @@ const AdminCourses = () => {
             </Card>
           ))
         )}
-      </div>
+        </div>
+      )}
 
       {/* Add/Edit Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={handleCloseDialog}>

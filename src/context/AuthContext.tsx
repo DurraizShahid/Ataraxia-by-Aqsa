@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { validateAdminCredentials, getAdminUser, setAdminUser, AdminUser } from '@/lib/localData';
+import { validateAdminCredentials, getAdminUser, setAdminUser, AdminUser } from '@/lib/supabaseData';
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: (username: string, password: string) => boolean;
+  login: (username: string, password: string) => Promise<boolean>;
   logout: () => void;
-  changePassword: (newPassword: string) => void;
+  changePassword: (newPassword: string) => Promise<void>;
   username: string | null;
 }
 
@@ -25,8 +25,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, []);
 
-  const login = (username: string, password: string): boolean => {
-    const isValid = validateAdminCredentials(username, password);
+  const login = async (username: string, password: string): Promise<boolean> => {
+    const isValid = await validateAdminCredentials(username, password);
     if (isValid) {
       setIsAuthenticated(true);
       setUsername(username);
@@ -42,14 +42,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     sessionStorage.removeItem('admin_session');
   };
 
-  const changePassword = (newPassword: string) => {
-    const currentUser = getAdminUser();
+  const changePassword = async (newPassword: string) => {
+    const currentUser = await getAdminUser();
     if (currentUser && username) {
       const updatedUser: AdminUser = {
         username: currentUser.username,
         password: newPassword,
       };
-      setAdminUser(updatedUser);
+      await setAdminUser(updatedUser);
     }
   };
 

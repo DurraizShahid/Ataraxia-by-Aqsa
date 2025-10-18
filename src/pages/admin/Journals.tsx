@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { getJournals, createJournal, updateJournal, deleteJournal, Journal } from '@/lib/localData';
+import { useState, useEffect } from 'react';
+import { getJournals, createJournal, updateJournal, deleteJournal, Journal } from '@/lib/supabaseData';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -18,11 +18,23 @@ import { Plus, Edit, Trash2, Search } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const AdminJournals = () => {
-  const [journals, setJournals] = useState<Journal[]>(getJournals());
+  const [journals, setJournals] = useState<Journal[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingJournal, setEditingJournal] = useState<Journal | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
+
+  useEffect(() => {
+    fetchJournals();
+  }, []);
+
+  const fetchJournals = async () => {
+    setIsLoading(true);
+    const data = await getJournals();
+    setJournals(data);
+    setIsLoading(false);
+  };
 
   const [formData, setFormData] = useState({
     name: '',
@@ -91,7 +103,7 @@ const AdminJournals = () => {
     resetForm();
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const price = parseFloat(formData.price);
@@ -115,32 +127,48 @@ const AdminJournals = () => {
       isBundle: formData.isBundle,
     };
 
-    if (editingJournal) {
-      updateJournal(editingJournal.id, journalData);
+    try {
+      if (editingJournal) {
+        await updateJournal(editingJournal.id, journalData);
+        toast({
+          title: 'Success',
+          description: 'Journal updated successfully',
+        });
+      } else {
+        await createJournal(journalData);
+        toast({
+          title: 'Success',
+          description: 'Journal created successfully',
+        });
+      }
+
+      await fetchJournals();
+      handleCloseDialog();
+    } catch (error) {
       toast({
-        title: 'Success',
-        description: 'Journal updated successfully',
-      });
-    } else {
-      createJournal(journalData);
-      toast({
-        title: 'Success',
-        description: 'Journal created successfully',
+        title: 'Error',
+        description: 'Failed to save journal',
+        variant: 'destructive',
       });
     }
-
-    setJournals(getJournals());
-    handleCloseDialog();
   };
 
-  const handleDelete = (id: string, name: string) => {
+  const handleDelete = async (id: string, name: string) => {
     if (window.confirm(`Are you sure you want to delete "${name}"?`)) {
-      deleteJournal(id);
-      setJournals(getJournals());
-      toast({
-        title: 'Success',
-        description: 'Journal deleted successfully',
-      });
+      const success = await deleteJournal(id);
+      if (success) {
+        await fetchJournals();
+        toast({
+          title: 'Success',
+          description: 'Journal deleted successfully',
+        });
+      } else {
+        toast({
+          title: 'Error',
+          description: 'Failed to delete journal',
+          variant: 'destructive',
+        });
+      }
     }
   };
 
@@ -174,8 +202,13 @@ const AdminJournals = () => {
       </div>
 
       {/* Journals List */}
-      <div className="grid gap-4">
-        {filteredJournals.length === 0 ? (
+      {isLoading ? (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">Loading journals...</p>
+        </div>
+      ) : (
+        <div className="grid gap-4">
+          {filteredJournals.length === 0 ? (
           <Card>
             <CardContent className="text-center py-12">
               <p className="text-muted-foreground">No journals found</p>
@@ -236,7 +269,8 @@ const AdminJournals = () => {
             </Card>
           ))
         )}
-      </div>
+        </div>
+      )}
 
       {/* Add/Edit Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={handleCloseDialog}>

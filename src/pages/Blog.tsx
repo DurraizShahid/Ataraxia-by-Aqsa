@@ -1,19 +1,39 @@
 import { useState, useEffect } from "react";
-import { getBlogs } from "@/lib/localData";
-import { getSiteContent } from "@/lib/siteContent";
+import { getBlogs } from "@/lib/supabaseData";
+import { getSiteContent } from "@/lib/supabaseSiteContent";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import type { BlogPost } from "@/lib/supabaseData";
+import type { SiteContent } from "@/lib/siteContent";
 
 const Blog = () => {
-  const [posts, setPosts] = useState(getBlogs());
-  const content = getSiteContent();
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [content, setContent] = useState<SiteContent | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Refresh posts when component mounts
-    setPosts(getBlogs());
+    const fetchData = async () => {
+      setIsLoading(true);
+      const [blogsData, contentData] = await Promise.all([
+        getBlogs(),
+        getSiteContent()
+      ]);
+      setPosts(blogsData);
+      setContent(contentData);
+      setIsLoading(false);
+    };
+    fetchData();
   }, []);
+
+  if (isLoading || !content) {
+    return (
+      <div className="container mx-auto py-16 px-4 text-center">
+        <p className="text-muted-foreground">Loading blogs...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto py-16 px-4">

@@ -1,15 +1,36 @@
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getCourseBySlug } from "@/lib/localData";
+import { getCourseBySlug } from "@/lib/supabaseData";
 import DOMPurify from 'dompurify';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, ShoppingCart, Clock, BookOpen, BarChart, CheckCircle2 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import type { Course } from "@/lib/supabaseData";
 
 const CourseDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const course = getCourseBySlug(slug || "");
+  const [course, setCourse] = useState<Course | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const { addToCart } = useCart();
+
+  useEffect(() => {
+    const fetchCourse = async () => {
+      setIsLoading(true);
+      const data = await getCourseBySlug(slug || "");
+      setCourse(data);
+      setIsLoading(false);
+    };
+    fetchCourse();
+  }, [slug]);
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto py-16 px-4 text-center">
+        <p className="text-muted-foreground">Loading course...</p>
+      </div>
+    );
+  }
 
   if (!course) {
     return (

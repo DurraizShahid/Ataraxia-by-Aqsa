@@ -1,10 +1,31 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { User, BookOpen, Calendar, Users, Check, Brain, Heart, Zap, Lightbulb, ExternalLink } from "lucide-react";
-import { getSiteContent } from "@/lib/siteContent";
+import { getSiteContent } from "@/lib/supabaseSiteContent";
+import type { SiteContent } from "@/lib/siteContent";
 
 const Services = () => {
-  const content = getSiteContent();
+  const [content, setContent] = useState<SiteContent | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchContent = async () => {
+      setIsLoading(true);
+      const data = await getSiteContent();
+      setContent(data);
+      setIsLoading(false);
+    };
+    fetchContent();
+  }, []);
+
+  if (isLoading || !content) {
+    return (
+      <div className="container mx-auto py-16 px-4 text-center">
+        <p className="text-muted-foreground">Loading...</p>
+      </div>
+    );
+  }
   
   return (
     <div>

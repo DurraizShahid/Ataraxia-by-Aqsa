@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { getSiteContent, updateSiteContent, resetSiteContent, SiteContent } from '@/lib/siteContent';
+import { useState, useEffect } from 'react';
+import { getSiteContent, updateSiteContent, resetSiteContent } from '@/lib/supabaseSiteContent';
+import type { SiteContent } from '@/lib/siteContent';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -10,25 +11,59 @@ import { useToast } from '@/hooks/use-toast';
 import { RotateCcw, Save } from 'lucide-react';
 
 const AdminSiteContent = () => {
-  const [content, setContent] = useState<SiteContent>(getSiteContent());
+  const [content, setContent] = useState<SiteContent | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
   const { toast } = useToast();
 
-  const handleSave = () => {
-    updateSiteContent(content);
-    toast({
-      title: 'Success',
-      description: 'Site content updated successfully',
-    });
-  };
+  useEffect(() => {
+    const fetchContent = async () => {
+      setIsLoading(true);
+      const data = await getSiteContent();
+      setContent(data);
+      setIsLoading(false);
+    };
+    fetchContent();
+  }, []);
 
-  const handleReset = () => {
-    if (window.confirm('Are you sure you want to reset all content to default? This cannot be undone.')) {
-      resetSiteContent();
-      setContent(getSiteContent());
+  const handleSave = async () => {
+    if (!content) return;
+    
+    setIsSaving(true);
+    const success = await updateSiteContent(content);
+    setIsSaving(false);
+    
+    if (success) {
       toast({
         title: 'Success',
-        description: 'Site content reset to defaults',
+        description: 'Site content updated successfully',
       });
+    } else {
+      toast({
+        title: 'Error',
+        description: 'Failed to update site content',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const handleReset = async () => {
+    if (window.confirm('Are you sure you want to reset all content to default? This cannot be undone.')) {
+      const success = await resetSiteContent();
+      if (success) {
+        const data = await getSiteContent();
+        setContent(data);
+        toast({
+          title: 'Success',
+          description: 'Site content reset to defaults',
+        });
+      } else {
+        toast({
+          title: 'Error',
+          description: 'Failed to reset content',
+          variant: 'destructive',
+        });
+      }
     }
   };
 
@@ -46,6 +81,16 @@ const AdminSiteContent = () => {
     });
   };
 
+  if (isLoading || !content) {
+    return (
+      <div className="space-y-6">
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">Loading site content...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -54,11 +99,11 @@ const AdminSiteContent = () => {
           <p className="text-muted-foreground mt-1">Edit all text content across your website</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" onClick={handleReset}>
+          <Button variant="outline" onClick={handleReset} disabled={isSaving}>
             <RotateCcw className="mr-2 h-4 w-4" /> Reset to Default
           </Button>
-          <Button onClick={handleSave}>
-            <Save className="mr-2 h-4 w-4" /> Save Changes
+          <Button onClick={handleSave} disabled={isSaving}>
+            <Save className="mr-2 h-4 w-4" /> {isSaving ? 'Saving...' : 'Save Changes'}
           </Button>
         </div>
       </div>
@@ -595,8 +640,8 @@ const AdminSiteContent = () => {
 
       {/* Sticky Save Button */}
       <div className="fixed bottom-8 right-8 flex gap-2">
-        <Button size="lg" onClick={handleSave} className="shadow-lg">
-          <Save className="mr-2 h-5 w-5" /> Save All Changes
+        <Button size="lg" onClick={handleSave} className="shadow-lg" disabled={isSaving}>
+          <Save className="mr-2 h-5 w-5" /> {isSaving ? 'Saving...' : 'Save All Changes'}
         </Button>
       </div>
     </div>

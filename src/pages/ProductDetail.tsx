@@ -1,15 +1,36 @@
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getJournalBySlug } from "@/lib/localData";
+import { getJournalBySlug } from "@/lib/supabaseData";
 import DOMPurify from 'dompurify';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, ShoppingCart, CheckCircle2, Download } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import type { Journal } from "@/lib/supabaseData";
 
 const ProductDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const product = getJournalBySlug(slug || "");
+  const [product, setProduct] = useState<Journal | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const { addToCart } = useCart();
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      setIsLoading(true);
+      const data = await getJournalBySlug(slug || "");
+      setProduct(data);
+      setIsLoading(false);
+    };
+    fetchProduct();
+  }, [slug]);
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto py-16 px-4 text-center">
+        <p className="text-muted-foreground">Loading journal...</p>
+      </div>
+    );
+  }
 
   if (!product) {
     return (
