@@ -4,9 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Link } from "react-router-dom";
 import { Download, MessageCircle, Heart, BookOpen, Brain, Leaf, Lightbulb, Package, ArrowRight } from "lucide-react";
 import { getJournals } from "@/lib/localData";
+import { getSiteContent } from "@/lib/siteContent";
 
 const Journals = () => {
   const [products, setProducts] = useState(getJournals());
+  const content = getSiteContent();
 
   useEffect(() => {
     setProducts(getJournals());
@@ -30,19 +32,19 @@ const Journals = () => {
   return (
     <div className="container mx-auto py-16 px-4">
       <div className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold font-serif mb-6">Healing Journals</h1>
+        <h1 className="text-4xl md:text-5xl font-bold font-serif mb-6">{content.journals.hero.title}</h1>
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-          Designed with Intention. Backed by Psychology. Guided by Heart.
+          {content.journals.hero.subtitle}
         </p>
         <p className="mt-4 text-muted-foreground max-w-3xl mx-auto">
-          Each journal in this collection was painstakingly crafted over months — with real emotional labor, tested techniques, and a deep desire to create a safe space for your healing and transformation. They’re not just pages — they’re your private coaching tools, integrating NLP, Hypnosis, Emotional Processing, and self-reflective interventions that work.
+          {content.journals.hero.description}
         </p>
       </div>
 
       {/* Individual Journals Section */}
       {individualProducts.length > 0 && (
         <>
-          <h2 className="text-3xl md:text-4xl font-serif text-primary text-center mb-12">🌿 Individual Journals</h2>
+          <h2 className="text-3xl md:text-4xl font-serif text-primary text-center mb-12">{content.journals.individualTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
             {individualProducts.map((product) => (
               <Card key={product.id} className="flex flex-col p-6 text-center">
@@ -60,7 +62,7 @@ const Journals = () => {
                     {product.shortDescription}
                   </p>
                   <Button asChild className="w-full">
-                    <Link to={`/journals/${product.slug}`}>View Details <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                    <Link to={`/journals/${product.slug}`}>{content.common.viewDetails} <ArrowRight className="ml-2 h-4 w-4" /></Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -72,7 +74,7 @@ const Journals = () => {
       {/* Journal Bundles Section */}
       {productBundles.length > 0 && (
         <>
-          <h2 className="text-3xl md:text-4xl font-serif text-primary text-center mb-12">💝 Journal Bundles – Because You Deserve More for Less</h2>
+          <h2 className="text-3xl md:text-4xl font-serif text-primary text-center mb-12">{content.journals.bundleTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
             {productBundles.map((product) => (
               <Card key={product.id} className="flex flex-col p-6 text-center bg-brand-pink/20 border-brand-pink">
@@ -104,7 +106,7 @@ const Journals = () => {
                     {product.shortDescription}
                   </p>
                   <Button asChild className="w-full bg-brand-pink hover:bg-brand-pink-darker text-primary-foreground">
-                    <Link to={`/journals/${product.slug}`}>View Details <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                    <Link to={`/journals/${product.slug}`}>{content.common.viewDetails} <ArrowRight className="ml-2 h-4 w-4" /></Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -118,23 +120,24 @@ const Journals = () => {
         <div className="flex justify-center space-x-8 mb-8 text-primary">
           <div className="flex flex-col items-center">
             <Download className="h-6 w-6 mb-2" />
-            <span className="text-sm font-semibold">Instant Download</span>
+            <span className="text-sm font-semibold">{content.journals.footer.instantDownload}</span>
           </div>
           <div className="flex flex-col items-center">
             <MessageCircle className="h-6 w-6 mb-2" />
-            <span className="text-sm font-semibold">Personal Support</span>
+            <span className="text-sm font-semibold">{content.journals.footer.personalSupport}</span>
           </div>
           <div className="flex flex-col items-center">
             <Heart className="h-6 w-6 mb-2" />
-            <span className="text-sm font-semibold">Built With Intention</span>
+            <span className="text-sm font-semibold">{content.journals.footer.builtWithIntention}</span>
           </div>
         </div>
         <p className="text-muted-foreground mb-6">
-          These journals took me months of heart work, research, and lived experience. I didn’t just create them — I breathed life into them. They’ve helped many, and I promise, they’ll help you too.
+          {content.journals.footer.closingText}
         </p>
         <p className="text-lg font-semibold text-primary">
-          👉 Want help choosing your journal?{" "}
-          <Link to="/book-call" className="underline hover:text-primary/80">Contact me</Link> — I’ll personally guide you.
+          {content.journals.footer.ctaText.split('Contact me')[0]}
+          <Link to="/book-call" className="underline hover:text-primary/80">Contact me</Link>
+          {content.journals.footer.ctaText.split('Contact me')[1]}
         </p>
       </div>
     </div>

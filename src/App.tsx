@@ -30,6 +30,7 @@ import AdminBlogs from "./pages/admin/Blogs";
 import AdminCourses from "./pages/admin/Courses";
 import AdminJournals from "./pages/admin/Journals";
 import AdminOrders from "./pages/admin/Orders";
+import AdminSiteContent from "./pages/admin/SiteContent";
 import AdminSettings from "./pages/admin/Settings";
 
 const queryClient = new QueryClient();
@@ -69,6 +70,7 @@ const App = () => (
               <Route path="courses" element={<AdminCourses />} />
               <Route path="journals" element={<AdminJournals />} />
               <Route path="orders" element={<AdminOrders />} />
+              <Route path="site-content" element={<AdminSiteContent />} />
               <Route path="settings" element={<AdminSettings />} />
             </Route>
 

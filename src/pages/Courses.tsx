@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { getCourses } from "@/lib/localData";
+import { getSiteContent } from "@/lib/siteContent";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { ArrowRight, Clock, BookOpen, BarChart } from "lucide-react";
-import DOMPurify from 'dompurify';
 
 const Courses = () => {
   const [courses, setCourses] = useState(getCourses());
+  const content = getSiteContent();
 
   useEffect(() => {
     setCourses(getCourses());
@@ -16,15 +17,15 @@ const Courses = () => {
   return (
     <div className="container mx-auto py-16 px-4">
       <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Courses</h1>
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">{content.courses.hero.title}</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Transform your life with our comprehensive, heart-centered courses designed for deep healing and personal growth.
+          {content.courses.hero.subtitle}
         </p>
       </div>
 
       {courses.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-muted-foreground">No courses available yet. Check back soon!</p>
+          <p className="text-muted-foreground">{content.courses.emptyState}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -92,7 +93,7 @@ const Courses = () => {
               <CardFooter className="p-6 pt-0">
                 <Button asChild className="w-full">
                   <Link to={`/courses/${course.slug}`}>
-                    View Details <ArrowRight className="ml-2 h-4 w-4" />
+                    {content.common.viewDetails} <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </CardFooter>

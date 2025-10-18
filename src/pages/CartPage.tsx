@@ -4,10 +4,12 @@ import { useCart } from "@/context/CartContext";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Trash2, ArrowLeft, ShoppingCart } from "lucide-react";
+import { getSiteContent } from "@/lib/siteContent";
 
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity, cartTotal, clearCart } = useCart();
   const navigate = useNavigate();
+  const content = getSiteContent();
 
   const handleProceedToCheckout = () => {
     if (cartItems.length === 0) {
@@ -18,15 +20,15 @@ const CartPage = () => {
 
   return (
     <div className="container mx-auto py-16 px-4">
-      <h1 className="text-4xl md:text-5xl font-bold font-serif text-center mb-12">Your Shopping Cart</h1>
+      <h1 className="text-4xl md:text-5xl font-bold font-serif text-center mb-12">{content.cart.title}</h1>
 
       {cartItems.length === 0 ? (
         <div className="text-center">
           <ShoppingCart className="mx-auto h-24 w-24 text-muted-foreground mb-6" />
-          <p className="text-xl text-muted-foreground mb-8">Your cart is empty.</p>
+          <p className="text-xl text-muted-foreground mb-8">{content.cart.emptyState}</p>
           <Button asChild size="lg">
             <Link to="/journals">
-              <ArrowLeft className="mr-2 h-4 w-4" /> Continue Shopping
+              <ArrowLeft className="mr-2 h-4 w-4" /> {content.cart.continueButton}
             </Link>
           </Button>
         </div>
@@ -61,11 +63,11 @@ const CartPage = () => {
             ))}
             <div className="flex justify-between mt-6">
               <Button variant="outline" onClick={clearCart}>
-                Clear Cart
+                {content.cart.clearButton}
               </Button>
               <Button asChild variant="link">
                 <Link to="/journals">
-                  <ArrowLeft className="mr-2 h-4 w-4" /> Continue Shopping
+                  <ArrowLeft className="mr-2 h-4 w-4" /> {content.cart.continueButton}
                 </Link>
               </Button>
             </div>
@@ -74,9 +76,9 @@ const CartPage = () => {
           <div className="lg:col-span-1">
             <Card className="p-6 shadow-lg sticky top-28">
               <CardContent className="p-0">
-                <h2 className="text-2xl font-serif mb-4">Cart Summary</h2>
+                <h2 className="text-2xl font-serif mb-4">{content.cart.summaryTitle}</h2>
                 <div className="flex justify-between text-lg font-semibold mb-4">
-                  <span>Total:</span>
+                  <span>{content.cart.totalLabel}</span>
                   <span>${cartTotal.toFixed(2)}</span>
                 </div>
                 <Button
@@ -85,10 +87,10 @@ const CartPage = () => {
                   onClick={handleProceedToCheckout}
                   disabled={cartItems.length === 0}
                 >
-                  Proceed to Checkout
+                  {content.cart.checkoutButton}
                 </Button>
                 <p className="text-sm text-muted-foreground mt-4 text-center">
-                  Secure checkout with instant digital delivery
+                  {content.cart.checkoutNote}
                 </p>
               </CardContent>
             </Card>

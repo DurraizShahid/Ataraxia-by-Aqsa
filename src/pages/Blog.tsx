@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getBlogs } from "@/lib/localData";
+import { getSiteContent } from "@/lib/siteContent";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -7,6 +8,7 @@ import { ArrowRight } from "lucide-react";
 
 const Blog = () => {
   const [posts, setPosts] = useState(getBlogs());
+  const content = getSiteContent();
 
   useEffect(() => {
     // Refresh posts when component mounts
@@ -15,10 +17,10 @@ const Blog = () => {
 
   return (
     <div className="container mx-auto py-16 px-4">
-      <h1 className="text-4xl font-bold text-center mb-12">Blog & Resources</h1>
+      <h1 className="text-4xl font-bold text-center mb-12">{content.blog.hero.title}</h1>
       {posts.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-muted-foreground">No blog posts available yet.</p>
+          <p className="text-muted-foreground">{content.blog.emptyState}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -52,7 +54,7 @@ const Blog = () => {
               <CardFooter className="p-6 pt-0">
                 <Button variant="link" className="p-0 text-primary text-xs" asChild>
                   <Link to={`/blog/${post.slug}`}>
-                    READ MORE <ArrowRight className="ml-1 h-3 w-3" />
+                    {content.common.readMore} <ArrowRight className="ml-1 h-3 w-3" />
                   </Link>
                 </Button>
               </CardFooter>
