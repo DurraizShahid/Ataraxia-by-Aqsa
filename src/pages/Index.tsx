@@ -22,7 +22,8 @@ import Autoplay from "embla-carousel-autoplay";
 import React from "react";
 import ServicesSection from "@/components/home/ServicesSection";
 import ContactCtaSection from "@/components/ContactCtaSection";
-import TransformationIntroSection from "@/components/home/TransformationIntroSection"; // Updated import
+import TransformationIntroSection from "@/components/home/TransformationIntroSection";
+import { getSiteContent } from "@/lib/siteContent";
 
 const heroImage = { src: "https://images.pexels.com/photos/7929183/pexels-photo-7929183.jpeg", alt: "Woman meditating in a serene setting, representing emotional healing and transformation" };
 
@@ -62,33 +63,37 @@ const Index = () => {
   );
 };
 
-const HeroSection = () => (
-  <section className="relative">
-    <div
-      className="w-full h-[80vh] bg-cover bg-center flex items-center"
-      style={{ backgroundImage: `url(${heroImage.src})` }}
-      aria-label={heroImage.alt}
-    >
-      <div className="container mx-auto px-4 text-left text-white">
-        <p className="text-sm uppercase tracking-[0.2em] mb-4">Psychotherapy</p>
-        <h1 className="text-5xl md:text-7xl font-serif max-w-2xl">
-          Tranquillity in Transformation
-        </h1>
-        <p className="mt-4 text-lg md:text-xl max-w-2xl">
-          Unlock emotional freedom, align your mind, body, and soul, and boost your success by 4x.
-        </p>
-        <div className="mt-8 flex gap-4 flex-col sm:flex-row"> {/* Added flex-col for mobile buttons */}
-          <Button size="lg" asChild>
-            <Link to="/book-call">Book a Free 1:1 Discovery Call</Link>
-          </Button>
-          <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-primary" asChild>
-            <Link to="/services">Explore Our Healing Services</Link>
-          </Button>
+const HeroSection = () => {
+  const content = getSiteContent();
+  
+  return (
+    <section className="relative">
+      <div
+        className="w-full h-[80vh] bg-cover bg-center flex items-center"
+        style={{ backgroundImage: `url(${heroImage.src})` }}
+        aria-label={heroImage.alt}
+      >
+        <div className="container mx-auto px-4 text-left text-white">
+          <p className="text-sm uppercase tracking-[0.2em] mb-4">Psychotherapy</p>
+          <h1 className="text-5xl md:text-7xl font-serif max-w-2xl">
+            {content.home.hero.title}
+          </h1>
+          <p className="mt-4 text-lg md:text-xl max-w-2xl">
+            {content.home.hero.subtitle}
+          </p>
+          <div className="mt-8 flex gap-4 flex-col sm:flex-row">
+            <Button size="lg" asChild>
+              <Link to="/book-call">{content.home.hero.cta}</Link>
+            </Button>
+            <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-primary" asChild>
+              <Link to="/services">Explore Our Healing Services</Link>
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const QuoteSection = () => (
   <section className="py-24 text-center">

@@ -1,16 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { User, BookOpen, Calendar, Users, Check, Brain, Heart, Zap, Lightbulb, ExternalLink } from "lucide-react"; // Added Check, Brain, Heart, Zap, Lightbulb, ExternalLink
+import { User, BookOpen, Calendar, Users, Check, Brain, Heart, Zap, Lightbulb, ExternalLink } from "lucide-react";
+import { getSiteContent } from "@/lib/siteContent";
 
 const Services = () => {
+  const content = getSiteContent();
+  
   return (
     <div>
       {/* Page Header */}
       <section className="bg-secondary py-20 md:py-32 text-center">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-6xl font-bold">Our Healing Services</h1>
+          <h1 className="text-4xl md:text-6xl font-bold">{content.services.hero.title}</h1>
           <p className="mt-4 text-lg md:text-xl max-w-2xl mx-auto text-muted-foreground">
-            Release, Realign, and Rise — Guided by Science, Soul, and Subconscious Wisdom
+            {content.services.hero.subtitle}
           </p>
         </div>
       </section>
@@ -19,7 +22,7 @@ const Services = () => {
       <section className="py-16 md:py-24 bg-background text-center">
         <div className="container mx-auto px-4 max-w-3xl">
           <p className="text-lg text-muted-foreground mb-6">
-            At Ataraxia, we don’t offer quick fixes. We offer deep, lasting transformation. Using a powerful integrated approach—combining Neuro-Linguistic Programming (NLP), Time Line Therapy™, Hypnotherapy, and emotional release techniques—we guide you to break free from the emotional blocks and mental patterns that are holding you back.
+            {content.services.description}
           </p>
           <p className="text-xl font-semibold text-primary">
             ✨ Experience more clarity, more control, and more peace — from the inside out.

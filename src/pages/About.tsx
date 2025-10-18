@@ -2,18 +2,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Linkedin, ArrowRight, ExternalLink } from "lucide-react";
-import ContactCtaSection from "@/components/ContactCtaSection"; // Import the new component
+import ContactCtaSection from "@/components/ContactCtaSection";
+import { getSiteContent } from "@/lib/siteContent";
 
 const About = () => {
+  const content = getSiteContent();
+  
   return (
     <div className="bg-[#F8F5F3]">
       {/* Welcome to Ataraxia Section */}
       <section className="py-20 md:py-32 text-center">
         <div className="container mx-auto px-4 max-w-3xl">
           <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-4">Welcome</p>
-          <h1 className="text-5xl md:text-6xl font-serif text-primary mb-6">Welcome to Ataraxia by Aqsa</h1>
+          <h1 className="text-5xl md:text-6xl font-serif text-primary mb-6">{content.about.hero.title}</h1>
           <p className="text-lg text-muted-foreground mb-6">
-            At Ataraxia by Aqsa, we guide you to transform your life by healing the root causes of emotional blockages and mental fog. Our internationally certified team uses proven techniques in NLP, Hypnosis, and emotional release strategies to help you release emotional baggage, clear mental fog, and realign with your true self.
+            {content.about.hero.subtitle}
           </p>
           <p className="text-lg text-muted-foreground">
             Our approach is designed to achieve faster and long-lasting results by changing the foundation of your mindset and emotional well-being. When you let go of limiting beliefs, blocked emotions, and unresolved traumas, you unlock sharper clarity, inner peace, and experience up to 4x more productivity in your personal and professional life.
@@ -24,10 +27,9 @@ const About = () => {
       {/* Why Choose Ataraxia? Section */}
       <section className="py-20 md:py-32 bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-4xl md:text-5xl font-serif text-primary text-center mb-12">Why Choose Ataraxia by Aqsa?</h2>
+          <h2 className="text-4xl md:text-5xl font-serif text-primary text-center mb-12">{content.about.approach.title}</h2>
           <p className="text-lg text-muted-foreground text-center mb-12">
-            Because true transformation begins within — and that’s exactly where we start.
-            Ataraxia by Aqsa is more than a coaching space. It's a sanctuary where healing meets science, and your personal evolution becomes inevitable. Unlike surface-level solutions, we work at the root cause of emotional struggles and mental blocks — using a powerful blend of Neuro-Linguistic Programming (NLP), Hypnotherapy, Time Line Therapy™, and Emotional Release techniques.
+            {content.about.approach.description} Unlike surface-level solutions, we work at the root cause of emotional struggles and mental blocks — using a powerful blend of Neuro-Linguistic Programming (NLP), Hypnotherapy, Time Line Therapy™, and Emotional Release techniques.
           </p>
           <h3 className="text-2xl font-serif text-primary mb-8 text-center">✨ Here’s What Makes Ataraxia by Aqsa Different:</h3>
           <ul className="space-y-8 text-left">
@@ -165,9 +167,9 @@ const About = () => {
       {/* Our Mission Section */}
       <section className="py-20 md:py-32 text-center">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-4xl md:text-5xl font-serif text-primary mb-6">Our Mission</h2>
+          <h2 className="text-4xl md:text-5xl font-serif text-primary mb-6">{content.about.mission.title}</h2>
           <p className="text-lg text-muted-foreground">
-            We empower you to heal from within, realign your emotional and mental state, and step confidently into your highest potential. Ataraxia by Aqsa’s mission is to provide compassionate, science-backed coaching that helps you live a life full of purpose, balance, and clarity.
+            {content.about.mission.description}
           </p>
         </div>
       </section>

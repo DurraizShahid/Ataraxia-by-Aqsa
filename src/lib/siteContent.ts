@@ -145,9 +145,9 @@ const STORAGE_KEY = 'ataraxia_site_content';
 const defaultContent: SiteContent = {
   home: {
     hero: {
-      title: "Find Peace. Heal Deeply. Transform Your Life.",
-      subtitle: "Evidence-based healing for your mind, heart, and soul",
-      cta: "Start Your Journey"
+      title: "Tranquillity in Transformation",
+      subtitle: "Unlock emotional freedom, align your mind, body, and soul, and boost your success by 4x.",
+      cta: "Book a Free 1:1 Discovery Call"
     },
     services: {
       title: "How I Can Support You",
@@ -161,25 +161,25 @@ const defaultContent: SiteContent = {
   
   about: {
     hero: {
-      title: "About Ataraxia by Aqsa",
-      subtitle: "Your guide to inner peace and transformation"
+      title: "Welcome to Ataraxia by Aqsa",
+      subtitle: "At Ataraxia by Aqsa, we guide you to transform your life by healing the root causes of emotional blockages and mental fog. Our internationally certified team uses proven techniques in NLP, Hypnosis, and emotional release strategies to help you release emotional baggage, clear mental fog, and realign with your true self."
     },
     mission: {
-      title: "My Mission",
-      description: "I believe healing is possible for everyone. My mission is to provide accessible, evidence-based tools for deep emotional healing and personal transformation."
+      title: "Our Mission",
+      description: "We empower you to heal from within, realign your emotional and mental state, and step confidently into your highest potential. Ataraxia by Aqsa's mission is to provide compassionate, science-backed coaching that helps you live a life full of purpose, balance, and clarity."
     },
     approach: {
-      title: "My Approach",
-      description: "I combine psychology, NLP, hypnosis, and spiritual practices to create comprehensive healing programs that address the root causes of pain and suffering."
+      title: "Why Choose Ataraxia by Aqsa?",
+      description: "Because true transformation begins within — and that's exactly where we start. Ataraxia by Aqsa is more than a coaching space. It's a sanctuary where healing meets science, and your personal evolution becomes inevitable."
     }
   },
   
   services: {
     hero: {
-      title: "Services & Support",
-      subtitle: "Choose the path that resonates with you"
+      title: "Our Healing Services",
+      subtitle: "Release, Realign, and Rise — Guided by Science, Soul, and Subconscious Wisdom"
     },
-    description: "From one-on-one coaching to self-paced courses, I offer various ways to support your healing journey."
+    description: "At Ataraxia, we don't offer quick fixes. We offer deep, lasting transformation. Using a powerful integrated approach—combining Neuro-Linguistic Programming (NLP), Time Line Therapy™, Hypnotherapy, and emotional release techniques—we guide you to break free from the emotional blocks and mental patterns that are holding you back."
   },
   
   courses: {
