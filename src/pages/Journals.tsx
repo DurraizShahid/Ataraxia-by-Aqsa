@@ -1,47 +1,30 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { Download, MessageCircle, Heart, BookOpen, Brain, Leaf, Lightbulb, Sparkles, Package, ArrowRight, ShoppingCart } from "lucide-react";
-import { useProducts } from "@/lib/woocommerce";
-import DOMPurify from 'dompurify';
+import { Download, MessageCircle, Heart, BookOpen, Brain, Leaf, Lightbulb, Package, ArrowRight } from "lucide-react";
+import { getJournals } from "@/lib/localData";
 
 const Journals = () => {
-  const { data: products, isLoading, isError, error } = useProducts();
+  const [products, setProducts] = useState(getJournals());
 
-  if (isLoading) {
-    return (
-      <div className="container mx-auto py-16 px-4 text-center">
-        <h1 className="text-4xl font-bold font-serif mb-6">Healing Journals</h1>
-        <p className="mt-4 text-lg text-muted-foreground">Loading products...</p>
-      </div>
-    );
-  }
+  useEffect(() => {
+    setProducts(getJournals());
+  }, []);
 
-  if (isError) {
-    return (
-      <div className="container mx-auto py-16 px-4 text-center text-destructive">
-        <h1 className="text-4xl font-bold font-serif mb-6">Healing Journals</h1>
-        <p className="mt-4 text-lg">Error loading products: {error?.message}</p>
-        <p className="mt-2 text-sm text-muted-foreground">Please ensure your WooCommerce API is accessible and credentials are correct.</p>
-      </div>
-    );
-  }
+  // Filter products into individual and bundles
+  const individualProducts = products.filter(p => !p.isBundle);
+  const productBundles = products.filter(p => p.isBundle);
 
-  // Filter products into individual and bundles based on categories or meta_data if available
-  // For simplicity, let's assume products with "bundle" in their name are bundles for now,
-  // or you can add a specific category in WooCommerce for bundles.
-  const individualProducts = products?.filter(p => !p.name.toLowerCase().includes("bundle")) || [];
-  const productBundles = products?.filter(p => p.name.toLowerCase().includes("bundle")) || [];
-
-  // Helper to get an icon based on product name or category
+  // Helper to get an icon based on product name
   const getProductIcon = (productName: string) => {
     const lowerCaseName = productName.toLowerCase();
-    if (lowerCaseName.includes("addiction")) return <Brain className="h-6 w-6" />;
-    if (lowerCaseName.includes("meditation")) return <Leaf className="h-6 w-6" />;
+    if (lowerCaseName.includes("addiction") || lowerCaseName.includes("recovery")) return <Brain className="h-6 w-6" />;
+    if (lowerCaseName.includes("meditation") || lowerCaseName.includes("mindfulness")) return <Leaf className="h-6 w-6" />;
     if (lowerCaseName.includes("inner child")) return <Heart className="h-6 w-6" />;
-    if (lowerCaseName.includes("reflective questions")) return <Lightbulb className="h-6 w-6" />;
-    if (lowerCaseName.includes("pack") || lowerCaseName.includes("bundle")) return <Package className="h-6 w-6" />;
-    return <BookOpen className="h-6 w-6" />; // Default icon
+    if (lowerCaseName.includes("reflective") || lowerCaseName.includes("questions")) return <Lightbulb className="h-6 w-6" />;
+    if (lowerCaseName.includes("bundle") || lowerCaseName.includes("pack")) return <Package className="h-6 w-6" />;
+    return <BookOpen className="h-6 w-6" />;
   };
 
   return (
@@ -67,13 +50,15 @@ const Journals = () => {
                   <div className="p-3 rounded-full bg-secondary text-primary mb-4">
                     {getProductIcon(product.name)}
                   </div>
-                  <CardTitle className="text-2xl font-serif mb-2" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(product.name) }} />
-                  <CardDescription className="text-3xl font-bold text-primary" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(product.price_html || `$${product.price}`) }} />
+                  <CardTitle className="text-2xl font-serif mb-2">{product.name}</CardTitle>
+                  <CardDescription className="text-3xl font-bold text-primary">
+                    ${product.price}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="flex-grow p-0">
-                  <p className="text-muted-foreground text-sm mb-4" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(product.short_description || product.description) }} />
-                  {/* You might need to add a custom field in WooCommerce for a tagline */}
-                  {/* <p className="text-primary font-semibold text-sm mb-6">{journal.tagline}</p> */}
+                  <p className="text-muted-foreground text-sm mb-4">
+                    {product.shortDescription}
+                  </p>
                   <Button asChild className="w-full">
                     <Link to={`/journals/${product.slug}`}>View Details <ArrowRight className="ml-2 h-4 w-4" /></Link>
                   </Button>
@@ -95,23 +80,29 @@ const Journals = () => {
                   <div className="p-3 rounded-full bg-brand-pink text-primary mb-4">
                     {getProductIcon(product.name)}
                   </div>
-                  <CardTitle className="text-2xl font-serif mb-2" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(product.name) }} />
+                  <CardTitle className="text-2xl font-serif mb-2">{product.name}</CardTitle>
                   <CardDescription className="text-3xl font-bold text-primary">
-                    {product.on_sale ? (
+                    {product.onSale && product.salePrice ? (
                       <>
-                        <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(product.sale_price ? `$${product.sale_price}` : product.price_html) }} />
-                        <span className="line-through text-muted-foreground text-lg ml-2" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(`$${product.regular_price}`) }} />
+                        <span>${product.salePrice}</span>
+                        <span className="line-through text-muted-foreground text-lg ml-2">
+                          ${product.regularPrice}
+                        </span>
                       </>
                     ) : (
-                      <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(product.price_html || `$${product.price}`) }} />
+                      <span>${product.price}</span>
                     )}
                   </CardDescription>
-                  {product.on_sale && product.regular_price && product.sale_price && (
-                    <p className="text-sm text-muted-foreground mt-1">Save ${parseFloat(product.regular_price) - parseFloat(product.sale_price)}</p>
+                  {product.onSale && product.salePrice && (
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Save ${(product.regularPrice - product.salePrice).toFixed(2)}
+                    </p>
                   )}
                 </CardHeader>
                 <CardContent className="flex-grow p-0">
-                  <p className="text-muted-foreground text-sm mb-6" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(product.short_description || product.description) }} />
+                  <p className="text-muted-foreground text-sm mb-6">
+                    {product.shortDescription}
+                  </p>
                   <Button asChild className="w-full bg-brand-pink hover:bg-brand-pink-darker text-primary-foreground">
                     <Link to={`/journals/${product.slug}`}>View Details <ArrowRight className="ml-2 h-4 w-4" /></Link>
                   </Button>

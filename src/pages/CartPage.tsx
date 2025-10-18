@@ -1,36 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Trash2, ArrowLeft, ShoppingCart, Loader2 } from "lucide-react"; // Added Loader2 icon
-import DOMPurify from 'dompurify';
-import { createWooCommerceOrder } from "@/lib/woocommerce"; // Import the new function
-import { toast } from "sonner"; // Import toast for notifications
-import { useState } from "react"; // Import useState for loading state
+import { Trash2, ArrowLeft, ShoppingCart } from "lucide-react";
 
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity, cartTotal, clearCart } = useCart();
-  const [isProcessingCheckout, setIsProcessingCheckout] = useState(false);
+  const navigate = useNavigate();
 
-  const handleProceedToCheckout = async () => {
+  const handleProceedToCheckout = () => {
     if (cartItems.length === 0) {
-      toast.error("Your cart is empty. Please add items before checking out.");
       return;
     }
-
-    setIsProcessingCheckout(true);
-    try {
-      const { payment_url } = await createWooCommerceOrder(cartItems);
-      toast.success("Order created successfully! Redirecting to payment...");
-      clearCart(); // Clear cart after order is successfully created
-      window.location.href = payment_url; // Redirect to WooCommerce payment page
-    } catch (error) {
-      console.error("Checkout error:", error);
-      toast.error(`Checkout failed: ${error instanceof Error ? error.message : "An unknown error occurred."}`);
-    } finally {
-      setIsProcessingCheckout(false);
-    }
+    navigate('/checkout');
   };
 
   return (
@@ -52,17 +35,14 @@ const CartPage = () => {
           <div className="lg:col-span-2 space-y-6">
             {cartItems.map((item) => (
               <Card key={item.id} className="flex items-center p-4 shadow-sm">
-                {item.images && item.images.length > 0 && (
-                  <img
-                    src={item.images[0].src}
-                    alt={item.images[0].alt || item.name}
-                    className="w-24 h-24 object-cover rounded-md mr-4"
-                  />
-                )}
+                <div className="w-24 h-24 bg-gray-200 rounded-md mr-4 flex items-center justify-center">
+                  <ShoppingCart className="h-8 w-8 text-gray-400" />
+                </div>
                 <div className="flex-grow">
-                  <h2 className="text-lg font-semibold" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.name) }} />
-                  <p className="text-muted-foreground text-sm" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.short_description || '') }} />
-                  <p className="text-primary font-bold mt-1" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(`$${(parseFloat(item.sale_price || item.price) * item.quantity).toFixed(2)}`) }} />
+                  <h2 className="text-lg font-semibold">{item.name}</h2>
+                  <p className="text-primary font-bold mt-1">
+                    ${(parseFloat(item.price) * item.quantity).toFixed(2)}
+                  </p>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Input
@@ -103,19 +83,12 @@ const CartPage = () => {
                   size="lg"
                   className="w-full"
                   onClick={handleProceedToCheckout}
-                  disabled={isProcessingCheckout || cartItems.length === 0}
+                  disabled={cartItems.length === 0}
                 >
-                  {isProcessingCheckout ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Processing...
-                    </>
-                  ) : (
-                    "Proceed to Checkout"
-                  )}
+                  Proceed to Checkout
                 </Button>
                 <p className="text-sm text-muted-foreground mt-4 text-center">
-                  You will be redirected to our secure WooCommerce store to complete your purchase.
+                  Secure checkout with instant digital delivery
                 </p>
               </CardContent>
             </Card>

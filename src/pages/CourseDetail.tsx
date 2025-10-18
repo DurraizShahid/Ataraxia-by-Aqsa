@@ -1,24 +1,24 @@
 import { useParams, Link } from "react-router-dom";
-import { getJournalBySlug } from "@/lib/localData";
+import { getCourseBySlug } from "@/lib/localData";
 import DOMPurify from 'dompurify';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, ShoppingCart, CheckCircle2, Download } from "lucide-react";
+import { ArrowLeft, ShoppingCart, Clock, BookOpen, BarChart, CheckCircle2 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
-const ProductDetail = () => {
+const CourseDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const product = getJournalBySlug(slug || "");
+  const course = getCourseBySlug(slug || "");
   const { addToCart } = useCart();
 
-  if (!product) {
+  if (!course) {
     return (
       <div className="container mx-auto py-16 px-4 text-center">
-        <h1 className="text-4xl font-bold mb-4">Product Not Found</h1>
-        <p className="text-lg text-muted-foreground">The product you are looking for does not exist.</p>
+        <h1 className="text-4xl font-bold mb-4">Course Not Found</h1>
+        <p className="text-lg text-muted-foreground">The course you are looking for does not exist.</p>
         <Button asChild className="mt-8">
-          <Link to="/journals">
-            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Journals
+          <Link to="/courses">
+            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Courses
           </Link>
         </Button>
       </div>
@@ -26,11 +26,11 @@ const ProductDetail = () => {
   }
 
   const handleAddToCart = () => {
-    // Convert journal to cart item format
+    // Convert course to cart item format
     const cartItem: any = {
-      id: parseInt(product.id),
-      name: product.name,
-      price: product.price.toString(),
+      id: parseInt(course.id),
+      name: course.title,
+      price: course.price.toString(),
       quantity: 1,
     };
     addToCart(cartItem);
@@ -41,43 +41,44 @@ const ProductDetail = () => {
       <article className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
           <div>
-            {product.featuredImage && (
+            {course.featuredImage && (
               <img
-                src={product.featuredImage}
-                alt={product.name}
+                src={course.featuredImage}
+                alt={course.title}
                 className="w-full h-auto object-cover rounded-lg shadow-lg"
               />
             )}
-            <div className="mt-6 p-4 bg-primary/5 rounded-lg">
-              <div className="flex items-center gap-2 text-primary mb-2">
-                <Download className="h-5 w-5" />
-                <span className="font-semibold">Instant Download</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                {product.pageCount} pages • {product.format} format
-              </p>
-            </div>
           </div>
           
           <div>
-            <h1 className="text-4xl md:text-5xl font-bold font-serif mb-4">{product.name}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold font-serif mb-4">{course.title}</h1>
             
             <p className="text-lg text-muted-foreground mb-6">
-              {product.shortDescription}
+              {course.shortDescription}
             </p>
 
+            <div className="flex flex-wrap gap-4 text-muted-foreground mb-6">
+              <div className="flex items-center gap-2">
+                <Clock className="h-5 w-5" />
+                <span>{course.duration}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <BookOpen className="h-5 w-5" />
+                <span>{course.lessons} lessons</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <BarChart className="h-5 w-5" />
+                <span>{course.level}</span>
+              </div>
+            </div>
+
             <div className="flex gap-2 flex-wrap mb-6">
-              {product.isBundle && (
-                <span className="px-3 py-1 bg-purple-100 text-purple-800 text-sm rounded-full">
-                  Bundle
-                </span>
-              )}
-              {product.onSale && (
+              {course.onSale && (
                 <span className="px-3 py-1 bg-red-100 text-red-800 text-sm rounded-full">
                   On Sale
                 </span>
               )}
-              {product.tags.map((tag) => (
+              {course.tags.map((tag) => (
                 <span
                   key={tag}
                   className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full"
@@ -89,20 +90,20 @@ const ProductDetail = () => {
 
             <div className="mb-6">
               <div className="text-4xl font-bold text-primary mb-2">
-                {product.onSale && product.salePrice ? (
+                {course.onSale && course.salePrice ? (
                   <>
-                    <span>${product.salePrice}</span>
+                    <span>${course.salePrice}</span>
                     <span className="line-through text-muted-foreground text-2xl ml-3">
-                      ${product.regularPrice}
+                      ${course.regularPrice}
                     </span>
                   </>
                 ) : (
-                  <span>${product.price}</span>
+                  <span>${course.price}</span>
                 )}
               </div>
-              {product.onSale && product.salePrice && (
+              {course.onSale && course.salePrice && (
                 <p className="text-sm text-green-600">
-                  Save ${(product.regularPrice - product.salePrice).toFixed(2)}
+                  Save ${(course.regularPrice - course.salePrice).toFixed(2)}
                 </p>
               )}
             </div>
@@ -112,8 +113,8 @@ const ProductDetail = () => {
             </Button>
 
             <Button asChild size="lg" variant="outline" className="w-full">
-              <Link to="/journals">
-                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Journals
+              <Link to="/courses">
+                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Courses
               </Link>
             </Button>
           </div>
@@ -121,31 +122,49 @@ const ProductDetail = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-2">
-            <Card>
+            <Card className="mb-8">
               <CardHeader>
-                <CardTitle>About This Journal</CardTitle>
+                <CardTitle>About This Course</CardTitle>
               </CardHeader>
               <CardContent>
                 <div
                   className="prose prose-lg max-w-none text-foreground"
-                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(product.description) }}
+                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(course.description) }}
                 />
               </CardContent>
             </Card>
+
+            {course.syllabus.length > 0 && (
+              <Card>
+                <CardHeader>
+                  <CardTitle>Course Syllabus</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {course.syllabus.map((item, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            )}
           </div>
 
           <div>
-            {product.features.length > 0 && (
+            {course.requirements.length > 0 && (
               <Card>
                 <CardHeader>
-                  <CardTitle>What's Included</CardTitle>
+                  <CardTitle>Requirements</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
-                    {product.features.map((feature, index) => (
+                    {course.requirements.map((req, index) => (
                       <li key={index} className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
+                        <span className="text-sm">{req}</span>
                       </li>
                     ))}
                   </ul>
@@ -159,4 +178,5 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail;
+export default CourseDetail;
+
