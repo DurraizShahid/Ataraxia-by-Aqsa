@@ -24,6 +24,7 @@ import { useSiteImages } from '@/context/SiteImagesContext';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogFooter,
@@ -106,6 +107,7 @@ const ReplaceDialog = ({
       <DialogContent className="max-w-lg">
         <DialogHeader>
           <DialogTitle>Replace — {label}</DialogTitle>
+          <DialogDescription>Upload a new image or paste a URL to replace the current one.</DialogDescription>
         </DialogHeader>
 
         <Tabs defaultValue="url">
