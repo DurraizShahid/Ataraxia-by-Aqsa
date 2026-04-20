@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
 import { Instagram, Linkedin, Facebook } from "lucide-react";
+import { useSiteImages } from "@/context/SiteImagesContext";
 
 const Footer = () => {
+  const { images } = useSiteImages();
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <img src="/logo-black.svg" alt="Ataraxia by Aqsa Logo" className="h-10 w-10" style={{ filter: 'brightness(0) invert(1)' }} />
+              <img src={images.logo} alt="Ataraxia by Aqsa Logo" className="h-10 w-10" style={{ filter: 'brightness(0) invert(1)' }} />
             </Link>
             <p className="text-sm text-primary-foreground/70 mb-6">
               Empowering you with tools for transformation and healing.

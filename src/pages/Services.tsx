@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { User, BookOpen, Calendar, Users, Check, Brain, Heart, Zap, Lightbulb, ExternalLink } from "lucide-react";
 import { getSiteContent } from "@/lib/supabaseSiteContent";
 import type { SiteContent } from "@/lib/siteContent";
+import { useSiteImages } from "@/context/SiteImagesContext";
 
 const Services = () => {
+  const { images } = useSiteImages();
   const [content, setContent] = useState<SiteContent | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -83,7 +85,7 @@ const Services = () => {
           </div>
           <div className="flex justify-center md:justify-end">
             <img
-              src="https://images.pexels.com/photos/3828944/pexels-photo-3828944.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src={images.service_coaching}
               alt="1:1 Breakthrough Coaching Session"
               className="w-full max-w-md h-auto object-cover rounded-lg shadow-lg"
             />
@@ -96,7 +98,7 @@ const Services = () => {
         <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="flex justify-center md:justify-start order-2 md:order-1">
             <img
-              src="https://images.pexels.com/photos/1535162/pexels-photo-1535162.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src={images.service_timeline_therapy}
               alt="Time Line Therapy Session"
               className="w-full max-w-md h-auto object-cover rounded-lg shadow-lg"
             />
@@ -152,7 +154,7 @@ const Services = () => {
           </div>
           <div className="flex justify-center md:justify-end">
             <img
-              src="https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src={images.service_hypnotherapy}
               alt="Hypnotherapy Session"
               className="w-full max-w-md h-auto object-cover rounded-lg shadow-lg"
             />
@@ -165,7 +167,7 @@ const Services = () => {
         <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="flex justify-center md:justify-start order-2 md:order-1">
             <img
-              src="https://images.pexels.com/photos/3771089/pexels-photo-3771089.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src={images.service_journaling}
               alt="Journaling & Creative Therapy"
               className="w-full max-w-md h-auto object-cover rounded-lg shadow-lg"
             />
@@ -219,7 +221,7 @@ const Services = () => {
           </div>
           <div className="flex justify-center md:justify-end">
             <img
-              src="https://images.pexels.com/photos/5428833/pexels-photo-5428833.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src={images.service_group_healing}
               alt="Group Healing Circles"
               className="w-full max-w-md h-auto object-cover rounded-lg shadow-lg"
             />
@@ -232,7 +234,7 @@ const Services = () => {
         <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="flex justify-center md:justify-start order-2 md:order-1">
             <img
-              src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src={images.service_corporate}
               alt="Corporate Trainings & Wellness Workshops"
               className="w-full max-w-md h-auto object-cover rounded-lg shadow-lg"
             />

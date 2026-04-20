@@ -1,7 +1,7 @@
 import { Link, useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
-import { LogOut, LayoutDashboard, BookOpen, GraduationCap, Book, ShoppingBag, Settings, FileText } from 'lucide-react';
+import { LogOut, LayoutDashboard, BookOpen, GraduationCap, Book, ShoppingBag, Settings, FileText, Images } from 'lucide-react';
 import { useEffect } from 'react';
 
 const AdminLayout = () => {
@@ -31,6 +31,7 @@ const AdminLayout = () => {
     { path: '/admin/journals', label: 'Journals', icon: Book },
     { path: '/admin/orders', label: 'Orders', icon: ShoppingBag },
     { path: '/admin/site-content', label: 'Site Content', icon: FileText },
+    { path: '/admin/images', label: 'Images', icon: Images },
     { path: '/admin/settings', label: 'Settings', icon: Settings },
   ];
 

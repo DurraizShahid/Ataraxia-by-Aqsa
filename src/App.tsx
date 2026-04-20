@@ -32,12 +32,15 @@ import AdminJournals from "./pages/admin/Journals";
 import AdminOrders from "./pages/admin/Orders";
 import AdminSiteContent from "./pages/admin/SiteContent";
 import AdminSettings from "./pages/admin/Settings";
+import AdminImageManager from "./pages/admin/ImageManager";
+import { SiteImagesProvider } from "./context/SiteImagesContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
+      <SiteImagesProvider>
       <TooltipProvider>
         <Toaster />
         <Sonner />
@@ -71,6 +74,7 @@ const App = () => (
               <Route path="journals" element={<AdminJournals />} />
               <Route path="orders" element={<AdminOrders />} />
               <Route path="site-content" element={<AdminSiteContent />} />
+              <Route path="images" element={<AdminImageManager />} />
               <Route path="settings" element={<AdminSettings />} />
             </Route>
 
@@ -79,6 +83,7 @@ const App = () => (
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
+      </SiteImagesProvider>
     </AuthProvider>
   </QueryClientProvider>
 );

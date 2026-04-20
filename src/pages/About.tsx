@@ -6,6 +6,7 @@ import { Facebook, Twitter, Linkedin, ArrowRight, ExternalLink, X } from "lucide
 import ContactCtaSection from "@/components/ContactCtaSection";
 import { getSiteContent } from "@/lib/supabaseSiteContent";
 import type { SiteContent } from "@/lib/siteContent";
+import { useSiteImages } from "@/context/SiteImagesContext";
 import {
   Dialog,
   DialogContent,
@@ -21,6 +22,7 @@ import {
 } from "@/components/ui/carousel";
 
 const About = () => {
+  const { images } = useSiteImages();
   const [content, setContent] = useState<SiteContent | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
@@ -176,44 +178,44 @@ const About = () => {
           <h2 className="text-4xl md:text-5xl font-serif text-primary mb-12">Licenses & Certifications</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-start justify-center max-w-6xl mx-auto">
             <div className="flex flex-col items-center">
-              <img 
-                src="/licenses/1718532377396.jpeg" 
-                alt="Certified NLP Coach - American Board of Neuro-Linguistic Programming" 
+              <img
+                src={images.cert_nlp_coach}
+                alt="Certified NLP Coach - American Board of Neuro-Linguistic Programming"
                 className="w-full max-w-[250px] h-auto object-contain mb-4 rounded-lg shadow-md cursor-pointer hover:shadow-xl transition-shadow"
-                onClick={() => setSelectedImage({ src: "/licenses/1718532377396.jpeg", alt: "Certified NLP Coach - American Board of Neuro-Linguistic Programming" })}
+                onClick={() => setSelectedImage({ src: images.cert_nlp_coach, alt: "Certified NLP Coach - American Board of Neuro-Linguistic Programming" })}
               />
               <p className="text-sm text-muted-foreground">
                 Certified NLP Coach via the American Board of Neuro-Linguistic Programming (ABNLP)
               </p>
             </div>
             <div className="flex flex-col items-center">
-              <img 
-                src="/licenses/1718532382606.jpeg" 
-                alt="Certified Practitioner of Time Line Therapy" 
+              <img
+                src={images.cert_timeline_therapy}
+                alt="Certified Practitioner of Time Line Therapy"
                 className="w-full max-w-[250px] h-auto object-contain mb-4 rounded-lg shadow-md cursor-pointer hover:shadow-xl transition-shadow"
-                onClick={() => setSelectedImage({ src: "/licenses/1718532382606.jpeg", alt: "Certified Practitioner of Time Line Therapy" })}
+                onClick={() => setSelectedImage({ src: images.cert_timeline_therapy, alt: "Certified Practitioner of Time Line Therapy" })}
               />
               <p className="text-sm text-muted-foreground">
                 Certified Practitioner of Time Line Therapy™ via the Time Line Therapy Association (TLTA)
               </p>
             </div>
             <div className="flex flex-col items-center">
-              <img 
-                src="/licenses/1718532384357.jpeg" 
-                alt="Certified Hypnotist - American Board of Hypnotherapy" 
+              <img
+                src={images.cert_hypnotist}
+                alt="Certified Hypnotist - American Board of Hypnotherapy"
                 className="w-full max-w-[250px] h-auto object-contain mb-4 rounded-lg shadow-md cursor-pointer hover:shadow-xl transition-shadow"
-                onClick={() => setSelectedImage({ src: "/licenses/1718532384357.jpeg", alt: "Certified Hypnotist - American Board of Hypnotherapy" })}
+                onClick={() => setSelectedImage({ src: images.cert_hypnotist, alt: "Certified Hypnotist - American Board of Hypnotherapy" })}
               />
               <p className="text-sm text-muted-foreground">
                 Certified Hypnotist via the American Board of Hypnotherapy (ABH)
               </p>
             </div>
             <div className="flex flex-col items-center">
-              <img 
-                src="/licenses/1718532384558.jpeg" 
-                alt="Certified NLP Practitioner - American Board of Neuro-Linguistic Programming" 
+              <img
+                src={images.cert_nlp_practitioner}
+                alt="Certified NLP Practitioner - American Board of Neuro-Linguistic Programming"
                 className="w-full max-w-[250px] h-auto object-contain mb-4 rounded-lg shadow-md cursor-pointer hover:shadow-xl transition-shadow"
-                onClick={() => setSelectedImage({ src: "/licenses/1718532384558.jpeg", alt: "Certified NLP Practitioner - American Board of Neuro-Linguistic Programming" })}
+                onClick={() => setSelectedImage({ src: images.cert_nlp_practitioner, alt: "Certified NLP Practitioner - American Board of Neuro-Linguistic Programming" })}
               />
               <p className="text-sm text-muted-foreground">
                 Certified NLP Practitioner via the American Board of Neuro-Linguistic Programming (ABNLP)
@@ -261,146 +263,33 @@ const About = () => {
               className="w-full"
             >
               <CarouselContent className="-ml-4">
-                <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <img 
-                      src="/Testimonials/Screenshot_20250722_184616.jpg" 
-                      alt="Client Testimonial"
-                      className="w-full h-auto object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-                      onClick={() => setSelectedImage({ src: "/Testimonials/Screenshot_20250722_184616.jpg", alt: "Client Testimonial" })}
-                    />
-                  </div>
-                </CarouselItem>
-                <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <img 
-                      src="/Testimonials/Screenshot_20250722_184638.jpg" 
-                      alt="Client Testimonial"
-                      className="w-full h-auto object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-                      onClick={() => setSelectedImage({ src: "/Testimonials/Screenshot_20250722_184638.jpg", alt: "Client Testimonial" })}
-                    />
-                  </div>
-                </CarouselItem>
-                <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <img 
-                      src="/Testimonials/WhatsApp Image 2025-07-17 at 17.05.39_24b1bd62.jpg" 
-                      alt="Client Testimonial"
-                      className="w-full h-auto object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-                      onClick={() => setSelectedImage({ src: "/Testimonials/WhatsApp Image 2025-07-17 at 17.05.39_24b1bd62.jpg", alt: "Client Testimonial" })}
-                    />
-                  </div>
-                </CarouselItem>
-                <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <img 
-                      src="/Testimonials/WhatsApp Image 2025-07-17 at 17.05.44_065ee4be.jpg" 
-                      alt="Client Testimonial"
-                      className="w-full h-auto object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-                      onClick={() => setSelectedImage({ src: "/Testimonials/WhatsApp Image 2025-07-17 at 17.05.44_065ee4be.jpg", alt: "Client Testimonial" })}
-                    />
-                  </div>
-                </CarouselItem>
-                <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <img 
-                      src="/Testimonials/WhatsApp Image 2025-07-17 at 17.05.44_ba738e5e.jpg" 
-                      alt="Client Testimonial"
-                      className="w-full h-auto object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-                      onClick={() => setSelectedImage({ src: "/Testimonials/WhatsApp Image 2025-07-17 at 17.05.44_ba738e5e.jpg", alt: "Client Testimonial" })}
-                    />
-                  </div>
-                </CarouselItem>
-                <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <img 
-                      src="/Testimonials/WhatsApp Image 2025-07-17 at 17.05.45_449b0557.jpg" 
-                      alt="Client Testimonial"
-                      className="w-full h-auto object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-                      onClick={() => setSelectedImage({ src: "/Testimonials/WhatsApp Image 2025-07-17 at 17.05.45_449b0557.jpg", alt: "Client Testimonial" })}
-                    />
-                  </div>
-                </CarouselItem>
-                <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <img 
-                      src="/Testimonials/WhatsApp Image 2025-07-17 at 17.05.45_a41cbb04.jpg" 
-                      alt="Client Testimonial"
-                      className="w-full h-auto object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-                      onClick={() => setSelectedImage({ src: "/Testimonials/WhatsApp Image 2025-07-17 at 17.05.45_a41cbb04.jpg", alt: "Client Testimonial" })}
-                    />
-                  </div>
-                </CarouselItem>
-                <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <img 
-                      src="/Testimonials/WhatsApp Image 2025-07-17 at 17.05.46_ca80f888.jpg" 
-                      alt="Client Testimonial"
-                      className="w-full h-auto object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-                      onClick={() => setSelectedImage({ src: "/Testimonials/WhatsApp Image 2025-07-17 at 17.05.46_ca80f888.jpg", alt: "Client Testimonial" })}
-                    />
-                  </div>
-                </CarouselItem>
-                <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <img 
-                      src="/Testimonials/WhatsApp Image 2025-07-17 at 17.05.51_71017b0d.jpg" 
-                      alt="Client Testimonial"
-                      className="w-full h-auto object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-                      onClick={() => setSelectedImage({ src: "/Testimonials/WhatsApp Image 2025-07-17 at 17.05.51_71017b0d.jpg", alt: "Client Testimonial" })}
-                    />
-                  </div>
-                </CarouselItem>
-                <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <img 
-                      src="/Testimonials/WhatsApp Image 2025-07-17 at 17.05.51_a0357313.jpg" 
-                      alt="Client Testimonial"
-                      className="w-full h-auto object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-                      onClick={() => setSelectedImage({ src: "/Testimonials/WhatsApp Image 2025-07-17 at 17.05.51_a0357313.jpg", alt: "Client Testimonial" })}
-                    />
-                  </div>
-                </CarouselItem>
-                <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <img 
-                      src="/Testimonials/WhatsApp Image 2025-07-17 at 17.05.52_8a4f9e34.jpg" 
-                      alt="Client Testimonial"
-                      className="w-full h-auto object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-                      onClick={() => setSelectedImage({ src: "/Testimonials/WhatsApp Image 2025-07-17 at 17.05.52_8a4f9e34.jpg", alt: "Client Testimonial" })}
-                    />
-                  </div>
-                </CarouselItem>
-                <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <img 
-                      src="/Testimonials/WhatsApp Image 2025-07-17 at 17.05.52_f9806664.jpg" 
-                      alt="Client Testimonial"
-                      className="w-full h-auto object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-                      onClick={() => setSelectedImage({ src: "/Testimonials/WhatsApp Image 2025-07-17 at 17.05.52_f9806664.jpg", alt: "Client Testimonial" })}
-                    />
-                  </div>
-                </CarouselItem>
-                <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <img 
-                      src="/Testimonials/WhatsApp Image 2025-07-17 at 17.06.02_dadf000a.jpg" 
-                      alt="Client Testimonial"
-                      className="w-full h-auto object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-                      onClick={() => setSelectedImage({ src: "/Testimonials/WhatsApp Image 2025-07-17 at 17.06.02_dadf000a.jpg", alt: "Client Testimonial" })}
-                    />
-                  </div>
-                </CarouselItem>
-                <CarouselItem className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <img 
-                      src="/Testimonials/WhatsApp Image 2025-07-17 at 17.06.03_1d8843b7.jpg" 
-                      alt="Client Testimonial"
-                      className="w-full h-auto object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-                      onClick={() => setSelectedImage({ src: "/Testimonials/WhatsApp Image 2025-07-17 at 17.06.03_1d8843b7.jpg", alt: "Client Testimonial" })}
-                    />
-                  </div>
-                </CarouselItem>
+                {([
+                  images.testimonial_1,
+                  images.testimonial_2,
+                  images.testimonial_3,
+                  images.testimonial_4,
+                  images.testimonial_5,
+                  images.testimonial_6,
+                  images.testimonial_7,
+                  images.testimonial_8,
+                  images.testimonial_9,
+                  images.testimonial_10,
+                  images.testimonial_11,
+                  images.testimonial_12,
+                  images.testimonial_13,
+                  images.testimonial_14,
+                ] as string[]).map((src, i) => (
+                  <CarouselItem key={i} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                    <div className="p-1">
+                      <img
+                        src={src}
+                        alt={`Client Testimonial ${i + 1}`}
+                        className="w-full h-auto object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
+                        onClick={() => setSelectedImage({ src, alt: `Client Testimonial ${i + 1}` })}
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
               </CarouselContent>
               <div className="mt-8 flex justify-center gap-2">
                 <CarouselPrevious className="static translate-y-0" />
