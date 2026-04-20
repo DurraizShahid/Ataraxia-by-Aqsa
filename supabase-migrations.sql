@@ -185,4 +185,27 @@ COMMENT ON TABLE journals IS 'Stores healing journals';
 COMMENT ON TABLE orders IS 'Stores customer orders';
 COMMENT ON TABLE site_content IS 'Stores site-wide content settings';
 COMMENT ON TABLE admin_users IS 'Stores admin user credentials';
+COMMENT ON TABLE brand_config IS 'Stores white-label branding configuration (colours, logos, theme)';
+
+-- ── 8. Brand Config Table (white-label) ──────────────────────────────────────
+CREATE TABLE IF NOT EXISTS brand_config (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    config JSONB NOT NULL DEFAULT '{}',
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Updated-at trigger for brand_config
+CREATE TRIGGER update_brand_config_updated_at
+    BEFORE UPDATE ON brand_config
+    FOR EACH ROW
+    EXECUTE FUNCTION update_updated_at_column();
+
+-- RLS for brand_config
+ALTER TABLE brand_config ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Anyone can read brand config"   ON brand_config FOR SELECT USING (true);
+CREATE POLICY "Anyone can insert brand config"  ON brand_config FOR INSERT WITH CHECK (true);
+CREATE POLICY "Anyone can update brand config"  ON brand_config FOR UPDATE USING (true);
+CREATE POLICY "Anyone can delete brand config"  ON brand_config FOR DELETE USING (true);
+
 

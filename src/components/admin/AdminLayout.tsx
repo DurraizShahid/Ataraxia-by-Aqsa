@@ -1,11 +1,13 @@
 import { Link, useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
+import { useBrandConfig } from '@/context/BrandConfigContext';
 import { Button } from '@/components/ui/button';
-import { LogOut, LayoutDashboard, BookOpen, GraduationCap, Book, ShoppingBag, Settings, FileText, Images } from 'lucide-react';
+import { LogOut, LayoutDashboard, BookOpen, GraduationCap, Book, ShoppingBag, Settings, FileText, Images, Palette } from 'lucide-react';
 import { useEffect } from 'react';
 
 const AdminLayout = () => {
   const { isAuthenticated, logout, username } = useAuth();
+  const { brandConfig } = useBrandConfig();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -32,6 +34,7 @@ const AdminLayout = () => {
     { path: '/admin/orders', label: 'Orders', icon: ShoppingBag },
     { path: '/admin/site-content', label: 'Site Content', icon: FileText },
     { path: '/admin/images', label: 'Images', icon: Images },
+    { path: '/admin/branding', label: 'Branding & Theme', icon: Palette },
     { path: '/admin/settings', label: 'Settings', icon: Settings },
   ];
 
@@ -42,7 +45,7 @@ const AdminLayout = () => {
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="p-6 border-b">
-            <h1 className="text-2xl font-bold text-primary">Ataraxia Admin</h1>
+            <h1 className="text-2xl font-bold text-primary">{brandConfig.siteName} Admin</h1>
             <p className="text-sm text-muted-foreground mt-1">Welcome, {username}</p>
           </div>
 

@@ -6,6 +6,7 @@ import { Menu, X, Search, ArrowUpRight, ShoppingCart } from "lucide-react"; // A
 import { cn } from "@/lib/utils";
 import { useCart } from "@/context/CartContext"; // Import useCart hook
 import { useSiteImages } from "@/context/SiteImagesContext";
+import { useBrandConfig } from "@/context/BrandConfigContext";
 
 const leftNavLinks = [
   { to: "/", label: "Home" },
@@ -26,6 +27,9 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { cartItemCount } = useCart(); // Get cart item count
   const { images } = useSiteImages();
+  const { brandConfig } = useBrandConfig();
+  // Use branding logo override if set, otherwise fall back to Image Manager logo
+  const logoSrc = brandConfig.logoUrl || images.logo;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,7 +79,7 @@ const Header = () => {
           {/* Mobile: Left Side - Logo */}
           <div className="lg:hidden">
             <Link to="/" className="flex items-center gap-2 text-primary">
-              <img src={images.logo} alt="Ataraxia by Aqsa Logo" className="h-10 w-10" />
+              <img src={logoSrc} alt="Logo" className="h-10 w-10" />
             </Link>
           </div>
 
@@ -94,7 +98,7 @@ const Header = () => {
               ))}
             </nav>
             <Link to="/" className="flex items-center gap-2 shrink-0 text-primary">
-              <img src={images.logo} alt="Ataraxia by Aqsa Logo" className="h-12 w-12" />
+              <img src={logoSrc} alt="Logo" className="h-12 w-12" />
             </Link>
             <nav className="flex items-center space-x-8">
               {rightNavLinks.map(({ to, label }) => (

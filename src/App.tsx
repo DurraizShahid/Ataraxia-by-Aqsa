@@ -33,13 +33,16 @@ import AdminOrders from "./pages/admin/Orders";
 import AdminSiteContent from "./pages/admin/SiteContent";
 import AdminSettings from "./pages/admin/Settings";
 import AdminImageManager from "./pages/admin/ImageManager";
+import AdminBranding from "./pages/admin/Branding";
 import { SiteImagesProvider } from "./context/SiteImagesContext";
+import { BrandConfigProvider } from "./context/BrandConfigContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
+      <BrandConfigProvider>
       <SiteImagesProvider>
       <TooltipProvider>
         <Toaster />
@@ -75,6 +78,7 @@ const App = () => (
               <Route path="orders" element={<AdminOrders />} />
               <Route path="site-content" element={<AdminSiteContent />} />
               <Route path="images" element={<AdminImageManager />} />
+              <Route path="branding" element={<AdminBranding />} />
               <Route path="settings" element={<AdminSettings />} />
             </Route>
 
@@ -84,6 +88,7 @@ const App = () => (
         </BrowserRouter>
       </TooltipProvider>
       </SiteImagesProvider>
+      </BrandConfigProvider>
     </AuthProvider>
   </QueryClientProvider>
 );
