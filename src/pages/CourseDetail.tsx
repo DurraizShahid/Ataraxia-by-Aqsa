@@ -95,7 +95,7 @@ const CourseDetail = () => {
 
             <div className="flex gap-2 flex-wrap mb-6">
               {course.onSale && (
-                <span className="px-3 py-1 bg-red-100 text-red-800 text-sm rounded-full">
+                <span className="px-3 py-1 bg-accent/20 text-accent text-sm rounded-full">
                   On Sale
                 </span>
               )}
@@ -123,7 +123,7 @@ const CourseDetail = () => {
                 )}
               </div>
               {course.onSale && course.salePrice && (
-                <p className="text-sm text-green-600">
+                <p className="text-sm text-accent">
                   Save ${(course.regularPrice - course.salePrice).toFixed(2)}
                 </p>
               )}

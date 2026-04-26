@@ -125,7 +125,7 @@ const Header = () => {
                 <Link to="/cart" className="relative">
                   <ShoppingCart className="h-5 w-5" />
                   {cartItemCount > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-brand-pink text-primary-foreground rounded-full h-4 w-4 flex items-center justify-center text-xs">
+                    <span className="absolute -top-1 -right-1 bg-accent text-accent-foreground rounded-full h-4 w-4 flex items-center justify-center text-xs">
                       {cartItemCount}
                     </span>
                   )}
@@ -141,7 +141,7 @@ const Header = () => {
               <Link to="/cart" className="relative">
                 <ShoppingCart className="h-6 w-6" />
                 {cartItemCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-brand-pink text-primary-foreground rounded-full h-4 w-4 flex items-center justify-center text-xs">
+                  <span className="absolute -top-1 -right-1 bg-accent text-accent-foreground rounded-full h-4 w-4 flex items-center justify-center text-xs">
                     {cartItemCount}
                   </span>
                 )}

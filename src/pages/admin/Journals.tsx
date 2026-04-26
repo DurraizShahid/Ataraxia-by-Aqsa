@@ -229,12 +229,12 @@ const AdminJournals = () => {
                     </div>
                     <div className="flex gap-2 flex-wrap">
                       {journal.isBundle && (
-                        <span className="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">
+                        <span className="px-2 py-1 bg-accent/20 text-accent text-xs rounded-full">
                           Bundle
                         </span>
                       )}
                       {journal.onSale && (
-                        <span className="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">
+                        <span className="px-2 py-1 bg-accent/20 text-accent text-xs rounded-full">
                           On Sale
                         </span>
                       )}

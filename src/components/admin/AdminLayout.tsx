@@ -39,9 +39,9 @@ const AdminLayout = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-secondary">
       {/* Sidebar */}
-      <div className="fixed inset-y-0 left-0 w-64 bg-white shadow-lg z-50">
+      <div className="fixed inset-y-0 left-0 w-64 bg-background shadow-lg z-50">
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="p-6 border-b">
@@ -60,8 +60,8 @@ const AdminLayout = () => {
                   to={item.path}
                   className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                     isActive
-                      ? 'bg-primary text-white'
-                      : 'text-gray-700 hover:bg-gray-100'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-muted-foreground hover:bg-muted'
                   }`}
                 >
                   <Icon className="h-5 w-5" />

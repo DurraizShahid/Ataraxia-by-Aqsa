@@ -31,7 +31,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="bg-[#F8F5F3]">
+    <div className="bg-background">
       <HeroSection siteContent={siteContent} />
       <TransformationIntroSection />
       <QuoteSection />
@@ -72,7 +72,7 @@ const HeroSection = ({ siteContent }: { siteContent: SiteContent | null }) => {
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-primary" asChild>
-              <Link to="/services">Explore Our Healing Services</Link>
+              <Link to="/services">Explore Courses</Link>
             </Button>
           </div>
         </div>

@@ -89,12 +89,12 @@ const ProductDetail = () => {
 
             <div className="flex gap-2 flex-wrap mb-6">
               {product.isBundle && (
-                <span className="px-3 py-1 bg-purple-100 text-purple-800 text-sm rounded-full">
+                <span className="px-3 py-1 bg-accent/20 text-accent text-sm rounded-full">
                   Bundle
                 </span>
               )}
               {product.onSale && (
-                <span className="px-3 py-1 bg-red-100 text-red-800 text-sm rounded-full">
+                <span className="px-3 py-1 bg-accent/20 text-accent text-sm rounded-full">
                   On Sale
                 </span>
               )}
@@ -122,7 +122,7 @@ const ProductDetail = () => {
                 )}
               </div>
               {product.onSale && product.salePrice && (
-                <p className="text-sm text-green-600">
+                <p className="text-sm text-accent">
                   Save ${(product.regularPrice - product.salePrice).toFixed(2)}
                 </p>
               )}

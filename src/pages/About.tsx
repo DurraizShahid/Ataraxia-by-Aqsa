@@ -46,7 +46,7 @@ const About = () => {
   }
   
   return (
-    <div className="bg-[#F8F5F3]">
+    <div className="bg-background">
       {/* Welcome to Ataraxia Section */}
       <section className="py-20 md:py-32 text-center">
         <div className="container mx-auto px-4 max-w-3xl">
@@ -123,8 +123,8 @@ const About = () => {
       <section className="py-20 md:py-32">
         <div className="container mx-auto px-4 max-w-3xl">
           <h2 className="text-4xl md:text-5xl font-serif text-primary text-center mb-12">Aqsa's Story</h2>
-          <div className="relative pl-8 md:pl-16 border-l-2 border-brand-pink space-y-12">
-            <div className="absolute left-0 top-0 w-4 h-4 bg-brand-pink rounded-full -translate-x-1/2"></div>
+          <div className="relative pl-8 md:pl-16 border-l-2 border-accent space-y-12">
+            <div className="absolute left-0 top-0 w-4 h-4 bg-accent rounded-full -translate-x-1/2"></div>
             <div className="relative">
               <h3 className="text-2xl font-serif text-primary mb-2">From Stuck...</h3>
               <p className="text-muted-foreground">
@@ -134,21 +134,21 @@ const About = () => {
                 I used to believe that success meant pushing through. I tried journaling, therapy, meditation — all of it helped a little, but the deeper pain kept resurfacing. Something within me whispered, “This isn’t healing. This is coping.”
               </p>
             </div>
-            <div className="absolute left-0 w-4 h-4 bg-brand-pink rounded-full -translate-x-1/2"></div>
+            <div className="absolute left-0 w-4 h-4 bg-accent rounded-full -translate-x-1/2"></div>
             <div className="relative">
               <h3 className="text-2xl font-serif text-primary mb-2">...to Healing...</h3>
               <p className="text-muted-foreground">
                 What I found was a path that went deeper than mindset. A path that transformed my subconscious. When I discovered Neuro-Linguistic Programming (NLP), Time Line Therapy™, and Hypnotherapy, everything changed. I didn’t just heal — I was rewired. The fog began to lift. Emotions I had buried started to release. And for the first time in years, I felt free.
               </p>
             </div>
-            <div className="absolute left-0 w-4 h-4 bg-brand-pink rounded-full -translate-x-1/2"></div>
+            <div className="absolute left-0 w-4 h-4 bg-accent rounded-full -translate-x-1/2"></div>
             <div className="relative">
               <h3 className="text-2xl font-serif text-primary mb-2">...to Coach...</h3>
               <p className="text-muted-foreground">
                 But it wasn’t just one method that helped — it was the combination of tools that truly transformed me. That's why I now use an integrated approach. At Ataraxia by Aqsa, I combine the most effective techniques — from subconscious work and emotional release to inner child healing and mindset restructuring — to guide others through their own breakthroughs.
               </p>
             </div>
-            <div className="absolute left-0 w-4 h-4 bg-brand-pink rounded-full -translate-x-1/2"></div>
+            <div className="absolute left-0 w-4 h-4 bg-accent rounded-full -translate-x-1/2"></div>
             <div className="relative">
               <h3 className="text-2xl font-serif text-primary mb-2">...to Ataraxia by Aqsa</h3>
               <p className="text-muted-foreground">
@@ -160,7 +160,7 @@ const About = () => {
               <p className="text-muted-foreground mt-4">
                 You don’t have to keep surviving. You were made to thrive — emotionally, mentally, spiritually.
               </p>
-              <Button asChild className="mt-8 bg-brand-pink hover:bg-brand-pink-darker text-primary-foreground">
+              <Button asChild className="mt-8 bg-accent hover:bg-accent/90 text-accent-foreground">
                 <Link to="/book-call">Book Your Free Discovery Call Now</Link>
               </Button>
             </div>

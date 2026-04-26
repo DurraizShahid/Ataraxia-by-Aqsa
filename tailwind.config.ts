@@ -74,9 +74,10 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        "brand-pink": {
-          DEFAULT: "#E6DCD5",
-          darker: "#d9c9c0",
+        "brand-gold": {
+          DEFAULT: "#C9A84C",
+          lighter: "#D4BA6E",
+          darker: "#A8893D",
         },
       },
       borderRadius: {

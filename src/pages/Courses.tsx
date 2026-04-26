@@ -84,7 +84,7 @@ const Courses = () => {
 
                 <div className="flex gap-2 flex-wrap mb-4">
                   {course.onSale && (
-                    <span className="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">
+                    <span className="px-2 py-1 bg-accent/20 text-accent text-xs rounded-full">
                       On Sale
                     </span>
                   )}

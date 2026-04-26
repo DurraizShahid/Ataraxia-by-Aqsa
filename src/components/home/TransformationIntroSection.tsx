@@ -15,7 +15,7 @@ const TransformationIntroSection = () => {
               <div className="text-4xl md:text-5xl font-serif text-primary font-bold">Stuck</div>
             </CardContent>
           </Card>
-          <ArrowRight className="h-16 w-16 text-brand-pink animate-pulse shrink-0" />
+          <ArrowRight className="h-16 w-16 text-accent animate-pulse shrink-0" />
           <Card className="p-8 md:p-10 shadow-lg border border-border bg-white/80 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
             <CardContent className="p-0">
               <div className="text-4xl md:text-5xl font-serif text-primary font-bold">Empowered</div>
@@ -42,7 +42,7 @@ const TransformationIntroSection = () => {
             <Link to="/book-call">Book a Free 1:1 Discovery Call <ArrowRight className="ml-2 h-4 w-4" /></Link>
           </Button>
           <Button size="lg" variant="outline" className="bg-transparent border-primary text-primary hover:bg-primary hover:text-primary-foreground" asChild>
-            <Link to="/services">Explore Our Healing Services <ArrowRight className="ml-2 h-4 w-4" /></Link>
+            <Link to="/services">Explore Courses <ArrowRight className="ml-2 h-4 w-4" /></Link>
           </Button>
           <Button size="lg" variant="secondary" asChild>
             <Link to="/journals">Get Started with a Journal <ArrowRight className="ml-2 h-4 w-4" /></Link>

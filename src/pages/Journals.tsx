@@ -98,9 +98,9 @@ const Journals = () => {
           <h2 className="text-3xl md:text-4xl font-serif text-primary text-center mb-12">{content.journals.bundleTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
             {productBundles.map((product) => (
-              <Card key={product.id} className="flex flex-col p-6 text-center bg-brand-pink/20 border-brand-pink">
+              <Card key={product.id} className="flex flex-col p-6 text-center bg-accent/20 border-accent">
                 <CardHeader className="flex flex-col items-center p-0 mb-4">
-                  <div className="p-3 rounded-full bg-brand-pink text-primary mb-4">
+                  <div className="p-3 rounded-full bg-accent text-accent-foreground mb-4">
                     {getProductIcon(product.name)}
                   </div>
                   <CardTitle className="text-2xl font-serif mb-2">{product.name}</CardTitle>
@@ -126,7 +126,7 @@ const Journals = () => {
                   <p className="text-muted-foreground text-sm mb-6">
                     {product.shortDescription}
                   </p>
-                  <Button asChild className="w-full bg-brand-pink hover:bg-brand-pink-darker text-primary-foreground">
+                  <Button asChild className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
                     <Link to={`/journals/${product.slug}`}>{content.common.viewDetails} <ArrowRight className="ml-2 h-4 w-4" /></Link>
                   </Button>
                 </CardContent>

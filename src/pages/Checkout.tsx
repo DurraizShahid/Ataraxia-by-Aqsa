@@ -83,8 +83,8 @@ const Checkout = () => {
         <Card className="max-w-2xl mx-auto text-center">
           <CardHeader>
             <div className="flex justify-center mb-4">
-              <div className="p-4 rounded-full bg-green-100">
-                <CheckCircle2 className="h-12 w-12 text-green-600" />
+              <div className="p-4 rounded-full bg-accent/20">
+                <CheckCircle2 className="h-12 w-12 text-accent" />
               </div>
             </div>
             <CardTitle className="text-3xl">Order Successful!</CardTitle>
@@ -93,7 +93,7 @@ const Checkout = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Alert className="bg-green-50 border-green-200">
+            <Alert className="bg-accent/10 border-accent/30">
               <AlertDescription>
                 Your order has been confirmed. You will receive a confirmation email at <strong>{formData.email}</strong> shortly.
               </AlertDescription>

@@ -138,7 +138,7 @@ const ReplaceDialog = ({
               />
             </div>
             {preview && (
-              <div className="w-full h-40 bg-gray-100 rounded-lg overflow-hidden border">
+              <div className="w-full h-40 bg-muted rounded-lg overflow-hidden border">
                 <img
                   key={preview}
                   src={preview}
@@ -162,7 +162,7 @@ const ReplaceDialog = ({
               onChange={handleFileChange}
             />
             <div
-              className="w-full h-40 border-2 border-dashed rounded-lg flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-gray-50 transition-colors"
+              className="w-full h-40 border-2 border-dashed rounded-lg flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-muted/50 transition-colors"
               onClick={() => fileInputRef.current?.click()}
             >
               {isUploading ? (
@@ -328,7 +328,7 @@ const ImageManager = () => {
 
                   <CardContent className="space-y-3">
                     {/* Thumbnail */}
-                    <div className="relative w-full h-36 bg-gray-100 rounded-md overflow-hidden border">
+                    <div className="relative w-full h-36 bg-muted rounded-md overflow-hidden border">
                       {isSavingThis && (
                         <div className="absolute inset-0 bg-black/50 z-10 flex items-center justify-center">
                           <RefreshCw className="h-5 w-5 text-white animate-spin" />

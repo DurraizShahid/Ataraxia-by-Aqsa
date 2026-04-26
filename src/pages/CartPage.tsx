@@ -37,8 +37,8 @@ const CartPage = () => {
           <div className="lg:col-span-2 space-y-6">
             {cartItems.map((item) => (
               <Card key={item.id} className="flex items-center p-4 shadow-sm">
-                <div className="w-24 h-24 bg-gray-200 rounded-md mr-4 flex items-center justify-center">
-                  <ShoppingCart className="h-8 w-8 text-gray-400" />
+                <div className="w-24 h-24 bg-muted rounded-md mr-4 flex items-center justify-center">
+                  <ShoppingCart className="h-8 w-8 text-muted-foreground" />
                 </div>
                 <div className="flex-grow">
                   <h2 className="text-lg font-semibold">{item.name}</h2>

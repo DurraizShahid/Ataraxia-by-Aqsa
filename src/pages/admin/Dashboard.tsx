@@ -33,29 +33,29 @@ const AdminDashboard = () => {
       title: 'Total Blogs',
       value: blogs.length,
       icon: BookOpen,
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-100',
+      color: 'text-primary',
+      bgColor: 'bg-primary/10',
     },
     {
       title: 'Total Courses',
       value: courses.length,
       icon: GraduationCap,
-      color: 'text-green-600',
-      bgColor: 'bg-green-100',
+      color: 'text-accent',
+      bgColor: 'bg-accent/20',
     },
     {
       title: 'Total Journals',
       value: journals.length,
       icon: Book,
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-100',
+      color: 'text-primary',
+      bgColor: 'bg-primary/10',
     },
     {
       title: 'Total Orders',
       value: orders.length,
       icon: ShoppingBag,
-      color: 'text-orange-600',
-      bgColor: 'bg-orange-100',
+      color: 'text-accent',
+      bgColor: 'bg-accent/20',
     },
   ];
 
@@ -114,8 +114,8 @@ const AdminDashboard = () => {
               From completed orders
             </p>
           </div>
-          <div className="p-3 rounded-lg bg-green-100">
-            <TrendingUp className="h-6 w-6 text-green-600" />
+          <div className="p-3 rounded-lg bg-accent/20">
+            <TrendingUp className="h-6 w-6 text-accent" />
           </div>
         </CardHeader>
         <CardContent>
@@ -155,10 +155,10 @@ const AdminDashboard = () => {
                     <span
                       className={`inline-block px-2 py-1 text-xs rounded-full mt-1 ${
                         order.status === 'completed'
-                          ? 'bg-green-100 text-green-800'
+                          ? 'bg-accent/20 text-accent'
                           : order.status === 'pending'
                           ? 'bg-yellow-100 text-yellow-800'
-                          : 'bg-red-100 text-red-800'
+                          : 'bg-destructive/20 text-destructive'
                       }`}
                     >
                       {order.status}
