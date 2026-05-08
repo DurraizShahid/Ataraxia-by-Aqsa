@@ -1,0 +1,56 @@
+<svg width="100%" viewBox="0 0 690 390" role="img" style="" xmlns="http://www.w3.org/2000/svg">
+<title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">The Journey — from Awareness through Breakthrough to Expansion</title>
+<desc style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">A winding path showing the four stages of transformation: Awareness, Breakthrough, Alignment, and Expansion, represented as a mountain ascent.</desc>
+<defs>
+  
+<mask id="imagine-text-gaps-giktt4" maskUnits="userSpaceOnUse"><rect x="0" y="0" width="690" height="390" fill="white"/><rect x="45" y="271" width="91.828125" height="21" fill="black" rx="2"/><rect x="45" y="288" width="76.282470703125" height="16" fill="black" rx="2"/><rect x="45" y="192" width="125.001953125" height="21" fill="black" rx="2"/><rect x="45" y="209" width="91.4833984375" height="16" fill="black" rx="2"/><rect x="481" y="157" width="93.84375" height="21" fill="black" rx="2"/><rect x="481" y="174" width="68.597412109375" height="16" fill="black" rx="2"/><rect x="502" y="87" width="87.84375" height="21" fill="black" rx="2"/><rect x="502" y="104" width="70.483642578125" height="16" fill="black" rx="2"/><rect x="230.5625" y="354" width="217.875" height="19" fill="black" rx="2"/></mask></defs>
+
+<rect width="680" height="380" fill="#0A0A0A" style="fill:rgb(10, 10, 10);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+<!-- Terrain / mountain silhouette -->
+<polygon points="60,310 160,290 230,250 300,200 360,150 420,115 470,140 520,200 570,250 620,290 640,310 640,340 60,340" style="fill:rgb(17, 17, 17);stroke:rgb(30, 30, 30);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+<!-- Subtle mountain ridgelines -->
+<polyline points="80,320 200,280 310,230 380,175 430,118 480,145 540,210 600,270 640,300" fill="none" stroke="#1E1E1E" stroke-width="1" mask="url(#imagine-text-gaps-giktt4)" style="fill:none;stroke:rgb(30, 30, 30);color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+<!-- Glow behind path -->
+<path d="M 80,315 C 130,300 170,280 230,248 C 280,220 330,188 380,168 C 410,155 428,120 428,120" mask="url(#imagine-text-gaps-giktt4)" style="fill:none;stroke:rgb(212, 175, 55);color:rgb(255, 255, 255);stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.07;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+<!-- Main journey path (winding upward) -->
+<path d="M 80,315 C 130,300 170,280 230,248 C 280,220 330,188 380,168 C 410,155 428,120 428,120" mask="url(#imagine-text-gaps-giktt4)" style="fill:none;stroke:rgb(212, 175, 55);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+<!-- Milestone dots -->
+<circle cx="80" cy="315" r="5" style="fill:rgb(10, 10, 10);stroke:rgb(212, 175, 55);color:rgb(255, 255, 255);stroke-width:1.2px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<circle cx="230" cy="248" r="5" style="fill:rgb(10, 10, 10);stroke:rgb(212, 175, 55);color:rgb(255, 255, 255);stroke-width:1.2px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<circle cx="330" cy="188" r="5" style="fill:rgb(10, 10, 10);stroke:rgb(212, 175, 55);color:rgb(255, 255, 255);stroke-width:1.2px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<circle cx="428" cy="120" r="5.5" style="fill:rgb(212, 175, 55);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+<!-- Flag at peak -->
+<line x1="428" y1="120" x2="428" y2="82" style="fill:rgb(0, 0, 0);stroke:rgb(212, 175, 55);color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<polygon points="428,82 456,90 428,98" style="fill:rgb(212, 175, 55);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.8;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+<!-- Labels for each stage — staggered left/right -->
+<!-- AWARENESS — bottom left -->
+<line x1="80" y1="315" x2="52" y2="298" stroke="#D4AF37" stroke-width="0.5" opacity="0.5" mask="url(#imagine-text-gaps-giktt4)" style="fill:rgb(0, 0, 0);stroke:rgb(212, 175, 55);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.5;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="50" y="286" style="fill:rgb(212, 175, 55);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Palatino Linotype&quot;, Palatino, serif;font-size:12px;font-weight:500;text-anchor:start;dominant-baseline:auto">AWARENESS</text>
+<text x="50" y="300" style="fill:rgb(85, 85, 85);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Georgia, serif;font-size:10.5px;font-weight:400;text-anchor:start;dominant-baseline:auto">The beginning</text>
+
+<!-- BREAKTHROUGH — mid climb -->
+<line x1="230" y1="248" x2="180" y2="218" stroke="#D4AF37" stroke-width="0.5" opacity="0.5" style="fill:rgb(0, 0, 0);stroke:rgb(212, 175, 55);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.5;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="50" y="207" style="fill:rgb(212, 175, 55);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Palatino Linotype&quot;, Palatino, serif;font-size:12px;font-weight:500;text-anchor:start;dominant-baseline:auto">BREAKTHROUGH</text>
+<text x="50" y="221" style="fill:rgb(85, 85, 85);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Georgia, serif;font-size:10.5px;font-weight:400;text-anchor:start;dominant-baseline:auto">The turning point</text>
+
+<!-- ALIGNMENT — upper mid -->
+<line x1="330" y1="188" x2="480" y2="178" stroke="#D4AF37" stroke-width="0.5" opacity="0.5" style="fill:rgb(0, 0, 0);stroke:rgb(212, 175, 55);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.5;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="486" y="172" style="fill:rgb(212, 175, 55);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Palatino Linotype&quot;, Palatino, serif;font-size:12px;font-weight:500;text-anchor:start;dominant-baseline:auto">ALIGNMENT</text>
+<text x="486" y="186" style="fill:rgb(85, 85, 85);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Georgia, serif;font-size:10.5px;font-weight:400;text-anchor:start;dominant-baseline:auto">The new you</text>
+
+<!-- EXPANSION — peak -->
+<line x1="428" y1="120" x2="500" y2="108" stroke="#D4AF37" stroke-width="0.5" opacity="0.5" style="fill:rgb(0, 0, 0);stroke:rgb(212, 175, 55);color:rgb(255, 255, 255);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.5;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="506" y="102" style="fill:rgb(212, 175, 55);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Palatino Linotype&quot;, Palatino, serif;font-size:12px;font-weight:500;text-anchor:start;dominant-baseline:auto">EXPANSION</text>
+<text x="506" y="116" style="fill:rgb(85, 85, 85);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Georgia, serif;font-size:10.5px;font-weight:400;text-anchor:start;dominant-baseline:auto">Living it fully</text>
+
+<!-- Subtitle -->
+<text x="340" y="368" style="fill:rgb(68, 68, 68);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Palatino Linotype&quot;, Palatino, serif;font-size:11px;font-weight:400;text-anchor:middle;dominant-baseline:auto">ATARAXIA · THE JOURNEY</text>
+
+</svg>

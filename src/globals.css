@@ -7,7 +7,59 @@
     @apply font-serif;
   }
   
+  /*
+    Dark-first tokens live in :root.
+    Optional light theme via html[data-theme="light"] (and .light helper).
+    Keep `.dark` selector for Tailwind `dark:` variants + legacy.
+  */
   :root {
+    /* Canvas */
+    --background: 0 0% 3%;
+    --foreground: 0 0% 95%;
+
+    /* Surfaces */
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 95%;
+
+    /* Primary (neutral emphasis, not gold) */
+    --primary: 0 0% 95%;
+    --primary-foreground: 0 0% 4%;
+
+    /* Secondary + muted (soft elevation / hovers) */
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 92%;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 65%;
+
+    /* Premium accent (gold) */
+    --accent: 43 60% 52%;
+    --accent-foreground: 0 0% 4%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 43 60% 52%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 6%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 0 0% 95%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 92%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 43 60% 52%;
+  }
+
+  :root[data-theme="light"],
+  .light {
     --background: 0 0% 100%;
     --foreground: 0 0% 9%;
 
@@ -36,43 +88,35 @@
     --input: 0 0% 89%;
     --ring: 43 60% 52%;
 
-    --radius: 0.5rem;
-
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
+  /* Alias `.dark` to the same token set as :root (dark-first). */
   .dark {
-    --background: 0 0% 4%;
+    --background: 0 0% 3%;
     --foreground: 0 0% 95%;
 
-    --card: 0 0% 4%;
+    --card: 0 0% 7%;
     --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 4%;
+    --popover: 0 0% 7%;
     --popover-foreground: 0 0% 95%;
 
     --primary: 0 0% 95%;
     --primary-foreground: 0 0% 4%;
 
     --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary-foreground: 0 0% 92%;
 
     --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
+    --muted-foreground: 0 0% 65%;
 
     --accent: 43 60% 52%;
     --accent-foreground: 0 0% 4%;
@@ -83,14 +127,15 @@
     --border: 0 0% 18%;
     --input: 0 0% 18%;
     --ring: 43 60% 52%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --sidebar-background: 0 0% 6%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 0 0% 95%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 92%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 43 60% 52%;
   }
 }
 

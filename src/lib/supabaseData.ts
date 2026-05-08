@@ -72,6 +72,19 @@ export interface Order {
   customerName: string;
 }
 
+export interface WorkshopWaitlistLead {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  professionalBackground: string;
+  workshopPreferences: string[];
+  intent: Record<string, unknown>;
+  sourcePath?: string;
+  utm: Record<string, unknown>;
+  createdAt: string;
+}
+
 // Blog functions
 export const getBlogs = async (): Promise<BlogPost[]> => {
   try {
@@ -397,6 +410,86 @@ export const deleteCourse = async (id: string): Promise<boolean> => {
     return true;
   } catch (error) {
     console.error('Error deleting course:', error);
+    return false;
+  }
+};
+
+// Workshop waitlist functions
+export const createWorkshopWaitlistLead = async (lead: Omit<WorkshopWaitlistLead, 'id' | 'createdAt'>): Promise<WorkshopWaitlistLead | null> => {
+  try {
+    const { data, error } = await supabase
+      .from('workshop_waitlist')
+      .insert({
+        name: lead.name,
+        email: lead.email,
+        phone: lead.phone || null,
+        professional_background: lead.professionalBackground,
+        workshop_preferences: lead.workshopPreferences,
+        intent: lead.intent ?? {},
+        source_path: lead.sourcePath || null,
+        utm: lead.utm ?? {},
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    return {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      phone: data.phone || undefined,
+      professionalBackground: data.professional_background,
+      workshopPreferences: data.workshop_preferences || [],
+      intent: data.intent || {},
+      sourcePath: data.source_path || undefined,
+      utm: data.utm || {},
+      createdAt: data.created_at,
+    };
+  } catch (error) {
+    console.error('Error creating workshop waitlist lead:', error);
+    return null;
+  }
+};
+
+export const getWorkshopWaitlistLeads = async (): Promise<WorkshopWaitlistLead[]> => {
+  try {
+    const { data, error } = await supabase
+      .from('workshop_waitlist')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+
+    return (data || []).map((lead: any) => ({
+      id: lead.id,
+      name: lead.name,
+      email: lead.email,
+      phone: lead.phone || undefined,
+      professionalBackground: lead.professional_background,
+      workshopPreferences: lead.workshop_preferences || [],
+      intent: lead.intent || {},
+      sourcePath: lead.source_path || undefined,
+      utm: lead.utm || {},
+      createdAt: lead.created_at,
+    }));
+  } catch (error) {
+    console.error('Error fetching workshop waitlist leads:', error);
+    return [];
+  }
+};
+
+export const deleteWorkshopWaitlistLead = async (id: string): Promise<boolean> => {
+  try {
+    const { error } = await supabase
+      .from('workshop_waitlist')
+      .delete()
+      .eq('id', id);
+
+    if (error) throw error;
+    return true;
+  } catch (error) {
+    console.error('Error deleting workshop waitlist lead:', error);
     return false;
   }
 };

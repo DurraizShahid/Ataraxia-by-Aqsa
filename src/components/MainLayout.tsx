@@ -1,10 +1,12 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import { GlobalJsonLd } from "./ataraxia";
 
 const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen bg-background">
+      <GlobalJsonLd />
       <Header />
       <main className="flex-grow">
         <Outlet />

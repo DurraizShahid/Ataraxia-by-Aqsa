@@ -1,166 +1,35 @@
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Link } from "react-router-dom";
-import { Download, MessageCircle, Heart, BookOpen, Brain, Leaf, Lightbulb, Package, ArrowRight } from "lucide-react";
-import { getJournals } from "@/lib/supabaseData";
-import { getSiteContent } from "@/lib/supabaseSiteContent";
-import type { Journal } from "@/lib/supabaseData";
-import type { SiteContent } from "@/lib/siteContent";
+import { Helmet } from "react-helmet-async";
+import { BundleTable, CTAButton, GoldDivider, JournalCard, SectionLabel } from "@/components/ataraxia";
 
 const Journals = () => {
-  const [products, setProducts] = useState<Journal[]>([]);
-  const [content, setContent] = useState<SiteContent | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      const [journalsData, contentData] = await Promise.all([
-        getJournals(),
-        getSiteContent()
-      ]);
-      setProducts(journalsData);
-      setContent(contentData);
-      setIsLoading(false);
-    };
-    fetchData();
-  }, []);
-
-  if (isLoading || !content) {
-    return (
-      <div className="container mx-auto py-16 px-4 text-center">
-        <p className="text-muted-foreground">Loading journals...</p>
-      </div>
-    );
-  }
-
-  // Filter products into individual and bundles
-  const individualProducts = products.filter(p => !p.isBundle);
-  const productBundles = products.filter(p => p.isBundle);
-
-  // Helper to get an icon based on product name
-  const getProductIcon = (productName: string) => {
-    const lowerCaseName = productName.toLowerCase();
-    if (lowerCaseName.includes("addiction") || lowerCaseName.includes("recovery")) return <Brain className="h-6 w-6" />;
-    if (lowerCaseName.includes("meditation") || lowerCaseName.includes("mindfulness")) return <Leaf className="h-6 w-6" />;
-    if (lowerCaseName.includes("inner child")) return <Heart className="h-6 w-6" />;
-    if (lowerCaseName.includes("reflective") || lowerCaseName.includes("questions")) return <Lightbulb className="h-6 w-6" />;
-    if (lowerCaseName.includes("bundle") || lowerCaseName.includes("pack")) return <Package className="h-6 w-6" />;
-    return <BookOpen className="h-6 w-6" />;
-  };
-
   return (
-    <div className="container mx-auto py-16 px-4">
-      <div className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold font-serif mb-6">{content.journals.hero.title}</h1>
-        <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-          {content.journals.hero.subtitle}
-        </p>
-        <p className="mt-4 text-muted-foreground max-w-3xl mx-auto">
-          {content.journals.hero.description}
-        </p>
+    <div className="bg-[#0A0A0A] text-[#F5F0E8] max-w-[1280px] mx-auto px-6 md:px-16 lg:px-24 py-16">
+      <Helmet>
+        <title>Therapeutic Healing Journals for Emotional Recovery | Shop Ataraxia</title>
+        <meta name="description" content="inner child healing journal, addiction recovery journal, therapeutic journaling workbook." />
+      </Helmet>
+      <h1 className="text-5xl">Healing You Can Hold.</h1>
+      <p className="mt-6 text-[#A09880] leading-8">Before a session. After a breakthrough. In the quiet hours when the work continues on its own.<br /><br />Each journal in the Ataraxia collection is a standalone transformation tool — built around the principles of the 4X System, crafted by a certified practitioner who has done this work herself. These are not notebooks. They are structured processes that begin the moment you open them.</p>
+      <GoldDivider />
+      <SectionLabel>INDIVIDUAL JOURNAL TITLES</SectionLabel>
+      <div className="grid md:grid-cols-2 gap-6">
+        <JournalCard image="/images/img_journal_inner_child.png" alt="Inner Child Healing Journal by Ataraxia — $65" title="Inner Child Healing Journal" price="$65" description="The most profound healing often leads back to the child who learned to survive rather than thrive. This journal creates a structured, compassionate container for that return — working through the emotional residue of early experience with precision, tenderness, and real methodological depth." who="Anyone ready to meet their younger self with tools, not just intention." />
+        <JournalCard image="/images/img_journal_addiction.png" alt="Addiction Recovery Guided Journal by Ataraxia — $75" title="Addiction Recovery Journal" price="$75" description="Recovery is not the absence of the substance. It is the presence of a different self. This journal supports the full arc of that transition — from the root emotional drivers through to identity reconstruction and new pattern installation." who="Those in recovery, supporting someone through it, or navigating any compulsive pattern." />
+        <JournalCard image="/images/img_journal_meditation.png" alt="Meditation & Inner Peace Journal by Ataraxia — $30" title="Meditation & Inner Peace Journal" price="$30" description="A daily anchor for those integrating their deeper work. Structured reflection, somatic awareness prompts, and practices drawn directly from the 4X methodology." />
+        <JournalCard image="/images/img_journal_self_reflection.png" alt="118 Deep Self Reflection Questions Journal by Ataraxia — $20" title="118 Deep Reflection Questions" price="$20" description="Not surface questions. Questions that reach the places polite conversation never does. 118 prompts designed to surface subconscious beliefs, identity patterns, and emotional truths most people have never been asked about." />
       </div>
-
-      {/* Individual Journals Section */}
-      {individualProducts.length > 0 && (
-        <>
-          <h2 className="text-3xl md:text-4xl font-serif text-primary text-center mb-12">{content.journals.individualTitle}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-            {individualProducts.map((product) => (
-              <Card key={product.id} className="flex flex-col p-6 text-center">
-                <CardHeader className="flex flex-col items-center p-0 mb-4">
-                  <div className="p-3 rounded-full bg-secondary text-primary mb-4">
-                    {getProductIcon(product.name)}
-                  </div>
-                  <CardTitle className="text-2xl font-serif mb-2">{product.name}</CardTitle>
-                  <CardDescription className="text-3xl font-bold text-primary">
-                    ${product.price}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="flex-grow p-0">
-                  <p className="text-muted-foreground text-sm mb-4">
-                    {product.shortDescription}
-                  </p>
-                  <Button asChild className="w-full">
-                    <Link to={`/journals/${product.slug}`}>{content.common.viewDetails} <ArrowRight className="ml-2 h-4 w-4" /></Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </>
-      )}
-
-      {/* Journal Bundles Section */}
-      {productBundles.length > 0 && (
-        <>
-          <h2 className="text-3xl md:text-4xl font-serif text-primary text-center mb-12">{content.journals.bundleTitle}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-            {productBundles.map((product) => (
-              <Card key={product.id} className="flex flex-col p-6 text-center bg-accent/20 border-accent">
-                <CardHeader className="flex flex-col items-center p-0 mb-4">
-                  <div className="p-3 rounded-full bg-accent text-accent-foreground mb-4">
-                    {getProductIcon(product.name)}
-                  </div>
-                  <CardTitle className="text-2xl font-serif mb-2">{product.name}</CardTitle>
-                  <CardDescription className="text-3xl font-bold text-primary">
-                    {product.onSale && product.salePrice ? (
-                      <>
-                        <span>${product.salePrice}</span>
-                        <span className="line-through text-muted-foreground text-lg ml-2">
-                          ${product.regularPrice}
-                        </span>
-                      </>
-                    ) : (
-                      <span>${product.price}</span>
-                    )}
-                  </CardDescription>
-                  {product.onSale && product.salePrice && (
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Save ${(product.regularPrice - product.salePrice).toFixed(2)}
-                    </p>
-                  )}
-                </CardHeader>
-                <CardContent className="flex-grow p-0">
-                  <p className="text-muted-foreground text-sm mb-6">
-                    {product.shortDescription}
-                  </p>
-                  <Button asChild className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
-                    <Link to={`/journals/${product.slug}`}>{content.common.viewDetails} <ArrowRight className="ml-2 h-4 w-4" /></Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </>
-      )}
-
-      {/* Footer Text */}
-      <div className="text-center max-w-3xl mx-auto">
-        <div className="flex justify-center space-x-8 mb-8 text-primary">
-          <div className="flex flex-col items-center">
-            <Download className="h-6 w-6 mb-2" />
-            <span className="text-sm font-semibold">{content.journals.footer.instantDownload}</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <MessageCircle className="h-6 w-6 mb-2" />
-            <span className="text-sm font-semibold">{content.journals.footer.personalSupport}</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <Heart className="h-6 w-6 mb-2" />
-            <span className="text-sm font-semibold">{content.journals.footer.builtWithIntention}</span>
-          </div>
-        </div>
-        <p className="text-muted-foreground mb-6">
-          {content.journals.footer.closingText}
-        </p>
-        <p className="text-lg font-semibold text-primary">
-          {content.journals.footer.ctaText.split('Contact me')[0]}
-          <Link to="/book-call" className="underline hover:text-primary/80">Contact me</Link>
-          {content.journals.footer.ctaText.split('Contact me')[1]}
-        </p>
+      <GoldDivider />
+      <SectionLabel>JOURNAL BUNDLES — PRICING & VALUE</SectionLabel>
+      <h2 className="text-4xl">The Collections. Curated to Take You Further.</h2>
+      <p className="mt-4 text-[#A09880]">Every journal in the Ataraxia collection is complete on its own. Together, they form a full-system healing library. The bundles below are designed so that the deeper you go, the more you save — because the work compounds when the tools work together.</p>
+      <BundleTable />
+      <p className="mt-8 text-[#A09880]">The Inner Circle Bundle — our most popular — pairs all four journals with a complimentary Private Discovery Call with Aqsa, giving you not just the tools but the guidance to use them at the deepest level.</p>
+      <div className="mt-6 flex gap-3 flex-wrap">
+        <CTAButton>▶  Shop Individual Journals</CTAButton>
+        <CTAButton>▶  Claim the Inner Circle Bundle</CTAButton>
+        <CTAButton>▶  Gift a Collection</CTAButton>
       </div>
+      <p className="mt-6 text-[#A09880] text-sm">All journals are beautifully presented and available as a curated gift. Contact us for gifting enquiries.</p>
     </div>
   );
 };

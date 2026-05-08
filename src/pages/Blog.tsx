@@ -1,87 +1,44 @@
-import { useState, useEffect } from "react";
-import { getBlogs } from "@/lib/supabaseData";
-import { getSiteContent } from "@/lib/supabaseSiteContent";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
-import type { BlogPost } from "@/lib/supabaseData";
-import type { SiteContent } from "@/lib/siteContent";
+import { Helmet } from "react-helmet-async";
+import { ArticleCard, GoldDivider, SectionLabel } from "@/components/ataraxia";
 
 const Blog = () => {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [content, setContent] = useState<SiteContent | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      const [blogsData, contentData] = await Promise.all([
-        getBlogs(),
-        getSiteContent()
-      ]);
-      setPosts(blogsData);
-      setContent(contentData);
-      setIsLoading(false);
-    };
-    fetchData();
-  }, []);
-
-  if (isLoading || !content) {
-    return (
-      <div className="container mx-auto py-16 px-4 text-center">
-        <p className="text-muted-foreground">Loading blogs...</p>
-      </div>
-    );
-  }
+  const titles = [
+    "What Is Time Line Therapy™ — and Why It Goes Where Other Methods Cannot",
+    "The Real Reason High Achievers Feel Empty (It Is Not What You Think)",
+    "How NLP Rewires Limiting Beliefs at the Subconscious Level",
+    "What Carl Jung Knew About Unprocessed Emotion — and What That Means for Your Life Now",
+    "Hypnotherapy Is Not What You Think It Is — Here Is What Actually Happens",
+    "Signs You Are Carrying Unresolved Emotional Trauma (Even If Life Looks Fine)",
+    "What to Expect in Your First Session with Ataraxia",
+    "Inner Child Work: What It Is, Why It Matters, and How to Begin",
+    "The Invisible Layer Beneath Team Performance — What Corporate Training Misses",
+  ];
 
   return (
-    <div className="container mx-auto py-16 px-4">
-      <h1 className="text-4xl font-bold text-center mb-12">{content.blog.hero.title}</h1>
-      {posts.length === 0 ? (
-        <div className="text-center py-12">
-          <p className="text-muted-foreground">{content.blog.emptyState}</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post) => (
-            <Card key={post.id} className="flex flex-col">
-              <CardHeader className="p-0">
-                {post.featuredImage && (
-                  <img
-                    src={post.featuredImage}
-                    alt={post.title}
-                    className="w-full h-48 object-cover rounded-t-lg"
-                  />
-                )}
-              </CardHeader>
-              <CardContent className="flex-grow p-6">
-                <CardTitle className="text-2xl font-serif mb-2">{post.title}</CardTitle>
-                <CardDescription className="text-muted-foreground text-sm">
-                  {post.excerpt}
-                </CardDescription>
-                <div className="flex gap-2 flex-wrap mt-3">
-                  {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </CardContent>
-              <CardFooter className="p-6 pt-0">
-                <Button variant="link" className="p-0 text-primary text-xs" asChild>
-                  <Link to={`/blog/${post.slug}`}>
-                    {content.common.readMore} <ArrowRight className="ml-1 h-3 w-3" />
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-      )}
+    <div className="bg-[#0A0A0A] text-[#F5F0E8] max-w-[1280px] mx-auto px-6 md:px-16 lg:px-24 py-16">
+      <Helmet>
+        <title>Emotional Healing, NLP &amp; Subconscious Reprogramming Insights | Ataraxia</title>
+      </Helmet>
+      <h1 className="text-5xl">Inside You.</h1>
+      <p className="italic text-[#B8962E] mt-4">The intellectual home of the Ataraxia movement.</p>
+      <p className="mt-6 text-[#A09880]">The Inside You series is the written expression of everything the 4X System is built on — educational, psychologically grounded, and written with the depth that the most intelligent readers deserve. This is not wellness content. It is the real architecture of the human mind, made readable.</p>
+      <GoldDivider />
+      <SectionLabel>CONTENT PILLARS</SectionLabel>
+      <div className="flex flex-wrap gap-3 text-[#A09880]">
+        <span className="border border-[#2A2A2A] rounded-full px-4 py-2">· Emotional Mastery — the mechanics of what you feel and why</span>
+        <span className="border border-[#2A2A2A] rounded-full px-4 py-2">· Subconscious Rewiring — the science and practice of identity-level change</span>
+        <span className="border border-[#2A2A2A] rounded-full px-4 py-2">· Healing — root-cause approaches, not surface relief</span>
+        <span className="border border-[#2A2A2A] rounded-full px-4 py-2">· NLP & The Mind — how the brain builds and sustains reality</span>
+        <span className="border border-[#2A2A2A] rounded-full px-4 py-2">· Relationships — the patterns beneath the patterns</span>
+        <span className="border border-[#2A2A2A] rounded-full px-4 py-2">· Mindset & Performance — for those who operate at the highest level</span>
+      </div>
+      <GoldDivider />
+      <SectionLabel>LAUNCH ARTICLES — CORNERSTONE SEO CONTENT</SectionLabel>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {titles.map((title) => (
+          <ArticleCard key={title} title={title} />
+        ))}
+      </div>
     </div>
   );
 };

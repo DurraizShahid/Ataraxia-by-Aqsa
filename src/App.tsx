@@ -9,10 +9,12 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Courses from "./pages/Courses";
-import CourseDetail from "./pages/CourseDetail";
+import Workshops from "./pages/Workshops";
+import WorkshopDetail from "./pages/WorkshopDetail";
 import Journals from "./pages/Journals";
 import ProductDetail from "./pages/ProductDetail";
 import Blog from "./pages/Blog";
+import Contact from "./pages/Contact";
 import BlogPost from "./pages/BlogPost";
 import BookCall from "./pages/BookCall";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -34,6 +36,7 @@ import AdminSiteContent from "./pages/admin/SiteContent";
 import AdminSettings from "./pages/admin/Settings";
 import AdminImageManager from "./pages/admin/ImageManager";
 import AdminBranding from "./pages/admin/Branding";
+import AdminWorkshopWaitlist from "./pages/admin/WorkshopWaitlist";
 import { SiteImagesProvider } from "./context/SiteImagesContext";
 import { BrandConfigProvider } from "./context/BrandConfigContext";
 
@@ -55,13 +58,15 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
+              <Route path="/workshops" element={<Workshops />} />
+              <Route path="/workshops/:slug" element={<WorkshopDetail />} />
               <Route path="/courses" element={<Courses />} />
-              <Route path="/courses/:slug" element={<CourseDetail />} />
               <Route path="/journals" element={<Journals />} />
               <Route path="/journals/:slug" element={<ProductDetail />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="/book-call" element={<BookCall />} />
+              <Route path="/book-call" element={<Contact />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-use" element={<TermsOfUse />} />
               <Route path="/cart" element={<CartPage />} />
@@ -74,6 +79,7 @@ const App = () => (
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="blogs" element={<AdminBlogs />} />
               <Route path="courses" element={<AdminCourses />} />
+              <Route path="workshop-waitlist" element={<AdminWorkshopWaitlist />} />
               <Route path="journals" element={<AdminJournals />} />
               <Route path="orders" element={<AdminOrders />} />
               <Route path="site-content" element={<AdminSiteContent />} />

@@ -62,7 +62,21 @@ CREATE TABLE IF NOT EXISTS journals (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- 4. Orders Table
+-- 4. Workshop Waitlist Table (pre-launch leads)
+CREATE TABLE IF NOT EXISTS workshop_waitlist (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    phone TEXT,
+    professional_background TEXT NOT NULL,
+    workshop_preferences TEXT[] DEFAULT '{}',
+    intent JSONB NOT NULL DEFAULT '{}',
+    source_path TEXT,
+    utm JSONB NOT NULL DEFAULT '{}',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 5. Orders Table
 CREATE TABLE IF NOT EXISTS orders (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     items JSONB NOT NULL,
@@ -75,14 +89,14 @@ CREATE TABLE IF NOT EXISTS orders (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- 5. Site Content Table (single row for site-wide content)
+-- 6. Site Content Table (single row for site-wide content)
 CREATE TABLE IF NOT EXISTS site_content (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     content JSONB NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- 6. Admin Users Table
+-- 7. Admin Users Table
 CREATE TABLE IF NOT EXISTS admin_users (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     username TEXT UNIQUE NOT NULL,
@@ -96,6 +110,8 @@ CREATE INDEX IF NOT EXISTS idx_blogs_slug ON blogs(slug);
 CREATE INDEX IF NOT EXISTS idx_blogs_date ON blogs(date DESC);
 CREATE INDEX IF NOT EXISTS idx_courses_slug ON courses(slug);
 CREATE INDEX IF NOT EXISTS idx_journals_slug ON journals(slug);
+CREATE INDEX IF NOT EXISTS idx_workshop_waitlist_email ON workshop_waitlist(email);
+CREATE INDEX IF NOT EXISTS idx_workshop_waitlist_created_at ON workshop_waitlist(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_orders_date ON orders(date DESC);
 CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
 
@@ -136,6 +152,7 @@ ON CONFLICT (username) DO NOTHING;
 ALTER TABLE blogs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE courses ENABLE ROW LEVEL SECURITY;
 ALTER TABLE journals ENABLE ROW LEVEL SECURITY;
+ALTER TABLE workshop_waitlist ENABLE ROW LEVEL SECURITY;
 ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
 ALTER TABLE site_content ENABLE ROW LEVEL SECURITY;
 ALTER TABLE admin_users ENABLE ROW LEVEL SECURITY;
@@ -158,6 +175,12 @@ CREATE POLICY "Public can read journals" ON journals FOR SELECT USING (true);
 CREATE POLICY "Anyone can insert journals" ON journals FOR INSERT WITH CHECK (true);
 CREATE POLICY "Anyone can update journals" ON journals FOR UPDATE USING (true);
 CREATE POLICY "Anyone can delete journals" ON journals FOR DELETE USING (true);
+
+-- Workshop waitlist policies
+CREATE POLICY "Public can read workshop waitlist" ON workshop_waitlist FOR SELECT USING (true);
+CREATE POLICY "Anyone can insert workshop waitlist" ON workshop_waitlist FOR INSERT WITH CHECK (true);
+CREATE POLICY "Anyone can update workshop waitlist" ON workshop_waitlist FOR UPDATE USING (true);
+CREATE POLICY "Anyone can delete workshop waitlist" ON workshop_waitlist FOR DELETE USING (true);
 
 -- Orders policies
 CREATE POLICY "Public can read orders" ON orders FOR SELECT USING (true);
@@ -182,6 +205,7 @@ CREATE POLICY "Anyone can update admin users" ON admin_users FOR UPDATE USING (t
 COMMENT ON TABLE blogs IS 'Stores blog posts';
 COMMENT ON TABLE courses IS 'Stores courses';
 COMMENT ON TABLE journals IS 'Stores healing journals';
+COMMENT ON TABLE workshop_waitlist IS 'Stores workshop pre-launch waitlist leads';
 COMMENT ON TABLE orders IS 'Stores customer orders';
 COMMENT ON TABLE site_content IS 'Stores site-wide content settings';
 COMMENT ON TABLE admin_users IS 'Stores admin user credentials';

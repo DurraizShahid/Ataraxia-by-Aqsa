@@ -29,17 +29,17 @@ export const defaultBrandConfig: BrandConfig = {
   faviconUrl: '',
   borderRadius: '0.5rem',
   colors: {
-    background: '0 0% 100%',
-    foreground: '0 0% 9%',
-    primary: '0 0% 9%',
-    primaryForeground: '0 0% 100%',
-    secondary: '0 0% 96%',
-    secondaryForeground: '0 0% 9%',
+    background: '0 0% 3%',
+    foreground: '0 0% 95%',
+    primary: '0 0% 95%',
+    primaryForeground: '0 0% 4%',
+    secondary: '0 0% 12%',
+    secondaryForeground: '0 0% 92%',
     accent: '43 60% 52%',
-    accentForeground: '0 0% 9%',
-    muted: '0 0% 96%',
-    mutedForeground: '0 0% 45%',
-    border: '0 0% 89%',
+    accentForeground: '0 0% 4%',
+    muted: '0 0% 12%',
+    mutedForeground: '0 0% 65%',
+    border: '0 0% 18%',
     ring: '43 60% 52%',
   },
 };
@@ -51,9 +51,10 @@ export const applyBrandConfig = (config: BrandConfig): void => {
 
   root.style.setProperty('--background', colors.background);
   root.style.setProperty('--foreground', colors.foreground);
-  root.style.setProperty('--card', colors.background);
+  // Surfaces follow secondary to keep elevation visible on dark canvas.
+  root.style.setProperty('--card', colors.secondary);
   root.style.setProperty('--card-foreground', colors.foreground);
-  root.style.setProperty('--popover', colors.background);
+  root.style.setProperty('--popover', colors.secondary);
   root.style.setProperty('--popover-foreground', colors.foreground);
   root.style.setProperty('--primary', colors.primary);
   root.style.setProperty('--primary-foreground', colors.primaryForeground);

@@ -77,6 +77,22 @@ export interface Database {
         Insert: Omit<Database['public']['Tables']['journals']['Row'], 'id' | 'created_at' | 'updated_at'>;
         Update: Partial<Database['public']['Tables']['journals']['Insert']>;
       };
+      workshop_waitlist: {
+        Row: {
+          id: string;
+          name: string;
+          email: string;
+          phone: string | null;
+          professional_background: string;
+          workshop_preferences: string[];
+          intent: any;
+          source_path: string | null;
+          utm: any;
+          created_at: string;
+        };
+        Insert: Omit<Database['public']['Tables']['workshop_waitlist']['Row'], 'id' | 'created_at'>;
+        Update: Partial<Database['public']['Tables']['workshop_waitlist']['Insert']>;
+      };
       orders: {
         Row: {
           id: string;
