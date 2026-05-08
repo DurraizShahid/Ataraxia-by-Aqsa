@@ -14,7 +14,7 @@ const Footer = () => {
           </div>
           <div className="flex flex-wrap gap-3">
             <Link to="/">Home</Link>·<Link to="/about">About</Link>·<Link to="/services">Services</Link>·
-            <Link to="/courses">Courses</Link>·<Link to="/journals">Journals</Link>·<Link to="/blog">Blog</Link>·
+            <Link to="/workshops">Workshop</Link>·<Link to="/journals">Journals</Link>·<Link to="/blog">Blog</Link>·
             <Link to="/contact">Contact</Link>
           </div>
           <div className="md:text-right">

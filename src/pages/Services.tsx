@@ -26,7 +26,7 @@ const Services = () => {
       <p className="mt-3 text-[#A09880]">Day 3: Rise — Embody the shift. Anchor it. Move forward as the identity you've built — not as a hope, but as a lived reality.</p>
       <p className="mt-4">Three tiers. One transformation.</p>
       <p className="text-[#A09880] mt-2">· Access — The complete 3-day experience<br />· Deep Work — Extended integration and personalised daily sessions<br />· Inner Circle — Includes a private session with Aqsa</p>
-      <div className="mt-5"><CTAButton>▶  Apply for The 4X Reset</CTAButton></div>
+      <div className="mt-5"><CTAButton to="/apply">▶  Apply for The 4X Reset</CTAButton></div>
       <Image
         src="/images/img_5_modalities.png"
         alt="The five transformation modalities used in the Ataraxia 4X Reset: Emotional Release, NLP Rewiring, Hypnosis, Somatic Healing, Timeline Therapy"
@@ -39,7 +39,7 @@ const Services = () => {
       <h2 className="text-4xl">Private Clarity & Transformation Sessions</h2>
       <p className="text-[#A09880] mt-4">For those who require deep, sustained private work. Available as a 3-month or 5-month container, this is not a weekly check-in. It is a complete internal overhaul — addressing the full spectrum of what is keeping you from operating at the level you know you're capable of.</p>
       <p className="text-[#A09880] mt-3">· Somatic-based emotional release<br />· NLP subconscious reprogramming<br />· Time Line Therapy™ for past emotional clearing<br />· WhatsApp accountability between sessions</p>
-      <div className="mt-5"><CTAButton>▶  Book a Private Discovery Call</CTAButton></div>
+      <div className="mt-5"><CTAButton to="/book-call">▶  Book a Private Discovery Call</CTAButton></div>
       <GoldDivider />
       <SectionLabel>SERVICE 03 — EMERGENCY SUPPORT</SectionLabel>
       <h2 className="text-4xl">Emergency & High-Stress Sessions</h2>

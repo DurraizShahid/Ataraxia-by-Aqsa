@@ -105,6 +105,19 @@ CREATE TABLE IF NOT EXISTS admin_users (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- 8. Applications Table (contact/apply form submissions)
+CREATE TABLE IF NOT EXISTS applications (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    phone TEXT,
+    program TEXT NOT NULL,
+    goals TEXT NOT NULL,
+    source_path TEXT,
+    utm JSONB NOT NULL DEFAULT '{}',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 -- Create indexes for better performance
 CREATE INDEX IF NOT EXISTS idx_blogs_slug ON blogs(slug);
 CREATE INDEX IF NOT EXISTS idx_blogs_date ON blogs(date DESC);
@@ -112,6 +125,8 @@ CREATE INDEX IF NOT EXISTS idx_courses_slug ON courses(slug);
 CREATE INDEX IF NOT EXISTS idx_journals_slug ON journals(slug);
 CREATE INDEX IF NOT EXISTS idx_workshop_waitlist_email ON workshop_waitlist(email);
 CREATE INDEX IF NOT EXISTS idx_workshop_waitlist_created_at ON workshop_waitlist(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_applications_email ON applications(email);
+CREATE INDEX IF NOT EXISTS idx_applications_created_at ON applications(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_orders_date ON orders(date DESC);
 CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
 
@@ -153,6 +168,7 @@ ALTER TABLE blogs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE courses ENABLE ROW LEVEL SECURITY;
 ALTER TABLE journals ENABLE ROW LEVEL SECURITY;
 ALTER TABLE workshop_waitlist ENABLE ROW LEVEL SECURITY;
+ALTER TABLE applications ENABLE ROW LEVEL SECURITY;
 ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
 ALTER TABLE site_content ENABLE ROW LEVEL SECURITY;
 ALTER TABLE admin_users ENABLE ROW LEVEL SECURITY;
@@ -182,6 +198,12 @@ CREATE POLICY "Anyone can insert workshop waitlist" ON workshop_waitlist FOR INS
 CREATE POLICY "Anyone can update workshop waitlist" ON workshop_waitlist FOR UPDATE USING (true);
 CREATE POLICY "Anyone can delete workshop waitlist" ON workshop_waitlist FOR DELETE USING (true);
 
+-- Applications policies
+CREATE POLICY "Public can read applications" ON applications FOR SELECT USING (true);
+CREATE POLICY "Anyone can insert applications" ON applications FOR INSERT WITH CHECK (true);
+CREATE POLICY "Anyone can update applications" ON applications FOR UPDATE USING (true);
+CREATE POLICY "Anyone can delete applications" ON applications FOR DELETE USING (true);
+
 -- Orders policies
 CREATE POLICY "Public can read orders" ON orders FOR SELECT USING (true);
 CREATE POLICY "Anyone can insert orders" ON orders FOR INSERT WITH CHECK (true);
@@ -206,6 +228,7 @@ COMMENT ON TABLE blogs IS 'Stores blog posts';
 COMMENT ON TABLE courses IS 'Stores courses';
 COMMENT ON TABLE journals IS 'Stores healing journals';
 COMMENT ON TABLE workshop_waitlist IS 'Stores workshop pre-launch waitlist leads';
+COMMENT ON TABLE applications IS 'Stores application form submissions';
 COMMENT ON TABLE orders IS 'Stores customer orders';
 COMMENT ON TABLE site_content IS 'Stores site-wide content settings';
 COMMENT ON TABLE admin_users IS 'Stores admin user credentials';

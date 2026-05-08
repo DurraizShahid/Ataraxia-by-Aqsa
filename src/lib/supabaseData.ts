@@ -85,6 +85,18 @@ export interface WorkshopWaitlistLead {
   createdAt: string;
 }
 
+export interface ApplicationLead {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  program: string;
+  goals: string;
+  sourcePath?: string;
+  utm: Record<string, unknown>;
+  createdAt: string;
+}
+
 // Blog functions
 export const getBlogs = async (): Promise<BlogPost[]> => {
   try {
@@ -490,6 +502,85 @@ export const deleteWorkshopWaitlistLead = async (id: string): Promise<boolean> =
     return true;
   } catch (error) {
     console.error('Error deleting workshop waitlist lead:', error);
+    return false;
+  }
+};
+
+// Applications (apply form) functions
+export const createApplicationLead = async (
+  lead: Omit<ApplicationLead, 'id' | 'createdAt'>
+): Promise<ApplicationLead | null> => {
+  try {
+    const { data, error } = await supabase
+      .from('applications')
+      .insert({
+        name: lead.name,
+        email: lead.email,
+        phone: lead.phone || null,
+        program: lead.program,
+        goals: lead.goals,
+        source_path: lead.sourcePath || null,
+        utm: lead.utm ?? {},
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    return {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      phone: data.phone || undefined,
+      program: data.program,
+      goals: data.goals,
+      sourcePath: data.source_path || undefined,
+      utm: data.utm || {},
+      createdAt: data.created_at,
+    };
+  } catch (error) {
+    console.error('Error creating application lead:', error);
+    return null;
+  }
+};
+
+export const getApplicationLeads = async (): Promise<ApplicationLead[]> => {
+  try {
+    const { data, error } = await supabase
+      .from('applications')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+
+    return (data || []).map((lead: any) => ({
+      id: lead.id,
+      name: lead.name,
+      email: lead.email,
+      phone: lead.phone || undefined,
+      program: lead.program,
+      goals: lead.goals,
+      sourcePath: lead.source_path || undefined,
+      utm: lead.utm || {},
+      createdAt: lead.created_at,
+    }));
+  } catch (error) {
+    console.error('Error fetching application leads:', error);
+    return [];
+  }
+};
+
+export const deleteApplicationLead = async (id: string): Promise<boolean> => {
+  try {
+    const { error } = await supabase
+      .from('applications')
+      .delete()
+      .eq('id', id);
+
+    if (error) throw error;
+    return true;
+  } catch (error) {
+    console.error('Error deleting application lead:', error);
     return false;
   }
 };

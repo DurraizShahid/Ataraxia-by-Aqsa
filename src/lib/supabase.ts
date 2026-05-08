@@ -93,6 +93,21 @@ export interface Database {
         Insert: Omit<Database['public']['Tables']['workshop_waitlist']['Row'], 'id' | 'created_at'>;
         Update: Partial<Database['public']['Tables']['workshop_waitlist']['Insert']>;
       };
+      applications: {
+        Row: {
+          id: string;
+          name: string;
+          email: string;
+          phone: string | null;
+          program: string;
+          goals: string;
+          source_path: string | null;
+          utm: any;
+          created_at: string;
+        };
+        Insert: Omit<Database['public']['Tables']['applications']['Row'], 'id' | 'created_at'>;
+        Update: Partial<Database['public']['Tables']['applications']['Insert']>;
+      };
       orders: {
         Row: {
           id: string;

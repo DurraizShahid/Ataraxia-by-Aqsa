@@ -34,10 +34,18 @@ const Contact = () => {
         </div>
       </div>
       <div className="mt-8 flex gap-3 flex-wrap">
-        <CTAButton>▶  Book Your Free Discovery Call</CTAButton>
-        <CTAButton>▶  Submit an Application</CTAButton>
+        <CTAButton to="/book-call">▶  Book Your Free Discovery Call</CTAButton>
+        <CTAButton to="/apply">▶  Submit an Application</CTAButton>
       </div>
-      <p className="text-[#A09880] text-sm mt-6">WhatsApp enquiries welcome. Response within 24 hours.</p>
+      <div className="text-[#A09880] text-sm mt-6 space-y-2">
+        <p>WhatsApp enquiries welcome. Response within 24 hours.</p>
+        <p>
+          Email Aqsa:{" "}
+          <a className="text-[#D4AF37] hover:underline" href="mailto:aqsakhan.growth@gmail.com">
+            aqsakhan.growth@gmail.com
+          </a>
+        </p>
+      </div>
     </div>
   );
 };

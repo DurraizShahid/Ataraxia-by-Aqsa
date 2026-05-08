@@ -17,6 +17,7 @@ import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import BlogPost from "./pages/BlogPost";
 import BookCall from "./pages/BookCall";
+import Application from "./pages/Application";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import NotFound from "./pages/NotFound";
@@ -37,6 +38,7 @@ import AdminSettings from "./pages/admin/Settings";
 import AdminImageManager from "./pages/admin/ImageManager";
 import AdminBranding from "./pages/admin/Branding";
 import AdminWorkshopWaitlist from "./pages/admin/WorkshopWaitlist";
+import AdminApplications from "./pages/admin/Applications";
 import { SiteImagesProvider } from "./context/SiteImagesContext";
 import { BrandConfigProvider } from "./context/BrandConfigContext";
 
@@ -65,7 +67,8 @@ const App = () => (
               <Route path="/journals/:slug" element={<ProductDetail />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="/book-call" element={<Contact />} />
+              <Route path="/book-call" element={<BookCall />} />
+              <Route path="/apply" element={<Application />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-use" element={<TermsOfUse />} />
@@ -80,6 +83,7 @@ const App = () => (
               <Route path="blogs" element={<AdminBlogs />} />
               <Route path="courses" element={<AdminCourses />} />
               <Route path="workshop-waitlist" element={<AdminWorkshopWaitlist />} />
+              <Route path="applications" element={<AdminApplications />} />
               <Route path="journals" element={<AdminJournals />} />
               <Route path="orders" element={<AdminOrders />} />
               <Route path="site-content" element={<AdminSiteContent />} />

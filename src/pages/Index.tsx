@@ -28,8 +28,8 @@ const Index = () => {
             This is the 4X System — a proprietary methodology integrating the deepest tools of subconscious transformation into one coherent, precision framework. Not a programme. Not a practice. A complete architecture for who you are becoming.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <CTAButton>▶  Begin Your 4X Reset</CTAButton>
-            <CTAButton>▶  Apply for 1:1 Intensive</CTAButton>
+            <CTAButton to="/services">▶  Begin Your 4X Reset</CTAButton>
+            <CTAButton to="/apply">▶  Apply for 1:1 Intensive</CTAButton>
             <CTAButton>▶  Explore The System</CTAButton>
           </div>
         </div>
@@ -78,9 +78,9 @@ const Index = () => {
             This is where the highest version of your life is waiting. Not as a promise. As a system.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <CTAButton>▶  Apply for The 4X Reset Experience</CTAButton>
-            <CTAButton>▶  Book a Private Clarity Call</CTAButton>
-            <CTAButton>▶  Explore Journals & Tools</CTAButton>
+            <CTAButton to="/apply">▶  Apply for The 4X Reset Experience</CTAButton>
+            <CTAButton to="/book-call">▶  Book a Private Clarity Call</CTAButton>
+            <CTAButton to="/journals">▶  Explore Journals & Tools</CTAButton>
           </div>
         </FadeInSection>
       </main>
