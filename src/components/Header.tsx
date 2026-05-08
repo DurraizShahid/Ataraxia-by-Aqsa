@@ -27,8 +27,19 @@ const Header = () => {
       }`}
     >
       <div className="max-w-[1280px] mx-auto px-6 md:px-16 lg:px-24 py-5 flex items-center justify-between gap-8">
-        <Link to="/" className="text-[#D4AF37] tracking-[0.2em] text-xl" style={{ fontFamily: "Palatino Linotype, serif" }}>
-          ATARAXIA
+        <Link
+          to="/"
+          className="flex items-center gap-3 text-[#F5F0E8] tracking-[0.2em] text-xl"
+          style={{ fontFamily: "Palatino Linotype, serif" }}
+          aria-label="Ataraxia home"
+        >
+          <img
+            src="/favicon.svg"
+            alt=""
+            className="h-12 w-12 shrink-0"
+            aria-hidden="true"
+          />
+          <span className="text-[#D4AF37]">ATARAXIA</span>
         </Link>
         <nav className="hidden lg:flex items-center gap-5">
           {links.map((link) => (
