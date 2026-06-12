@@ -7,6 +7,21 @@ export const initializeSampleData = async () => {
     // Initialize site content first
     await initializeSiteContent();
     
+    // Initialize admin user
+    const { data: existingAdmin } = await supabase
+      .from('admin_users')
+      .select('id')
+      .limit(1);
+    
+    if (!existingAdmin || existingAdmin.length === 0) {
+      await supabase.from('admin_users').insert([
+        {
+          username: 'admin',
+          password: 'admin123'
+        }
+      ]);
+    }
+    
     // Check if data already exists
     const { data: existingBlogs } = await supabase
       .from('blogs')

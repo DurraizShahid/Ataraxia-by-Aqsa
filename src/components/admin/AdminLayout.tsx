@@ -2,7 +2,7 @@ import { Link, useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { useBrandConfig } from '@/context/BrandConfigContext';
 import { Button } from '@/components/ui/button';
-import { LogOut, LayoutDashboard, BookOpen, GraduationCap, Book, ShoppingBag, Settings, FileText, Images, Palette, Users, ClipboardList } from 'lucide-react';
+import { LogOut, LayoutDashboard, BookOpen, GraduationCap, Book, ShoppingBag, Settings, FileText, Images, Palette, Users, ClipboardList, SlidersHorizontal } from 'lucide-react';
 import { useEffect } from 'react';
 
 const AdminLayout = () => {
@@ -28,6 +28,7 @@ const AdminLayout = () => {
 
   const menuItems = [
     { path: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { path: '/admin/site-editor', label: 'Site Editor', icon: SlidersHorizontal },
     { path: '/admin/blogs', label: 'Blogs', icon: BookOpen },
     { path: '/admin/courses', label: 'Courses', icon: GraduationCap },
     { path: '/admin/workshop-waitlist', label: 'Workshop Waitlist', icon: Users },
