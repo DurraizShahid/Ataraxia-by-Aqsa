@@ -1,36 +1,112 @@
-import { Helmet } from "react-helmet-async";
-import { BundleTable, CTAButton, GoldDivider, JournalCard, SectionLabel } from "@/components/ataraxia";
+import { useState, useEffect } from 'react';
+import { getJournals, Journal } from '@/lib/supabaseData';
+import JournalCard from '@/components/ataraxia/JournalCard';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+} from '@/components/ui/tabs';
+import { Loader2 } from 'lucide-react';
 
 const Journals = () => {
+  const [journals, setJournals] = useState<Journal[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [sortBy, setSortBy] = useState<'newest' | 'price-low' | 'price-high'>('newest');
+  const [filterFormat, setFilterFormat] = useState<'all' | 'digital' | 'physical' | 'bundle'>('all');
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getJournals();
+      setJournals(data);
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+  
+  const filteredAndSortedJournals = [...journals]
+    .filter(journal => {
+      if (filterFormat === 'all') return true;
+      if (filterFormat === 'digital') return journal.format.toLowerCase() === 'digital';
+      if (filterFormat === 'physical') return journal.format.toLowerCase() === 'physical';
+      if (filterFormat === 'bundle') return journal.isBundle || journal.format.toLowerCase().includes('bundle');
+      return true;
+    })
+    .sort((a, b) => {
+      if (sortBy === 'newest') {
+        // Assuming getJournals already orders by created_at, but just in case
+        return 0; 
+      } else if (sortBy === 'price-low') {
+        const aPrice = a.onSale && a.salePrice ? a.salePrice : a.price;
+        const bPrice = b.onSale && b.salePrice ? b.salePrice : b.price;
+        return aPrice - bPrice;
+      } else {
+        const aPrice = a.onSale && a.salePrice ? a.salePrice : a.price;
+        const bPrice = b.onSale && b.salePrice ? b.salePrice : b.price;
+        return bPrice - aPrice;
+      }
+    });
+  
   return (
-    <div className="bg-[#0A0A0A] text-[#F5F0E8] max-w-[1280px] mx-auto px-6 md:px-16 lg:px-24 py-16">
-      <Helmet>
-        <title>Therapeutic Healing Journals for Emotional Recovery | Shop Ataraxia</title>
-        <meta name="description" content="inner child healing journal, addiction recovery journal, therapeutic journaling workbook." />
-      </Helmet>
-      <h1 className="text-5xl">Healing You Can Hold.</h1>
-      <p className="mt-6 text-[#A09880] leading-8">Before a session. After a breakthrough. In the quiet hours when the work continues on its own.<br /><br />Each journal in the Ataraxia collection is a standalone transformation tool — built around the principles of the 4X System, crafted by a certified practitioner who has done this work herself. These are not notebooks. They are structured processes that begin the moment you open them.</p>
-      <GoldDivider />
-      <SectionLabel>INDIVIDUAL JOURNAL TITLES</SectionLabel>
-      <div className="grid md:grid-cols-2 gap-6">
-        <JournalCard image="/images/img_journal_inner_child.png" alt="Inner Child Healing Journal by Ataraxia — $65" title="Inner Child Healing Journal" price="$65" description="The most profound healing often leads back to the child who learned to survive rather than thrive. This journal creates a structured, compassionate container for that return — working through the emotional residue of early experience with precision, tenderness, and real methodological depth." who="Anyone ready to meet their younger self with tools, not just intention." />
-        <JournalCard image="/images/img_journal_addiction.png" alt="Addiction Recovery Guided Journal by Ataraxia — $75" title="Addiction Recovery Journal" price="$75" description="Recovery is not the absence of the substance. It is the presence of a different self. This journal supports the full arc of that transition — from the root emotional drivers through to identity reconstruction and new pattern installation." who="Those in recovery, supporting someone through it, or navigating any compulsive pattern." />
-        <JournalCard image="/images/img_journal_meditation.png" alt="Meditation & Inner Peace Journal by Ataraxia — $30" title="Meditation & Inner Peace Journal" price="$30" description="A daily anchor for those integrating their deeper work. Structured reflection, somatic awareness prompts, and practices drawn directly from the 4X methodology." />
-        <JournalCard image="/images/img_journal_self_reflection.png" alt="118 Deep Self Reflection Questions Journal by Ataraxia — $20" title="118 Deep Reflection Questions" price="$20" description="Not surface questions. Questions that reach the places polite conversation never does. 118 prompts designed to surface subconscious beliefs, identity patterns, and emotional truths most people have never been asked about." />
+    <div className="bg-[#0A0A0A] text-[#F5F0E8] min-h-screen">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24 py-20">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Journals & Workbooks</h1>
+          <p className="text-[#A09880] text-lg max-w-2xl mx-auto">
+            Transform your journey with our carefully curated collection of journals, workbooks, and digital planners
+          </p>
+        </div>
+        
+        {/* Filter & Sort Bar */}
+        <div className="flex flex-col md:flex-row gap-6 mb-12 items-center justify-between">
+          <Tabs defaultValue="all" className="w-full md:w-auto" onValueChange={(v) => setFilterFormat(v as any)}>
+            <TabsList className="bg-[#111111] border border-[#2A2A2A]">
+              <TabsTrigger value="all">All Formats</TabsTrigger>
+              <TabsTrigger value="digital">Digital</TabsTrigger>
+              <TabsTrigger value="physical">Physical</TabsTrigger>
+              <TabsTrigger value="bundle">Bundles</TabsTrigger>
+            </TabsList>
+          </Tabs>
+          
+          <Select defaultValue="newest" onValueChange={(v) => setSortBy(v as any)}>
+            <SelectTrigger className="w-full md:w-[200px] bg-[#111111] border-[#2A2A2A]">
+              <SelectValue placeholder="Sort by" />
+            </SelectTrigger>
+            <SelectContent className="bg-[#111111] border-[#2A2A2A]">
+              <SelectItem value="newest">Newest First</SelectItem>
+              <SelectItem value="price-low">Price: Low to High</SelectItem>
+              <SelectItem value="price-high">Price: High to Low</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        
+        {/* Loading State */}
+        {loading ? (
+          <div className="flex items-center justify-center py-24">
+            <Loader2 className="h-12 w-12 text-[#D4AF37] animate-spin" />
+          </div>
+        ) : filteredAndSortedJournals.length === 0 ? (
+          <div className="text-center py-24">
+            <h3 className="text-2xl font-semibold mb-3">No journals available right now</h3>
+            <p className="text-[#A09880]">Check back soon for new releases!</p>
+          </div>
+        ) : (
+          /* Grid of Journals */
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredAndSortedJournals.map(journal => (
+              <JournalCard key={journal.id} journal={journal} />
+            ))}
+          </div>
+        )}
       </div>
-      <GoldDivider />
-      <SectionLabel>JOURNAL BUNDLES — PRICING & VALUE</SectionLabel>
-      <h2 className="text-4xl">The Collections. Curated to Take You Further.</h2>
-      <p className="mt-4 text-[#A09880]">Every journal in the Ataraxia collection is complete on its own. Together, they form a full-system healing library. The bundles below are designed so that the deeper you go, the more you save — because the work compounds when the tools work together.</p>
-      <BundleTable />
-      <p className="mt-8 text-[#A09880]">The Inner Circle Bundle — our most popular — pairs all four journals with a complimentary Private Discovery Call with Aqsa, giving you not just the tools but the guidance to use them at the deepest level.</p>
-      <div className="mt-6 flex gap-3 flex-wrap">
-        <CTAButton>▶  Shop Individual Journals</CTAButton>
-        <CTAButton>▶  Claim the Inner Circle Bundle</CTAButton>
-        <CTAButton>▶  Gift a Collection</CTAButton>
-      </div>
-      <p className="mt-6 text-[#A09880] text-sm">All journals are beautifully presented and available as a curated gift. Contact us for gifting enquiries.</p>
     </div>
   );
 };
+
 export default Journals;

@@ -49,6 +49,8 @@ export interface Journal {
   pageCount: number;
   format: string;
   isBundle: boolean;
+  isDeleted: boolean;
+  includedJournalIds: string[];
 }
 
 export interface AdminUser {
@@ -64,12 +66,20 @@ export interface Order {
     name: string;
     price: number;
     quantity: number;
+    format?: string;
   }>;
   total: number;
   date: string;
   status: 'pending' | 'completed' | 'failed';
   customerEmail: string;
   customerName: string;
+  customerPhone?: string;
+  billingAddress?: {
+    addressLine1: string;
+    city: string;
+    country: string;
+    postalCode: string;
+  };
 }
 
 export interface WorkshopWaitlistLead {
@@ -611,7 +621,9 @@ export const getJournals = async (): Promise<Journal[]> => {
       pageCount: journal.page_count,
       format: journal.format,
       isBundle: journal.is_bundle,
-    }));
+      isDeleted: journal.is_deleted || false,
+      includedJournalIds: journal.included_journal_ids || [],
+    })).filter(j => !j.isDeleted);
   } catch (error) {
     console.error('Error fetching journals:', error);
     return [];
@@ -629,7 +641,7 @@ export const getJournalBySlug = async (slug: string): Promise<Journal | null> =>
     if (error) throw error;
     if (!data) return null;
     
-    return {
+    const journal = {
       id: data.id,
       name: data.name,
       slug: data.slug,
@@ -645,7 +657,12 @@ export const getJournalBySlug = async (slug: string): Promise<Journal | null> =>
       pageCount: data.page_count,
       format: data.format,
       isBundle: data.is_bundle,
+      isDeleted: data.is_deleted || false,
+      includedJournalIds: data.included_journal_ids || [],
     };
+    
+    if (journal.isDeleted) return null;
+    return journal;
   } catch (error) {
     console.error('Error fetching journal:', error);
     return null;
@@ -671,6 +688,8 @@ export const createJournal = async (journal: Omit<Journal, 'id'>): Promise<Journ
         page_count: journal.pageCount,
         format: journal.format,
         is_bundle: journal.isBundle,
+        is_deleted: false,
+        included_journal_ids: journal.includedJournalIds || [],
       })
       .select()
       .single();
@@ -693,6 +712,8 @@ export const createJournal = async (journal: Omit<Journal, 'id'>): Promise<Journ
       pageCount: data.page_count,
       format: data.format,
       isBundle: data.is_bundle,
+      isDeleted: data.is_deleted || false,
+      includedJournalIds: data.included_journal_ids || [],
     };
   } catch (error) {
     console.error('Error creating journal:', error);
@@ -717,6 +738,8 @@ export const updateJournal = async (id: string, updates: Partial<Journal>): Prom
     if (updates.pageCount !== undefined) updateData.page_count = updates.pageCount;
     if (updates.format) updateData.format = updates.format;
     if (updates.isBundle !== undefined) updateData.is_bundle = updates.isBundle;
+    if (updates.isDeleted !== undefined) updateData.is_deleted = updates.isDeleted;
+    if (updates.includedJournalIds) updateData.included_journal_ids = updates.includedJournalIds;
     
     const { data, error } = await supabase
       .from('journals')
@@ -743,6 +766,8 @@ export const updateJournal = async (id: string, updates: Partial<Journal>): Prom
       pageCount: data.page_count,
       format: data.format,
       isBundle: data.is_bundle,
+      isDeleted: data.is_deleted || false,
+      includedJournalIds: data.included_journal_ids || [],
     };
   } catch (error) {
     console.error('Error updating journal:', error);
@@ -754,7 +779,7 @@ export const deleteJournal = async (id: string): Promise<boolean> => {
   try {
     const { error } = await supabase
       .from('journals')
-      .delete()
+      .update({ is_deleted: true })
       .eq('id', id);
     
     if (error) throw error;
@@ -831,10 +856,40 @@ export const getOrders = async (): Promise<Order[]> => {
       status: order.status,
       customerEmail: order.customer_email,
       customerName: order.customer_name,
+      customerPhone: order.customer_phone,
+      billingAddress: order.billing_address,
     }));
   } catch (error) {
     console.error('Error fetching orders:', error);
     return [];
+  }
+};
+
+export const getOrderById = async (id: string): Promise<Order | null> => {
+  try {
+    const { data, error } = await supabase
+      .from('orders')
+      .select('*')
+      .eq('id', id)
+      .single();
+    
+    if (error) throw error;
+    if (!data) return null;
+    
+    return {
+      id: data.id,
+      items: data.items,
+      total: parseFloat(data.total),
+      date: data.date,
+      status: data.status,
+      customerEmail: data.customer_email,
+      customerName: data.customer_name,
+      customerPhone: data.customer_phone,
+      billingAddress: data.billing_address,
+    };
+  } catch (error) {
+    console.error('Error fetching order by ID:', error);
+    return null;
   }
 };
 
@@ -847,6 +902,8 @@ export const createOrder = async (order: Omit<Order, 'id' | 'date' | 'status'>):
         total: order.total,
         customer_email: order.customerEmail,
         customer_name: order.customerName,
+        customer_phone: order.customerPhone,
+        billing_address: order.billingAddress,
         status: 'pending',
         date: new Date().toISOString(),
       })
@@ -863,6 +920,8 @@ export const createOrder = async (order: Omit<Order, 'id' | 'date' | 'status'>):
       status: data.status,
       customerEmail: data.customer_email,
       customerName: data.customer_name,
+      customerPhone: data.customer_phone,
+      billingAddress: data.billing_address,
     };
   } catch (error) {
     console.error('Error creating order:', error);

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import CartDrawer from "@/components/CartDrawer";
 
 const leftNavLinks = [
   { to: "/", label: "Home" },
@@ -101,8 +102,13 @@ const Header = () => {
             </nav>
           </div>
 
+          {/* Desktop & Mobile: Cart */}
+          <div className="absolute right-0 top-1/2 -translate-y-1/2">
+            <CartDrawer />
+          </div>
+
           {/* Mobile: right side menu */}
-          <div className="lg:hidden">
+          <div className="lg:hidden mr-12">
             <Sheet open={isMenuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger asChild>
                 <Button

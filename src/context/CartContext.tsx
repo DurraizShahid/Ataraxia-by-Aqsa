@@ -1,26 +1,24 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { WooCommerceProduct } from '@/lib/woocommerce';
+import { createContext, useContext, useState, useEffect, ReactNode, useMemo } from 'react';
+import { Journal } from '@/lib/supabaseData';
+import { CartItem } from '@/types/cart';
 import { toast } from 'sonner';
 
-interface CartItem extends WooCommerceProduct {
-  quantity: number;
-}
-
 interface CartContextType {
-  cartItems: CartItem[];
-  addToCart: (product: WooCommerceProduct, quantity?: number) => void;
-  removeFromCart: (productId: number) => void;
-  updateQuantity: (productId: number, quantity: number) => void;
-  clearCart: () => void;
-  cartTotal: number;
-  cartItemCount: number;
+  items: CartItem[]
+  itemCount: number
+  subtotal: number
+  total: number
+  addToCart: (journal: Journal, quantity?: number) => void
+  removeFromCart: (journalId: string) => void
+  updateQuantity: (journalId: string, quantity: number) => void
+  clearCart: () => void
+  isInCart: (journalId: string) => boolean
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    // Initialize cart from localStorage
+  const [items, setItems] = useState<CartItem[]>(() => {
     if (typeof window !== 'undefined') {
       const savedCart = localStorage.getItem('ataraxia_cart');
       return savedCart ? JSON.parse(savedCart) : [];
@@ -28,70 +26,96 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     return [];
   });
 
+  // Save cart to localStorage on every change
   useEffect(() => {
-    // Save cart to localStorage whenever it changes
     if (typeof window !== 'undefined') {
-      localStorage.setItem('ataraxia_cart', JSON.stringify(cartItems));
+      localStorage.setItem('ataraxia_cart', JSON.stringify(items));
     }
-  }, [cartItems]);
+  }, [items]);
 
-  const addToCart = (product: WooCommerceProduct, quantity: number = 1) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === product.id);
+  // Calculate derived values
+  const itemCount = useMemo(() => items.reduce((count, item) => count + item.quantity, 0), [items]);
+  const subtotal = useMemo(() => items.reduce((sum, item) => sum + item.price * item.quantity, 0), [items]);
+  const total = subtotal;
+
+  const addToCart = (journal: Journal, quantity: number = 1) => {
+    setItems((prevItems) => {
+      const existingItem = prevItems.find(item => item.journalId === journal.id);
+
       if (existingItem) {
-        const updatedItems = prevItems.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item
+        // Update quantity
+        const updatedItems = prevItems.map(item =>
+          item.journalId === journal.id
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
         );
-        toast.success(`${quantity} more "${product.name}" added to cart!`);
+        toast.success(`${quantity} more "${journal.name}" added to cart!`);
         return updatedItems;
       } else {
-        toast.success(`"${product.name}" added to cart!`);
-        return [...prevItems, { ...product, quantity }];
+        // Create new cart item
+        const price = journal.onSale && journal.salePrice ? journal.salePrice : journal.price; // Wait, looking at Journal type: has price, regularPrice, salePrice
+        const newItem: CartItem = {
+          journalId: journal.id,
+          title: journal.name,
+          price: price,
+          regularPrice: journal.regularPrice,
+          salePrice: journal.salePrice,
+          onSale: journal.onSale,
+          quantity: quantity,
+          featuredImage: journal.featuredImage,
+          format: journal.format
+        };
+        toast.success(`"${journal.name}" added to cart!`);
+        return [...prevItems, newItem];
       }
     });
   };
 
-  const removeFromCart = (productId: number) => {
-    setCartItems((prevItems) => {
-      const removedItem = prevItems.find(item => item.id === productId);
+  const removeFromCart = (journalId: string) => {
+    setItems((prevItems) => {
+      const removedItem = prevItems.find(item => item.journalId === journalId);
       if (removedItem) {
-        toast.info(`"${removedItem.name}" removed from cart.`);
+        toast.info(`"${removedItem.title}" removed from cart.`);
       }
-      return prevItems.filter((item) => item.id !== productId);
+      return prevItems.filter(item => item.journalId !== journalId);
     });
   };
 
-  const updateQuantity = (productId: number, quantity: number) => {
-    setCartItems((prevItems) => {
-      const updatedItems = prevItems.map((item) =>
-        item.id === productId ? { ...item, quantity: Math.max(1, quantity) } : item
-      );
-      return updatedItems;
-    });
+  const updateQuantity = (journalId: string, quantity: number) => {
+    if (quantity <= 0) {
+      removeFromCart(journalId);
+      return;
+    }
+    setItems((prevItems) =>
+      prevItems.map(item =>
+        item.journalId === journalId
+          ? { ...item, quantity }
+          : item
+      )
+    );
   };
 
   const clearCart = () => {
-    setCartItems([]);
+    setItems([]);
     toast.info("Cart cleared!");
   };
 
-  const cartTotal = cartItems.reduce((total, item) => {
-    const price = parseFloat(item.sale_price || item.price);
-    return total + (isNaN(price) ? 0 : price * item.quantity);
-  }, 0);
-
-  const cartItemCount = cartItems.reduce((count, item) => count + item.quantity, 0);
+  const isInCart = (journalId: string): boolean => {
+    return items.some(item => item.journalId === journalId);
+  };
 
   return (
     <CartContext.Provider
       value={{
-        cartItems,
+        items,
+        itemCount,
+        subtotal,
+        total,
         addToCart,
         removeFromCart,
         updateQuantity,
         clearCart,
-        cartTotal,
-        cartItemCount,
+        isInCart,
       }}
     >
       {children}
@@ -101,8 +125,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
 export const useCart = () => {
   const context = useContext(CartContext);
-  if (context === undefined) {
-    throw new Error('useCart must be used within a CartProvider');
+  if (!context) {
+    throw new Error('useCart must be used within CartProvider');
   }
   return context;
 };

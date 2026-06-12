@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getJournals, createJournal, updateJournal, deleteJournal, Journal } from '@/lib/supabaseData';
+import { getJournals, createJournal, updateJournal, deleteJournal, Journal, getOrders } from '@/lib/supabaseData';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -14,11 +14,26 @@ import {
   DialogTitle,
   DialogFooter,
 } from '@/components/ui/dialog';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Plus, Edit, Trash2, Search } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
+const formatCurrency = (amount: number): string => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(amount);
+};
+
 const AdminJournals = () => {
   const [journals, setJournals] = useState<Journal[]>([]);
+  const [orders, setOrders] = useState<any[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingJournal, setEditingJournal] = useState<Journal | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -26,13 +41,17 @@ const AdminJournals = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    fetchJournals();
+    fetchData();
   }, []);
 
-  const fetchJournals = async () => {
+  const fetchData = async () => {
     setIsLoading(true);
-    const data = await getJournals();
-    setJournals(data);
+    const [journalsData, ordersData] = await Promise.all([
+      getJournals(),
+      getOrders(),
+    ]);
+    setJournals(journalsData);
+    setOrders(ordersData);
     setIsLoading(false);
   };
 
@@ -49,9 +68,14 @@ const AdminJournals = () => {
     tags: '',
     features: '',
     pageCount: '',
-    format: 'PDF',
+    format: 'Digital',
     isBundle: false,
+    includedJournalIds: [] as string[],
   });
+
+  const [errors, setErrors] = useState<{
+    salePrice?: string;
+  }>({});
 
   const resetForm = () => {
     setFormData({
@@ -67,10 +91,12 @@ const AdminJournals = () => {
       tags: '',
       features: '',
       pageCount: '',
-      format: 'PDF',
+      format: 'Digital',
       isBundle: false,
+      includedJournalIds: [],
     });
     setEditingJournal(null);
+    setErrors({});
   };
 
   const handleOpenDialog = (journal?: Journal) => {
@@ -91,6 +117,7 @@ const AdminJournals = () => {
         pageCount: journal.pageCount.toString(),
         format: journal.format,
         isBundle: journal.isBundle,
+        includedJournalIds: journal.includedJournalIds,
       });
     } else {
       resetForm();
@@ -103,12 +130,33 @@ const AdminJournals = () => {
     resetForm();
   };
 
+  const validateForm = () => {
+    const newErrors: { salePrice?: string } = {};
+    const regularPrice = parseFloat(formData.regularPrice);
+    const salePrice = formData.salePrice ? parseFloat(formData.salePrice) : undefined;
+
+    if (formData.onSale) {
+      if (!formData.salePrice) {
+        newErrors.salePrice = 'Sale price is required when on sale';
+      } else if (salePrice && regularPrice && salePrice >= regularPrice) {
+        newErrors.salePrice = 'Sale price must be less than regular price';
+      }
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const price = parseFloat(formData.price);
+    if (!validateForm()) {
+      return;
+    }
+
     const regularPrice = parseFloat(formData.regularPrice);
     const salePrice = formData.salePrice ? parseFloat(formData.salePrice) : undefined;
+    const price = formData.onSale && salePrice ? salePrice : regularPrice;
 
     const journalData = {
       name: formData.name,
@@ -125,6 +173,8 @@ const AdminJournals = () => {
       pageCount: parseInt(formData.pageCount),
       format: formData.format,
       isBundle: formData.isBundle,
+      isDeleted: false,
+      includedJournalIds: formData.includedJournalIds,
     };
 
     try {
@@ -142,7 +192,7 @@ const AdminJournals = () => {
         });
       }
 
-      await fetchJournals();
+      await fetchData();
       handleCloseDialog();
     } catch (error) {
       toast({
@@ -154,10 +204,18 @@ const AdminJournals = () => {
   };
 
   const handleDelete = async (id: string, name: string) => {
-    if (window.confirm(`Are you sure you want to delete "${name}"?`)) {
+    const ordersWithJournal = orders.filter(order =>
+      order.items.some((item: any) => item.id === id)
+    );
+
+    const confirmMessage = ordersWithJournal.length > 0
+      ? `This journal is in ${ordersWithJournal.length} existing orders. Deleting it will not affect those orders, but the journal will be removed from the catalog. Are you sure you want to delete "${name}"?`
+      : `Are you sure you want to delete "${name}"?`;
+
+    if (window.confirm(confirmMessage)) {
       const success = await deleteJournal(id);
       if (success) {
-        await fetchJournals();
+        await fetchData();
         toast({
           title: 'Success',
           description: 'Journal deleted successfully',
@@ -176,6 +234,10 @@ const AdminJournals = () => {
     journal.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     journal.shortDescription.toLowerCase().includes(searchTerm.toLowerCase()) ||
     journal.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
+  const availableJournalsForBundle = journals.filter(j =>
+    !editingJournal || j.id !== editingJournal.id
   );
 
   return (
@@ -223,7 +285,7 @@ const AdminJournals = () => {
                     <CardTitle className="mb-2">{journal.name}</CardTitle>
                     <p className="text-sm text-muted-foreground mb-2">{journal.shortDescription}</p>
                     <div className="flex gap-4 text-sm text-muted-foreground mb-2">
-                      <span>💰 ${journal.price}</span>
+                      <span>💰 {formatCurrency(journal.price)}</span>
                       <span>📄 {journal.pageCount} pages</span>
                       <span>📋 {journal.format}</span>
                     </div>
@@ -337,34 +399,25 @@ const AdminJournals = () => {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="price">Price *</Label>
-                <Input
-                  id="price"
-                  type="number"
-                  step="0.01"
-                  value={formData.price}
-                  onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                  required
-                />
+            {/* Price Section */}
+            <div className="p-4 border rounded-lg">
+              <h3 className="font-semibold mb-4">Pricing</h3>
+              
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="space-y-2">
+                  <Label htmlFor="regularPrice">Regular Price *</Label>
+                  <Input
+                    id="regularPrice"
+                    type="number"
+                    step="0.01"
+                    value={formData.regularPrice}
+                    onChange={(e) => setFormData({ ...formData, regularPrice: e.target.value })}
+                    required
+                  />
+                </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="regularPrice">Regular Price *</Label>
-                <Input
-                  id="regularPrice"
-                  type="number"
-                  step="0.01"
-                  value={formData.regularPrice}
-                  onChange={(e) => setFormData({ ...formData, regularPrice: e.target.value })}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center space-x-4">
+              <div className="space-y-2 mb-4">
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="onSale"
@@ -373,30 +426,46 @@ const AdminJournals = () => {
                   />
                   <Label htmlFor="onSale">On Sale</Label>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="isBundle"
-                    checked={formData.isBundle}
-                    onCheckedChange={(checked) => setFormData({ ...formData, isBundle: checked as boolean })}
+              </div>
+
+              {formData.onSale && (
+                <div className="space-y-2 mb-4">
+                  <Label htmlFor="salePrice">Sale Price *</Label>
+                  <Input
+                    id="salePrice"
+                    type="number"
+                    step="0.01"
+                    value={formData.salePrice}
+                    onChange={(e) => setFormData({ ...formData, salePrice: e.target.value })}
+                    className={errors.salePrice ? 'border-red-500' : ''}
                   />
-                  <Label htmlFor="isBundle">Is Bundle</Label>
+                  {errors.salePrice && (
+                    <p className="text-red-500 text-sm">{errors.salePrice}</p>
+                  )}
+                </div>
+              )}
+
+              {/* Live Preview */}
+              <div className="p-3 bg-muted rounded-lg">
+                <Label className="text-sm text-muted-foreground">Price Preview</Label>
+                <div className="text-2xl font-bold mt-1">
+                  {formData.onSale && parseFloat(formData.salePrice) ? (
+                    <div className="flex items-center gap-2">
+                      <span className="line-through text-muted-foreground">
+                        {formatCurrency(parseFloat(formData.regularPrice))}
+                      </span>
+                      <span className="text-accent">
+                        {formatCurrency(parseFloat(formData.salePrice))}
+                      </span>
+                    </div>
+                  ) : (
+                    <span>{formatCurrency(parseFloat(formData.regularPrice || 0))}</span>
+                  )}
                 </div>
               </div>
             </div>
 
-            {formData.onSale && (
-              <div className="space-y-2">
-                <Label htmlFor="salePrice">Sale Price</Label>
-                <Input
-                  id="salePrice"
-                  type="number"
-                  step="0.01"
-                  value={formData.salePrice}
-                  onChange={(e) => setFormData({ ...formData, salePrice: e.target.value })}
-                />
-              </div>
-            )}
-
+            {/* Format & Bundle Section */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="pageCount">Page Count *</Label>
@@ -411,15 +480,61 @@ const AdminJournals = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="format">Format *</Label>
-                <Input
-                  id="format"
+                <Select
                   value={formData.format}
-                  onChange={(e) => setFormData({ ...formData, format: e.target.value })}
-                  placeholder="PDF"
-                  required
-                />
+                  onValueChange={(value) => setFormData({ ...formData, format: value })}
+                >
+                  <SelectTrigger id="format">
+                    <SelectValue placeholder="Select format" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Digital">Digital</SelectItem>
+                    <SelectItem value="Physical">Physical</SelectItem>
+                    <SelectItem value="Bundle">Bundle</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
+
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="isBundle"
+                  checked={formData.isBundle}
+                  onCheckedChange={(checked) => setFormData({ ...formData, isBundle: checked as boolean })}
+                />
+                <Label htmlFor="isBundle">Is Bundle</Label>
+              </div>
+            </div>
+
+            {formData.isBundle && (
+              <div className="space-y-2">
+                <Label>Included Journals</Label>
+                <div className="border rounded-lg p-3 grid grid-cols-1 gap-2 max-h-48 overflow-y-auto">
+                  {availableJournalsForBundle.map(j => (
+                    <div key={j.id} className="flex items-center space-x-2">
+                      <Checkbox
+                        checked={formData.includedJournalIds.includes(j.id)}
+                        onCheckedChange={(checked) => {
+                          const currentIds = [...formData.includedJournalIds];
+                          if (checked) {
+                            currentIds.push(j.id);
+                          } else {
+                            const index = currentIds.indexOf(j.id);
+                            if (index > -1) currentIds.splice(index, 1);
+                          }
+                          setFormData({ ...formData, includedJournalIds: currentIds });
+                        }}
+                      />
+                      <Label className="cursor-pointer">{j.name}</Label>
+                    </div>
+                  ))}
+                  {availableJournalsForBundle.length === 0 && (
+                    <p className="text-muted-foreground text-sm">No other journals available</p>
+                  )}
+                </div>
+              </div>
+            )}
 
             <div className="space-y-2">
               <Label htmlFor="tags">Tags (comma-separated)</Label>
@@ -458,4 +573,3 @@ const AdminJournals = () => {
 };
 
 export default AdminJournals;
-
